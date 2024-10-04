@@ -4,6 +4,8 @@
 
 package com.mycompany.proyecto.farmacia;
 
+import pantallas.frmLogin;
+
 /**
  *
  * @author Aaron
@@ -11,6 +13,7 @@ package com.mycompany.proyecto.farmacia;
 public class ProyectoFarmacia {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
     }
 }
