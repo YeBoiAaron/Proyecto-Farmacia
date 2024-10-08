@@ -15,6 +15,7 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
      */
     public frmInventarioMedicamentos() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -39,6 +40,9 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btnVenta = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
+        btnRecetas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,11 +95,32 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jButton5.setText("Cancelar");
 
+        btnVenta.setText("Venta");
+        btnVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentaActionPerformed(evt);
+            }
+        });
+
+        btnInventario.setText("Inventario");
+        btnInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventarioActionPerformed(evt);
+            }
+        });
+
+        btnRecetas.setText("Recetas");
+        btnRecetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecetasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -125,11 +150,24 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(58, 58, 58)))))
                 .addGap(62, 62, 62))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRecetas, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVenta)
+                    .addComponent(btnInventario)
+                    .addComponent(btnRecetas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,6 +198,24 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
+        frmVenta venta = new frmVenta();
+        venta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVentaActionPerformed
+
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+        frmInventarioMedicamentos inventario = new frmInventarioMedicamentos();
+        inventario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnInventarioActionPerformed
+
+    private void btnRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetasActionPerformed
+        frmRecetas recetas = new frmRecetas();
+        recetas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRecetasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +253,9 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnRecetas;
+    private javax.swing.JButton btnVenta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

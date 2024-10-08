@@ -15,6 +15,7 @@ public class frmRecetas extends javax.swing.JFrame {
      */
     public frmRecetas() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -26,9 +27,9 @@ public class frmRecetas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnVenta = new javax.swing.JButton();
+        btnRecetas = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -44,11 +45,26 @@ public class frmRecetas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Venta");
+        btnVenta.setText("Venta");
+        btnVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentaActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Recetas");
+        btnRecetas.setText("Recetas");
+        btnRecetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecetasActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Inventario");
+        btnInventario.setText("Inventario");
+        btnInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventarioActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nombre del Paciente:");
@@ -113,11 +129,11 @@ public class frmRecetas extends javax.swing.JFrame {
                                     .addComponent(jTextField6)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRecetas, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -131,9 +147,9 @@ public class frmRecetas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btnVenta)
+                    .addComponent(btnRecetas)
+                    .addComponent(btnInventario))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -161,6 +177,22 @@ public class frmRecetas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
+        frmVenta venta = new frmVenta();
+        venta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVentaActionPerformed
+
+    private void btnRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRecetasActionPerformed
+
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+        frmInventarioMedicamentos inventario = new frmInventarioMedicamentos();
+        inventario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnInventarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,9 +230,9 @@ public class frmRecetas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnInventario;
+    private javax.swing.JButton btnRecetas;
+    private javax.swing.JButton btnVenta;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;

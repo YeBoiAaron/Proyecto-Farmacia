@@ -58,11 +58,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="btnVenta" min="-2" pref="230" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="btnRecetas" min="-2" pref="230" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="btnInventario" min="-2" pref="230" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -81,9 +81,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRecetas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnInventario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -118,20 +118,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnVenta">
       <Properties>
         <Property name="text" type="java.lang.String" value="Venta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVentaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnRecetas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Recetas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecetasActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnInventario">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inventario"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInventarioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

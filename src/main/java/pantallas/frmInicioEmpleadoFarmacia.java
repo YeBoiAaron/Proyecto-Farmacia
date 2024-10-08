@@ -84,15 +84,21 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
-        // TODO add your handling code here:
+        frmVenta venta = new frmVenta();
+        venta.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetasActionPerformed
-        // TODO add your handling code here:
+        frmRecetas recetas = new frmRecetas();
+        recetas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRecetasActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-        // TODO add your handling code here:
+        frmInventarioMedicamentos inventario = new frmInventarioMedicamentos();
+        inventario.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     /**
