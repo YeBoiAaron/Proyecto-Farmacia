@@ -91,7 +91,12 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jButton3.setText("Actualizar");
 
-        jButton4.setText("Crear");
+        jButton4.setText("Eliminar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminar(evt);
+            }
+        });
 
         jButton5.setText("Cancelar");
 
@@ -216,6 +221,12 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         recetas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRecetasActionPerformed
+
+    private void BotonEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminar
+        frmEliminarMedicamento EM = new frmEliminarMedicamento();
+        EM.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BotonEliminar
 
     /**
      * @param args the command line arguments
