@@ -88,8 +88,18 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         }
 
         jButton2.setText("Nuevo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregar(evt);
+            }
+        });
 
         jButton3.setText("Actualizar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonActualizar(evt);
+            }
+        });
 
         jButton4.setText("Eliminar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +237,18 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         EM.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BotonEliminar
+
+    private void BotonActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizar
+        frmActualizarInventario frmAI = new frmActualizarInventario();
+        frmAI.setVisible(true);
+        this.dispose();;
+    }//GEN-LAST:event_BotonActualizar
+
+    private void BotonAgregar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregar
+       frmAgregarMedicamento frmAM= new frmAgregarMedicamento();
+       frmAM.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_BotonAgregar
 
     /**
      * @param args the command line arguments

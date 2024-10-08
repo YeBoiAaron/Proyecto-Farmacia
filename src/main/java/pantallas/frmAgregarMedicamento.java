@@ -4,6 +4,9 @@
  */
 package pantallas;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author oribi
@@ -37,8 +40,8 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BotonSeleccionar = new javax.swing.JButton();
+        BotonCancelart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -68,9 +71,19 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Cantidad");
 
-        jButton1.setText("Seleccionar");
+        BotonSeleccionar.setText("Seleccionar");
+        BotonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonSeleccionar(evt);
+            }
+        });
 
-        jButton2.setText("Cancelar");
+        BotonCancelart.setText("Cancelar");
+        BotonCancelart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCancelar(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,9 +114,9 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(BotonCancelart)
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -133,8 +146,8 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(BotonCancelart)
+                    .addComponent(BotonSeleccionar))
                 .addGap(22, 22, 22))
         );
 
@@ -144,6 +157,18 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void BotonSeleccionar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSeleccionar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonSeleccionar
+
+    private void BotonCancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelar
+        frmInventarioMedicamentos frmIM = new frmInventarioMedicamentos();
+        frmIM.setVisible(true);
+        this.dispose();
+
+        
+    }//GEN-LAST:event_BotonCancelar
 
     /**
      * @param args the command line arguments
@@ -181,8 +206,8 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton BotonCancelart;
+    private javax.swing.JButton BotonSeleccionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
