@@ -27,79 +27,62 @@ public class frmInicioMedico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnNuevaReceta = new javax.swing.JButton();
-        btnConsultarReceta = new javax.swing.JButton();
-        btnEliminarReceta = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        moCrearReceta = new javax.swing.JMenuItem();
+        moConsultarReceta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 400));
         setSize(getPreferredSize());
 
-        btnNuevaReceta.setText("Crear Receta");
-        btnNuevaReceta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaRecetaActionPerformed(evt);
-            }
-        });
+        jMenu1.setText("Recetas");
 
-        btnConsultarReceta.setText("Consultar Receta");
-        btnConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
+        moCrearReceta.setText("Crear Receta");
+        moCrearReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarRecetaActionPerformed(evt);
+                moCrearRecetaActionPerformed(evt);
             }
         });
+        jMenu1.add(moCrearReceta);
 
-        btnEliminarReceta.setText("Eliminar Receta");
-        btnEliminarReceta.addActionListener(new java.awt.event.ActionListener() {
+        moConsultarReceta.setText("Consultar Receta");
+        moConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarRecetaActionPerformed(evt);
+                moConsultarRecetaActionPerformed(evt);
             }
         });
+        jMenu1.add(moConsultarReceta);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNuevaReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEliminarReceta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConsultarReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevaReceta)
-                    .addComponent(btnConsultarReceta)
-                    .addComponent(btnEliminarReceta))
-                .addContainerGap(371, Short.MAX_VALUE))
+            .addGap(0, 377, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevaRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaRecetaActionPerformed
-        frmCrearReceta crear_receta = new frmCrearReceta();
-        crear_receta.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnNuevaRecetaActionPerformed
-
-    private void btnConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarRecetaActionPerformed
+    private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
         frmConsultarReceta consultar_receta = new frmConsultarReceta();
         consultar_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnConsultarRecetaActionPerformed
+    }//GEN-LAST:event_moCrearRecetaActionPerformed
 
-    private void btnEliminarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRecetaActionPerformed
-        frmEliminarReceta eliminar_receta = new frmEliminarReceta();
-        eliminar_receta.setVisible(true);
+    private void moConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moConsultarRecetaActionPerformed
+        frmCrearReceta crear_receta = new frmCrearReceta();
+        crear_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnEliminarRecetaActionPerformed
+    }//GEN-LAST:event_moConsultarRecetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,8 +120,9 @@ public class frmInicioMedico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConsultarReceta;
-    private javax.swing.JButton btnEliminarReceta;
-    private javax.swing.JButton btnNuevaReceta;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem moConsultarReceta;
+    private javax.swing.JMenuItem moCrearReceta;
     // End of variables declaration//GEN-END:variables
 }

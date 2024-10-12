@@ -29,47 +29,26 @@ public class frmCrearReceta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnNuevaReceta = new javax.swing.JButton();
-        btnConsultarReceta = new javax.swing.JButton();
-        btnEliminarReceta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tfNombrePaciente = new javax.swing.JTextField();
-        tfFechaNacimiento = new javax.swing.JTextField();
         tfMedicamento = new javax.swing.JTextField();
         tfSexo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         taDirecciones = new javax.swing.JTextArea();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        dcFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        moCrearReceta = new javax.swing.JMenuItem();
+        moConsultarReceta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
         setSize(getPreferredSize());
-
-        btnNuevaReceta.setText("Crear Receta");
-        btnNuevaReceta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaRecetaActionPerformed(evt);
-            }
-        });
-
-        btnConsultarReceta.setText("Consultar Receta");
-        btnConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarRecetaActionPerformed(evt);
-            }
-        });
-
-        btnEliminarReceta.setText("Eliminar Receta");
-        btnEliminarReceta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarRecetaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Nombre Paciente");
 
@@ -80,8 +59,6 @@ public class frmCrearReceta extends javax.swing.JFrame {
         jLabel4.setText("Medicamento");
 
         jLabel5.setText("Direcciones");
-
-        tfFechaNacimiento.setText("dd/mm/yyyy");
 
         tfMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,18 +84,35 @@ public class frmCrearReceta extends javax.swing.JFrame {
             }
         });
 
+        dcFechaNacimiento.setFocusCycleRoot(true);
+        dcFechaNacimiento.setPreferredSize(new java.awt.Dimension(200, 30));
+
+        jMenu1.setText("Recetas");
+
+        moCrearReceta.setText("Crear Receta");
+        moCrearReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moCrearRecetaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(moCrearReceta);
+
+        moConsultarReceta.setText("Consultar Receta");
+        moConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moConsultarRecetaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(moConsultarReceta);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNuevaReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEliminarReceta, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConsultarReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -137,28 +131,22 @@ public class frmCrearReceta extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                         .addComponent(tfNombrePaciente)
                         .addComponent(tfMedicamento)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfSexo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tfSexo))
+                    .addComponent(dcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevaReceta)
-                    .addComponent(btnConsultarReceta)
-                    .addComponent(btnEliminarReceta))
-                .addGap(25, 25, 25)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -170,7 +158,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
@@ -179,22 +167,6 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNuevaRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaRecetaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaRecetaActionPerformed
-
-    private void btnConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarRecetaActionPerformed
-        frmConsultarReceta consultar_receta = new frmConsultarReceta();
-        consultar_receta.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnConsultarRecetaActionPerformed
-
-    private void btnEliminarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRecetaActionPerformed
-        frmEliminarReceta eliminar_receta = new frmEliminarReceta();
-        eliminar_receta.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnEliminarRecetaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -208,6 +180,18 @@ public class frmCrearReceta extends javax.swing.JFrame {
         dlgSeleccionarMedicamento seleccion_medicamento = new dlgSeleccionarMedicamento(this);
         seleccion_medicamento.setVisible(true);
     }//GEN-LAST:event_tfMedicamentoActionPerformed
+
+    private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
+        frmConsultarReceta consultar_receta = new frmConsultarReceta();
+        consultar_receta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_moCrearRecetaActionPerformed
+
+    private void moConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moConsultarRecetaActionPerformed
+        frmCrearReceta crear_receta = new frmCrearReceta();
+        crear_receta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_moConsultarRecetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,18 +230,19 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnConsultarReceta;
-    private javax.swing.JButton btnEliminarReceta;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnNuevaReceta;
+    private com.toedter.calendar.JDateChooser dcFechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem moConsultarReceta;
+    private javax.swing.JMenuItem moCrearReceta;
     private javax.swing.JTextArea taDirecciones;
-    private javax.swing.JTextField tfFechaNacimiento;
     private javax.swing.JTextField tfMedicamento;
     private javax.swing.JTextField tfNombrePaciente;
     private javax.swing.JTextField tfSexo;
