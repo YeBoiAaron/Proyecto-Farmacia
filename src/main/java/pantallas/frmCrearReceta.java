@@ -58,7 +58,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
         jLabel4.setText("Medicamento");
 
-        jLabel5.setText("Direcciones");
+        jLabel5.setText("Indicaciones");
 
         tfMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

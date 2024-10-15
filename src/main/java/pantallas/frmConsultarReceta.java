@@ -28,20 +28,16 @@ public class frmConsultarReceta extends javax.swing.JFrame {
 
         btnBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfMedicamento = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        tfNumeroReceta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBusqueda = new javax.swing.JTable();
         tfNombrePaciente = new javax.swing.JTextField();
-        dcFechaNacimiento = new com.toedter.calendar.JDateChooser();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        moCrearReceta = new javax.swing.JMenuItem();
-        moConsultarReceta = new javax.swing.JMenuItem();
+        miCrearReceta = new javax.swing.JMenuItem();
+        miConsultarReceta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(getPreferredSize());
@@ -62,45 +58,63 @@ public class frmConsultarReceta extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Fecha de nacimiento");
-
-        jLabel3.setText("Numero de Receta");
-
-        jLabel4.setText("Medicamento");
-
         tblBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Paciente", "Medicamento", "Direcciones", "Numero de Receta"
+                "Numero de Receta", "Medicamentos", "Instrucciones"
             }
-        ));
-        jScrollPane1.setViewportView(tblBusqueda);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        dcFechaNacimiento.setFocusCycleRoot(true);
-        dcFechaNacimiento.setPreferredSize(new java.awt.Dimension(200, 30));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblBusqueda);
+        if (tblBusqueda.getColumnModel().getColumnCount() > 0) {
+            tblBusqueda.getColumnModel().getColumn(0).setResizable(false);
+            tblBusqueda.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblBusqueda.getColumnModel().getColumn(1).setResizable(false);
+            tblBusqueda.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        btnEditar.setText("Editar");
+
+        btnEliminar.setText("Eliminar");
 
         jMenu1.setText("Recetas");
 
-        moCrearReceta.setText("Crear Receta");
-        moCrearReceta.addActionListener(new java.awt.event.ActionListener() {
+        miCrearReceta.setText("Crear Receta");
+        miCrearReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moCrearRecetaActionPerformed(evt);
+                miCrearRecetaActionPerformed(evt);
             }
         });
-        jMenu1.add(moCrearReceta);
+        jMenu1.add(miCrearReceta);
 
-        moConsultarReceta.setText("Consultar Receta");
-        moConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
+        miConsultarReceta.setText("Consultar Receta");
+        miConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moConsultarRecetaActionPerformed(evt);
+                miConsultarRecetaActionPerformed(evt);
             }
         });
-        jMenu1.add(moConsultarReceta);
+        jMenu1.add(miConsultarReceta);
 
         jMenuBar1.add(jMenu1);
 
@@ -111,31 +125,20 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(227, 227, 227)
-                        .addComponent(btnBuscar)
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfNumeroReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,26 +146,18 @@ public class frmConsultarReceta extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(dcFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfNumeroReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnCancelar))
-                .addGap(51, 51, 51))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,17 +171,17 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
+    private void miCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCrearRecetaActionPerformed
         frmConsultarReceta consultar_receta = new frmConsultarReceta();
         consultar_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_moCrearRecetaActionPerformed
+    }//GEN-LAST:event_miCrearRecetaActionPerformed
 
-    private void moConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moConsultarRecetaActionPerformed
+    private void miConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultarRecetaActionPerformed
         frmCrearReceta crear_receta = new frmCrearReceta();
         crear_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_moConsultarRecetaActionPerformed
+    }//GEN-LAST:event_miConsultarRecetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,19 +221,15 @@ public class frmConsultarReceta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private com.toedter.calendar.JDateChooser dcFechaNacimiento;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem moConsultarReceta;
-    private javax.swing.JMenuItem moCrearReceta;
+    private javax.swing.JMenuItem miConsultarReceta;
+    private javax.swing.JMenuItem miCrearReceta;
     private javax.swing.JTable tblBusqueda;
-    private javax.swing.JTextField tfMedicamento;
     private javax.swing.JTextField tfNombrePaciente;
-    private javax.swing.JTextField tfNumeroReceta;
     // End of variables declaration//GEN-END:variables
 }
