@@ -119,19 +119,12 @@ public class frmActualizarInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonCancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelar
-        frmInventarioMedicamentos frmIM = new frmInventarioMedicamentos();
-        frmIM.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BotonCancelar
 
     /**
      * @param args the command line arguments
      */
-    
-
-
-        
-     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

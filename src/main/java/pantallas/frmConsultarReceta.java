@@ -4,6 +4,8 @@
  */
 package pantallas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Aaron
@@ -89,7 +91,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblBusqueda);
         if (tblBusqueda.getColumnModel().getColumnCount() > 0) {
             tblBusqueda.getColumnModel().getColumn(0).setResizable(false);
-            tblBusqueda.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblBusqueda.getColumnModel().getColumn(0).setPreferredWidth(30);
             tblBusqueda.getColumnModel().getColumn(1).setResizable(false);
             tblBusqueda.getColumnModel().getColumn(2).setResizable(false);
         }
@@ -97,6 +99,11 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         btnEditar.setText("Editar");
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Recetas");
 
@@ -168,7 +175,9 @@ public class frmConsultarReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        frmInicioMedico inicio = new frmInicioMedico();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void miCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCrearRecetaActionPerformed
@@ -182,6 +191,10 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         crear_receta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_miConsultarRecetaActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments

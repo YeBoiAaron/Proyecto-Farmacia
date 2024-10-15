@@ -15,6 +15,7 @@ public class frmEliminarMedicamento extends javax.swing.JFrame {
      */
     public frmEliminarMedicamento() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -133,8 +134,6 @@ public class frmEliminarMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonEliminar
 
     private void BotonCancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelar
-        frmInventarioMedicamentos frmIM = new frmInventarioMedicamentos();
-        frmIM.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BotonCancelar
 

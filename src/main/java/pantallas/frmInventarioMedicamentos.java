@@ -216,19 +216,16 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private void BotonEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminar
         frmEliminarMedicamento EM = new frmEliminarMedicamento();
         EM.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_BotonEliminar
 
     private void BotonActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizar
         frmActualizarInventario frmAI = new frmActualizarInventario();
         frmAI.setVisible(true);
-        this.dispose();;
     }//GEN-LAST:event_BotonActualizar
 
     private void BotonAgregar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregar
        frmAgregarMedicamento frmAM= new frmAgregarMedicamento();
        frmAM.setVisible(true);
-       this.dispose();
     }//GEN-LAST:event_BotonAgregar
 
     private void BotonCancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelar

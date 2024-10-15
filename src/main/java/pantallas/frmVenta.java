@@ -40,7 +40,7 @@ public class frmVenta extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -62,7 +62,7 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel2.setText("Nombre del Paciente:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Direcciones:");
+        jLabel3.setText("Instrucciones:");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -76,10 +76,15 @@ public class frmVenta extends javax.swing.JFrame {
 
         jButton5.setText("Confirmar");
 
-        jButton6.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Medicamento:");
+        jLabel6.setText("Medicamento(s):");
 
         jMenu1.setText("Venta");
 
@@ -129,7 +134,7 @@ public class frmVenta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6))
+                        .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
@@ -184,7 +189,7 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(btnCancelar))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -192,9 +197,6 @@ public class frmVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRealizarVentaActionPerformed
-        frmVenta venta = new frmVenta();
-        venta.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_miRealizarVentaActionPerformed
 
     private void miConsultarRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultarRecetasActionPerformed
@@ -208,6 +210,12 @@ public class frmVenta extends javax.swing.JFrame {
         inventario.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_miConsultarInventarioActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        frmInicioEmpleadoFarmacia frmAM= new frmInicioEmpleadoFarmacia();
+        frmAM.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,9 +253,9 @@ public class frmVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

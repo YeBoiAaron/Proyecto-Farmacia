@@ -73,14 +73,15 @@ public class frmInicioMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
-        frmConsultarReceta consultar_receta = new frmConsultarReceta();
-        consultar_receta.setVisible(true);
+        frmCrearReceta crear_receta = new frmCrearReceta();
+        crear_receta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_moCrearRecetaActionPerformed
 
     private void moConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moConsultarRecetaActionPerformed
-        frmCrearReceta crear_receta = new frmCrearReceta();
-        crear_receta.setVisible(true);
+        
+        frmConsultarReceta consultar_receta = new frmConsultarReceta();
+        consultar_receta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_moConsultarRecetaActionPerformed
 
