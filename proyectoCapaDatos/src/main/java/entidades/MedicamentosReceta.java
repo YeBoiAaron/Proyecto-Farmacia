@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author Aaron
  */
 @Entity
-@Table(name = "medicamentos_receta")
+@Table(name = "medicamentosReceta")
 public class MedicamentosReceta implements Serializable {
 
     private static final long serialVersionUID = 1L;

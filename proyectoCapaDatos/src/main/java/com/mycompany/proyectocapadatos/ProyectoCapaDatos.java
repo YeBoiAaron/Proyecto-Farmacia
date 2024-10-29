@@ -11,6 +11,6 @@ package com.mycompany.proyectocapadatos;
 public class ProyectoCapaDatos {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
     }
 }

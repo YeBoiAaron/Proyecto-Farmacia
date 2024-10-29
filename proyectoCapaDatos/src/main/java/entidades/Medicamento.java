@@ -26,10 +26,10 @@ public class Medicamento implements Serializable {
     private String activo;
     private float precio;
     
-    @OneToMany(mappedBy = "medicamento")
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.PERSIST)
     private List<MedicamentosReceta> recetas;
     
-    @OneToMany(mappedBy = "medicamento")
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.PERSIST)
     private List<InventarioSucursal> inventarios;
 
     public Medicamento() {

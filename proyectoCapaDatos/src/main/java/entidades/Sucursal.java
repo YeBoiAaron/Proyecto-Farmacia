@@ -5,6 +5,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -29,7 +30,7 @@ public class Sucursal implements Serializable {
     private Gerente gerente;
     
     @OneToMany(mappedBy = "sucursal")
-    private InventarioSucursal inventario;
+    private List<InventarioSucursal> inventario;
 
     public Sucursal() {
     }
@@ -41,7 +42,7 @@ public class Sucursal implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Sucursal(String calle, String numero, String colonia, int codigoPostal, Gerente gerente, InventarioSucursal inventario) {
+    public Sucursal(String calle, String numero, String colonia, int codigoPostal, Gerente gerente, List<InventarioSucursal> inventario) {
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
@@ -50,7 +51,7 @@ public class Sucursal implements Serializable {
         this.inventario = inventario;
     }
 
-    public Sucursal(Long idSucursal, String calle, String numero, String colonia, int codigoPostal, Gerente gerente, InventarioSucursal inventario) {
+    public Sucursal(Long idSucursal, String calle, String numero, String colonia, int codigoPostal, Gerente gerente, List<InventarioSucursal> inventario) {
         this.idSucursal = idSucursal;
         this.calle = calle;
         this.numero = numero;
@@ -108,11 +109,11 @@ public class Sucursal implements Serializable {
         this.gerente = gerente;
     }
 
-    public InventarioSucursal getInventario() {
+    public List<InventarioSucursal> getInventario() {
         return inventario;
     }
 
-    public void setInventario(InventarioSucursal inventario) {
+    public void setInventario(List<InventarioSucursal> inventario) {
         this.inventario = inventario;
     }
 

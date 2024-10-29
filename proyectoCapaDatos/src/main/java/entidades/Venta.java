@@ -32,6 +32,9 @@ public class Venta implements Serializable {
     @JoinColumn(name = "idReceta", referencedColumnName = "idReceta")
     private Receta receta;
 
+    public Venta() {
+    }
+
     public Venta(String folio, float subtotal, float total, LocalDate fecha) {
         this.folio = folio;
         this.subtotal = subtotal;
