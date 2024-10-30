@@ -24,29 +24,8 @@ public class Cajero extends Empleado implements Serializable {
     public Cajero() {
     }
 
-    public Cajero(String nombreUsuario, String correo, String contrasena) {
-        super(nombreUsuario, correo, contrasena);
-    }
-
-    public Cajero(Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(idUsuario, nombreUsuario, correo, contrasena);
-    }
-
-    public Cajero(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento);
-    }
-
     public Cajero(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
         super(nombreCompleto, numeroTelefono, fechaNacimiento, nombreUsuario, correo, contrasena);
-    }
-
-    public Cajero(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento, idUsuario, nombreUsuario, correo, contrasena);
-    }
-
-    public Cajero(List<Venta> ventas, String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento);
-        this.ventas = ventas;
     }
 
     public Cajero(List<Venta> ventas, String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {

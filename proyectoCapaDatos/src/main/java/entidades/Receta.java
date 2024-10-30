@@ -49,17 +49,6 @@ public class Receta implements Serializable {
         this.estado = estado;
     }
 
-    public Receta(String numeroReceta, String diagnostico, String instrucciones, String estado, Venta venta, Medico medico, Paciente paciente, List<MedicamentosReceta> medicamentos) {
-        this.numeroReceta = numeroReceta;
-        this.diagnostico = diagnostico;
-        this.instrucciones = instrucciones;
-        this.estado = estado;
-        this.venta = venta;
-        this.medico = medico;
-        this.paciente = paciente;
-        this.medicamentos = medicamentos;
-    }
-
     public Receta(Long idReceta, String numeroReceta, String diagnostico, String instrucciones, String estado, Venta venta, Medico medico, Paciente paciente, List<MedicamentosReceta> medicamentos) {
         this.idReceta = idReceta;
         this.numeroReceta = numeroReceta;

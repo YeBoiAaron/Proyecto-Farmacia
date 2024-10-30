@@ -27,20 +27,6 @@ public class Empleado extends Usuario implements Serializable {
     public Empleado() {
     }
 
-    public Empleado(String nombreUsuario, String correo, String contrasena) {
-        super(nombreUsuario, correo, contrasena);
-    }
-
-    public Empleado(Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(idUsuario, nombreUsuario, correo, contrasena);
-    }
-
-    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento) {
-        this.nombreCompleto = nombreCompleto;
-        this.numeroTelefono = numeroTelefono;
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
     public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
         super(nombreUsuario, correo, contrasena);
         this.nombreCompleto = nombreCompleto;

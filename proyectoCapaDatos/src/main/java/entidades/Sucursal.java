@@ -42,15 +42,6 @@ public class Sucursal implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Sucursal(String calle, String numero, String colonia, int codigoPostal, Gerente gerente, List<InventarioSucursal> inventario) {
-        this.calle = calle;
-        this.numero = numero;
-        this.colonia = colonia;
-        this.codigoPostal = codigoPostal;
-        this.gerente = gerente;
-        this.inventario = inventario;
-    }
-
     public Sucursal(Long idSucursal, String calle, String numero, String colonia, int codigoPostal, Gerente gerente, List<InventarioSucursal> inventario) {
         this.idSucursal = idSucursal;
         this.calle = calle;

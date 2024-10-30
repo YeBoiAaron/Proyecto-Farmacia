@@ -29,38 +29,13 @@ public class Medico extends Usuario implements Serializable {
 
     public Medico() {
     }
-
-    public Medico(String nombreUsuario, String correo, String contrasena) {
-        super(nombreUsuario, correo, contrasena);
-    }
-
-    public Medico(Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(idUsuario, nombreUsuario, correo, contrasena);
-    }
-
+    
     public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
         super(nombreUsuario, correo, contrasena);
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
         this.cedulaProfesional = cedulaProfesional;
         this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(idUsuario, nombreUsuario, correo, contrasena);
-        this.nombreCompleto = nombreCompleto;
-        this.numeroTelefono = numeroTelefono;
-        this.cedulaProfesional = cedulaProfesional;
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, List<Receta> recetas, String nombreUsuario, String correo, String contrasena) {
-        super(nombreUsuario, correo, contrasena);
-        this.nombreCompleto = nombreCompleto;
-        this.numeroTelefono = numeroTelefono;
-        this.cedulaProfesional = cedulaProfesional;
-        this.fechaNacimiento = fechaNacimiento;
-        this.recetas = recetas;
     }
 
     public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, List<Receta> recetas, Long idUsuario, String nombreUsuario, String correo, String contrasena) {

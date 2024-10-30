@@ -45,17 +45,6 @@ public class Paciente implements Serializable {
         this.edad = edad;
     }
 
-    public Paciente(String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float peso, int edad, List<Receta> recetas) {
-        this.nombreCompleto = nombreCompleto;
-        this.fechaNacimiento = fechaNacimiento;
-        this.numeroTelefono = numeroTelefono;
-        this.correo = correo;
-        this.sexo = sexo;
-        this.peso = peso;
-        this.edad = edad;
-        this.recetas = recetas;
-    }
-
     public Paciente(Long idPaciente, String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float peso, int edad, List<Receta> recetas) {
         this.idPaciente = idPaciente;
         this.nombreCompleto = nombreCompleto;

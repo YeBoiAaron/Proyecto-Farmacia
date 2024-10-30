@@ -42,15 +42,6 @@ public class Venta implements Serializable {
         this.fecha = fecha;
     }
 
-    public Venta(String folio, float subtotal, float total, LocalDate fecha, Cajero cajero, Receta receta) {
-        this.folio = folio;
-        this.subtotal = subtotal;
-        this.total = total;
-        this.fecha = fecha;
-        this.cajero = cajero;
-        this.receta = receta;
-    }
-
     public Venta(Long idVenta, String folio, float subtotal, float total, LocalDate fecha, Cajero cajero, Receta receta) {
         this.idVenta = idVenta;
         this.folio = folio;

@@ -43,16 +43,6 @@ public class Medicamento implements Serializable {
         this.precio = precio;
     }
 
-    public Medicamento(String nombre, String presentacion, String concentracion, String activo, float precio, List<MedicamentosReceta> recetas, List<InventarioSucursal> inventarios) {
-        this.nombre = nombre;
-        this.presentacion = presentacion;
-        this.concentracion = concentracion;
-        this.activo = activo;
-        this.precio = precio;
-        this.recetas = recetas;
-        this.inventarios = inventarios;
-    }
-
     public Medicamento(Long idMedicamento, String nombre, String presentacion, String concentracion, String activo, float precio, List<MedicamentosReceta> recetas, List<InventarioSucursal> inventarios) {
         this.idMedicamento = idMedicamento;
         this.nombre = nombre;

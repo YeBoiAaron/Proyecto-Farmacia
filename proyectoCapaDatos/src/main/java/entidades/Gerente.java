@@ -23,38 +23,8 @@ public class Gerente extends Empleado implements Serializable {
     public Gerente() {
     }
 
-    public Gerente(Sucursal sucursal) {
-        this.sucursal = sucursal;
-    }
-
-    public Gerente(String nombreUsuario, String correo, String contrasena) {
-        super(nombreUsuario, correo, contrasena);
-    }
-
-    public Gerente(Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(idUsuario, nombreUsuario, correo, contrasena);
-    }
-
-    public Gerente(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento);
-    }
-
     public Gerente(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
         super(nombreCompleto, numeroTelefono, fechaNacimiento, nombreUsuario, correo, contrasena);
-    }
-
-    public Gerente(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento, idUsuario, nombreUsuario, correo, contrasena);
-    }
-
-    public Gerente(Sucursal sucursal, String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento);
-        this.sucursal = sucursal;
-    }
-
-    public Gerente(Sucursal sucursal, String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
-        super(nombreCompleto, numeroTelefono, fechaNacimiento, nombreUsuario, correo, contrasena);
-        this.sucursal = sucursal;
     }
 
     public Gerente(Sucursal sucursal, String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
