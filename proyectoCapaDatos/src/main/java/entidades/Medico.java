@@ -124,7 +124,7 @@ public class Medico extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Medico{" + "idMedico=" + idMedico + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", cedulaProfesional=" + cedulaProfesional + ", fechaNacimiento=" + fechaNacimiento + ", recetas=" + recetas + '}';
+        return "Medico{" + "idMedico=" + idMedico + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", cedulaProfesional=" + cedulaProfesional + ", fechaNacimiento=" + fechaNacimiento + ", recetas=" + recetas + '}' + super.toString();
     }
 
 }

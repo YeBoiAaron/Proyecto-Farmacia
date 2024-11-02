@@ -137,6 +137,6 @@ public class Empleado extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + ", tipoEmpleado=" + tipoEmpleado + ", ventas=" + ventas + ", sucursal=" + sucursal + '}';
+        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + ", tipoEmpleado=" + tipoEmpleado + ", ventas=" + ventas + ", sucursal=" + sucursal + '}' + super.toString();
     }
 }
