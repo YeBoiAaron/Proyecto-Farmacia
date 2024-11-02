@@ -20,11 +20,11 @@ public class MedicamentosReceta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int cantidad;
-    
+
     @ManyToOne
     @JoinColumn(name = "idMedicamento")
     private Medicamento medicamento;
-    
+
     @ManyToOne
     @JoinColumn(name = "idReceta")
     private Receta receta;
@@ -101,5 +101,5 @@ public class MedicamentosReceta implements Serializable {
     public String toString() {
         return "MedicamentosReceta{" + "id=" + id + ", cantidad=" + cantidad + ", medicamento=" + medicamento + ", receta=" + receta + '}';
     }
-    
+
 }

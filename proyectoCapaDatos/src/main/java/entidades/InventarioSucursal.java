@@ -20,11 +20,11 @@ public class InventarioSucursal implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idInventario;
     private int cantidad;
-    
+
     @ManyToOne
     @JoinColumn(name = "idMedicamento")
     private Medicamento medicamento;
-    
+
     @ManyToOne
     @JoinColumn(name = "idSucursal")
     private Sucursal sucursal;
@@ -101,5 +101,5 @@ public class InventarioSucursal implements Serializable {
     public String toString() {
         return "InventarioSucursal{" + "idInventario=" + idInventario + ", cantidad=" + cantidad + ", medicamento=" + medicamento + ", sucursal=" + sucursal + '}';
     }
-    
+
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.*;
+
 /**
  *
  * @author Aaron
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("Gerente")
 public class Gerente extends Empleado implements Serializable {
-    
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idSucursal", referencedColumnName = "idSucursal")
     private Sucursal sucursal;

@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author Aaron
  */
 @Entity
-@Table(name="pacientes")
+@Table(name = "pacientes")
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Paciente implements Serializable {
     private String sexo;
     private float peso;
     private int edad;
-    
+
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
     private List<Receta> recetas;
 
@@ -153,5 +153,5 @@ public class Paciente implements Serializable {
     public String toString() {
         return "Paciente{" + "idPaciente=" + idPaciente + ", nombreCompleto=" + nombreCompleto + ", fechaNacimiento=" + fechaNacimiento + ", numeroTelefono=" + numeroTelefono + ", correo=" + correo + ", sexo=" + sexo + ", peso=" + peso + ", edad=" + edad + ", recetas=" + recetas + '}';
     }
-    
+
 }

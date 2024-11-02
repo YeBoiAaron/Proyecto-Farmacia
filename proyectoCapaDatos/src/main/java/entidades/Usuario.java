@@ -12,9 +12,9 @@ import java.io.Serializable;
  * @author Aaron
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="tipoUsuario")
-@Table(name="usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipoUsuario")
+@Table(name = "usuarios")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -97,5 +97,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" + "idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", correo=" + correo + '}';
     }
-    
+
 }

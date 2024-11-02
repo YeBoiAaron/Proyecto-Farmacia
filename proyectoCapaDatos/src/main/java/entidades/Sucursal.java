@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author Aaron
  */
 @Entity
-@Table(name="sucursales")
+@Table(name = "sucursales")
 public class Sucursal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,10 +25,10 @@ public class Sucursal implements Serializable {
     private String numero;
     private String colonia;
     private int codigoPostal;
-    
+
     @OneToOne(mappedBy = "sucursal")
     private Gerente gerente;
-    
+
     @OneToMany(mappedBy = "sucursal")
     private List<InventarioSucursal> inventario;
 
@@ -134,5 +134,5 @@ public class Sucursal implements Serializable {
     public String toString() {
         return "Sucursal{" + "idSucursal=" + idSucursal + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", gerente=" + gerente + ", inventario=" + inventario + '}';
     }
-    
+
 }

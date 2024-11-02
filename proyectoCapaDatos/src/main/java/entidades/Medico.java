@@ -16,20 +16,20 @@ import javax.persistence.*;
  */
 @Entity
 @DiscriminatorValue("Medico")
-@Table(name="medicos")
+@Table(name = "medicos")
 public class Medico extends Usuario implements Serializable {
-    
+
     private String nombreCompleto;
     private String numeroTelefono;
     private String cedulaProfesional;
     private LocalDate fechaNacimiento;
-    
+
     @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST)
     private List<Receta> recetas;
 
     public Medico() {
     }
-    
+
     public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
         super(nombreUsuario, correo, contrasena);
         this.nombreCompleto = nombreCompleto;
@@ -113,5 +113,5 @@ public class Medico extends Usuario implements Serializable {
     public String toString() {
         return "Medico{" + "nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", cedulaProfesional=" + cedulaProfesional + ", fechaNacimiento=" + fechaNacimiento + ", recetas=" + recetas + '}';
     }
-    
+
 }

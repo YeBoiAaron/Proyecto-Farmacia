@@ -15,9 +15,9 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipoEmpleado")
+@DiscriminatorColumn(name = "tipoEmpleado")
 @DiscriminatorValue("Empleado")
-@Table(name="empleados")
+@Table(name = "empleados")
 public class Empleado extends Usuario implements Serializable {
 
     private String nombreCompleto;

@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author Aaron
  */
 @Entity
-@Table(name="recetas")
+@Table(name = "recetas")
 public class Receta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,17 +25,17 @@ public class Receta implements Serializable {
     private String diagnostico;
     private String instrucciones;
     private String estado;
-    
+
     @OneToOne
     @JoinColumn(name = "idVenta", referencedColumnName = "idVenta")
     private Venta venta;
-    
+
     @ManyToOne
     private Medico medico;
-    
+
     @ManyToOne
     private Paciente paciente;
-    
+
     @OneToMany(mappedBy = "receta")
     private List<MedicamentosReceta> medicamentos;
 
@@ -154,5 +154,5 @@ public class Receta implements Serializable {
         final Receta other = (Receta) obj;
         return Objects.equals(this.idReceta, other.idReceta);
     }
-    
+
 }

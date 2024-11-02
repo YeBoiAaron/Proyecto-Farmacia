@@ -24,10 +24,10 @@ public class Venta implements Serializable {
     private float subtotal;
     private float total;
     private LocalDate fecha;
-    
+
     @ManyToOne
     private Cajero cajero;
-    
+
     @OneToOne
     @JoinColumn(name = "idReceta", referencedColumnName = "idReceta")
     private Receta receta;
@@ -132,5 +132,5 @@ public class Venta implements Serializable {
     public String toString() {
         return "Venta{" + "idVenta=" + idVenta + ", folio=" + folio + ", subtotal=" + subtotal + ", total=" + total + ", fecha=" + fecha + ", cajero=" + cajero + ", receta=" + receta + '}';
     }
-    
+
 }

@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("Cajero")
 public class Cajero extends Empleado implements Serializable {
-    
+
     @OneToMany(mappedBy = "cajero", cascade = CascadeType.PERSIST)
     private List<Venta> ventas;
 
