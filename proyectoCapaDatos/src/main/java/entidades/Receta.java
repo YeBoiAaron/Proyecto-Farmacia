@@ -31,13 +31,15 @@ public class Receta implements Serializable {
     private Venta venta;
 
     @ManyToOne
+    @JoinColumn(name = "idMedico")
     private Medico medico;
 
     @ManyToOne
+    @JoinColumn(name = "idPaciente")
     private Paciente paciente;
 
     @OneToMany(mappedBy = "receta")
-    private List<MedicamentosReceta> medicamentos;
+    private List<MedicamentosReceta> listaMedicamentos;
 
     public Receta() {
     }
@@ -58,7 +60,7 @@ public class Receta implements Serializable {
         this.venta = venta;
         this.medico = medico;
         this.paciente = paciente;
-        this.medicamentos = medicamentos;
+        this.listaMedicamentos = medicamentos;
     }
 
     public Long getIdReceta() {
@@ -125,12 +127,12 @@ public class Receta implements Serializable {
         this.paciente = paciente;
     }
 
-    public List<MedicamentosReceta> getMedicamentos() {
-        return medicamentos;
+    public List<MedicamentosReceta> getListaMedicamentos() {
+        return listaMedicamentos;
     }
 
-    public void setMedicamentos(List<MedicamentosReceta> medicamentos) {
-        this.medicamentos = medicamentos;
+    public void setListaMedicamentos(List<MedicamentosReceta> listaMedicamentos) {
+        this.listaMedicamentos = listaMedicamentos;
     }
 
     @Override

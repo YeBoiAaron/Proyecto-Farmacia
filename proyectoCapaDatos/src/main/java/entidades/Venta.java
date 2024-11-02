@@ -26,6 +26,7 @@ public class Venta implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne
+    @JoinColumn(name = "idCajero")
     private Empleado cajero;
 
     @OneToOne

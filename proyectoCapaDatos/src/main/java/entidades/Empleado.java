@@ -15,16 +15,20 @@ import javax.persistence.*;
  * @author Aaron
  */
 @Entity
-@DiscriminatorValue("Empleado")
 @Table(name = "empleados")
 public class Empleado extends Usuario implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idEmpleado;
+    
     private String nombreCompleto;
     private String numeroTelefono;
     private LocalDate fechaNacimiento;
     private String tipoEmpleado;
     
-    @OneToMany(mappedBy = "cajero")
+    @OneToMany(mappedBy = "cajero", cascade = CascadeType.PERSIST)
     private List<Venta> ventas;
     
     @OneToOne
@@ -42,14 +46,23 @@ public class Empleado extends Usuario implements Serializable {
         this.tipoEmpleado = tipoEmpleado;
     }
 
-    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado, List<Venta> ventas, Sucursal sucursal, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        super(idUsuario, nombreUsuario, correo, contrasena);
+    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado, List<Venta> ventas, Sucursal sucursal, Long idEmpleado, String nombreUsuario, String correo, String contrasena) {
+        super(nombreUsuario, correo, contrasena);
+        this.idEmpleado = idEmpleado;
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
         this.tipoEmpleado = tipoEmpleado;
         this.ventas = ventas;
         this.sucursal = sucursal;
+    }
+
+    public Long getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(Long idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
     public String getNombreCompleto() {
@@ -76,6 +89,30 @@ public class Empleado extends Usuario implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public String getTipoEmpleado() {
+        return tipoEmpleado;
+    }
+
+    public void setTipoEmpleado(String tipoEmpleado) {
+        this.tipoEmpleado = tipoEmpleado;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -95,11 +132,11 @@ public class Empleado extends Usuario implements Serializable {
             return false;
         }
         final Empleado other = (Empleado) obj;
-        return Objects.equals(super.getIdUsuario(), other.getIdUsuario());
+        return Objects.equals(this.idEmpleado, other.getIdEmpleado());
     }
 
     @Override
     public String toString() {
-        return "Empleado{" + "nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + ", tipoEmpleado=" + tipoEmpleado + ", ventas=" + ventas + ", sucursal=" + sucursal + '}';
     }
 }

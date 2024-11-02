@@ -4,23 +4,16 @@
  */
 package entidades;
 
+import java.util.Objects;
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  *
  * @author Aaron
  */
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipoUsuario")
-@Table(name = "usuarios")
-public class Usuario implements Serializable {
+@MappedSuperclass
+public abstract class Usuario{
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
     private String nombreUsuario;
     private String correo;
     private String contrasena;
@@ -32,21 +25,6 @@ public class Usuario implements Serializable {
         this.nombreUsuario = nombreUsuario;
         this.correo = correo;
         this.contrasena = contrasena;
-    }
-
-    public Usuario(Long idUsuario, String nombreUsuario, String correo, String contrasena) {
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.correo = correo;
-        this.contrasena = contrasena;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public String getNombreUsuario() {
@@ -75,27 +53,28 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.nombreUsuario);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the idUsuario fields are not set
-        if (!(object instanceof Usuario)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Usuario other = (Usuario) obj;
+        return Objects.equals(this.nombreUsuario, other.nombreUsuario);
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", correo=" + correo + '}';
+        return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", correo=" + correo + ", contraseña=" + contrasena + '}';
     }
-
 }

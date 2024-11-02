@@ -26,7 +26,7 @@ public class Medicamento implements Serializable {
     private String activo;
     private float precio;
 
-    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "medicamento")
     private List<MedicamentosReceta> recetas;
 
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.PERSIST)

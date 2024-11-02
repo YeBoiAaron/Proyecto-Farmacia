@@ -29,7 +29,7 @@ public class Sucursal implements Serializable {
     @OneToOne(mappedBy = "sucursal")
     private Empleado gerente;
 
-    @OneToMany(mappedBy = "sucursal")
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InventarioSucursal> inventario;
 
     public Sucursal() {

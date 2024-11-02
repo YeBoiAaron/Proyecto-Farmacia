@@ -30,7 +30,7 @@ public class Paciente implements Serializable {
     private int edad;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
-    private List<Receta> recetas;
+    private List<Receta> listaRecetas;
 
     public Paciente() {
     }
@@ -54,7 +54,7 @@ public class Paciente implements Serializable {
         this.sexo = sexo;
         this.peso = peso;
         this.edad = edad;
-        this.recetas = recetas;
+        this.listaRecetas = recetas;
     }
 
     public Long getIdPaciente() {
@@ -121,12 +121,12 @@ public class Paciente implements Serializable {
         this.edad = edad;
     }
 
-    public List<Receta> getRecetas() {
-        return recetas;
+    public List<Receta> getListaRecetas() {
+        return listaRecetas;
     }
 
-    public void setRecetas(List<Receta> recetas) {
-        this.recetas = recetas;
+    public void setListaRecetas(List<Receta> listaRecetas) {
+        this.listaRecetas = listaRecetas;
     }
 
     @Override
@@ -151,7 +151,7 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "Paciente{" + "idPaciente=" + idPaciente + ", nombreCompleto=" + nombreCompleto + ", fechaNacimiento=" + fechaNacimiento + ", numeroTelefono=" + numeroTelefono + ", correo=" + correo + ", sexo=" + sexo + ", peso=" + peso + ", edad=" + edad + ", recetas=" + recetas + '}';
+        return "Paciente{" + "idPaciente=" + idPaciente + ", nombreCompleto=" + nombreCompleto + ", fechaNacimiento=" + fechaNacimiento + ", numeroTelefono=" + numeroTelefono + ", correo=" + correo + ", sexo=" + sexo + ", peso=" + peso + ", edad=" + edad + ", recetas=" + listaRecetas + '}';
     }
 
 }
