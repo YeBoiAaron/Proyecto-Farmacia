@@ -27,7 +27,7 @@ public class Sucursal implements Serializable {
     private int codigoPostal;
 
     @OneToOne(mappedBy = "sucursal")
-    private Gerente gerente;
+    private Empleado gerente;
 
     @OneToMany(mappedBy = "sucursal")
     private List<InventarioSucursal> inventario;
@@ -42,7 +42,7 @@ public class Sucursal implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Sucursal(Long idSucursal, String calle, String numero, String colonia, int codigoPostal, Gerente gerente, List<InventarioSucursal> inventario) {
+    public Sucursal(Long idSucursal, String calle, String numero, String colonia, int codigoPostal, Empleado gerente, List<InventarioSucursal> inventario) {
         this.idSucursal = idSucursal;
         this.calle = calle;
         this.numero = numero;
@@ -92,11 +92,11 @@ public class Sucursal implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Gerente getGerente() {
+    public Empleado getGerente() {
         return gerente;
     }
 
-    public void setGerente(Gerente gerente) {
+    public void setGerente(Empleado gerente) {
         this.gerente = gerente;
     }
 

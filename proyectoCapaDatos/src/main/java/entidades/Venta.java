@@ -26,7 +26,7 @@ public class Venta implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne
-    private Cajero cajero;
+    private Empleado cajero;
 
     @OneToOne
     @JoinColumn(name = "idReceta", referencedColumnName = "idReceta")
@@ -42,7 +42,7 @@ public class Venta implements Serializable {
         this.fecha = fecha;
     }
 
-    public Venta(Long idVenta, String folio, float subtotal, float total, LocalDate fecha, Cajero cajero, Receta receta) {
+    public Venta(Long idVenta, String folio, float subtotal, float total, LocalDate fecha, Empleado cajero, Receta receta) {
         this.idVenta = idVenta;
         this.folio = folio;
         this.subtotal = subtotal;
@@ -92,11 +92,11 @@ public class Venta implements Serializable {
         this.fecha = fecha;
     }
 
-    public Cajero getCajero() {
+    public Empleado getCajero() {
         return cajero;
     }
 
-    public void setCajero(Cajero cajero) {
+    public void setCajero(Empleado cajero) {
         this.cajero = cajero;
     }
 

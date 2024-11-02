@@ -6,6 +6,7 @@ package entidades;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -14,8 +15,6 @@ import javax.persistence.*;
  * @author Aaron
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipoEmpleado")
 @DiscriminatorValue("Empleado")
 @Table(name = "empleados")
 public class Empleado extends Usuario implements Serializable {
@@ -23,22 +22,34 @@ public class Empleado extends Usuario implements Serializable {
     private String nombreCompleto;
     private String numeroTelefono;
     private LocalDate fechaNacimiento;
+    private String tipoEmpleado;
+    
+    @OneToMany(mappedBy = "cajero")
+    private List<Venta> ventas;
+    
+    @OneToOne
+    @JoinColumn(name = "idSucursal")
+    private Sucursal sucursal;
 
     public Empleado() {
     }
 
-    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
+    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado, String nombreUsuario, String correo, String contrasena) {
         super(nombreUsuario, correo, contrasena);
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
+        this.tipoEmpleado = tipoEmpleado;
     }
 
-    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
+    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado, List<Venta> ventas, Sucursal sucursal, Long idUsuario, String nombreUsuario, String correo, String contrasena) {
         super(idUsuario, nombreUsuario, correo, contrasena);
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
+        this.tipoEmpleado = tipoEmpleado;
+        this.ventas = ventas;
+        this.sucursal = sucursal;
     }
 
     public String getNombreCompleto() {
