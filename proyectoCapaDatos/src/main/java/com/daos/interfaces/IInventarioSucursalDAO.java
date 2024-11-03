@@ -5,7 +5,7 @@
 package com.daos.interfaces;
 
 import com.daos.IDAO;
-import entidades.InventarioSucursal;
+import com.entidades.InventarioSucursal;
 
 /**
  *

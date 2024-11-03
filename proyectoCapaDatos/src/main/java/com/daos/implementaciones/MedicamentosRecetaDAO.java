@@ -6,7 +6,7 @@ package com.daos.implementaciones;
 
 import com.daos.interfaces.IMedicamentosRecetaDAO;
 import com.daos.DAOBase;
-import entidades.MedicamentosReceta;
+import com.entidades.MedicamentosReceta;
 import javax.persistence.EntityManager;
 
 /**

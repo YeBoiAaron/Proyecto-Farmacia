@@ -6,7 +6,7 @@ package com.daos.implementaciones;
 
 import com.daos.interfaces.IInventarioSucursalDAO;
 import com.daos.DAOBase;
-import entidades.InventarioSucursal;
+import com.entidades.InventarioSucursal;
 import javax.persistence.EntityManager;
 
 /**
