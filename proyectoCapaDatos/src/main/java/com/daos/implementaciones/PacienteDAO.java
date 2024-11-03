@@ -5,17 +5,17 @@
 package com.daos.implementaciones;
 
 import com.daos.DAOBase;
-import com.daos.interfaces.IInventarioSucursalDAO;
-import com.entidades.InventarioSucursal;
+import com.daos.interfaces.IPacienteDAO;
+import com.entidades.Paciente;
 import javax.persistence.EntityManager;
 
 /**
  *
  * @author Aaron
  */
-public class InventarioSucursalDAO extends DAOBase<InventarioSucursal> implements IInventarioSucursalDAO {
+public class PacienteDAO extends DAOBase<Paciente> implements IPacienteDAO {
     
-    public InventarioSucursalDAO(EntityManager entityManager) {
+    public PacienteDAO(EntityManager entityManager) {
         super(entityManager);
     }
     
