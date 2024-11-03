@@ -15,12 +15,12 @@ import javax.persistence.criteria.CriteriaQuery;
  *
  * @author Aaron
  */
-public class DaoBase<T> implements IDao<T> {
+public class DAOBase<T> implements IDAO<T> {
 
     private EntityManager entityManager;
     private Class<T> type;
 
-    public DaoBase(EntityManager entityManager) {
+    public DAOBase(EntityManager entityManager) {
         this.entityManager = entityManager;
 
         Type t = getClass().getGenericSuperclass();

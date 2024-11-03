@@ -4,6 +4,9 @@
  */
 package pantallas;
 
+import pantallas.medico.frmInicioMedico;
+import pantallas.empleado.frmInicioEmpleadoFarmacia;
+
 /**
  *
  * @author Aaron

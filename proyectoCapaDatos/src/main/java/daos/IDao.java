@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Aaron
  */
-public interface IDao<T> {
+public interface IDAO<T> {
 
     T obtener(Long id);
 
