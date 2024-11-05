@@ -75,23 +75,15 @@ public class frmVenta extends javax.swing.JFrame {
 
         jTablaIndicaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Medicamento", "Indicaciones"
+                "Medicamento", "Indicaciones", "Cantidad"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         TablaIndicaciones.setViewportView(jTablaIndicaciones);
 
         jMenu1.setText("Venta");
