@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pantallas;
+package com.pantallas;
 
-import pantallas.medico.frmInicioMedico;
-import pantallas.empleado.frmInicioEmpleadoFarmacia;
+import com.pantallas.medico.frmInicioMedico;
+import com.pantallas.empleado.frmInicioEmpleadoFarmacia;
 
 /**
  *
