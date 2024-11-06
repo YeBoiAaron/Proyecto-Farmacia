@@ -25,7 +25,7 @@ public class MedicamentosReceta implements Serializable {
     @JoinColumn(name = "idMedicamento")
     private Medicamento medicamento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idReceta")
     private Receta receta;
 

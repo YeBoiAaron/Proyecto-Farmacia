@@ -2,18 +2,18 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="Farmacia_PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>entidades.Usuario</class>
-    <class>entidades.Medico</class>
-    <class>entidades.Empleado</class>
-    <class>entidades.Cajero</class>
-    <class>entidades.Gerente</class>
-    <class>entidades.Receta</class>
-    <class>entidades.Medicamento</class>
-    <class>entidades.Paciente</class>
-    <class>entidades.Sucursal</class>
-    <class>entidades.Venta</class>
-    <class>entidades.MedicamentosReceta</class>
-    <class>entidades.InventarioSucursal</class>
+    <class>com.entidades.Usuario</class>
+    <class>com.entidades.Medico</class>
+    <class>com.entidades.Empleado</class>
+    <class>com.entidades.Cajero</class>
+    <class>com.entidades.Gerente</class>
+    <class>com.entidades.Receta</class>
+    <class>com.entidades.Medicamento</class>
+    <class>com.entidades.Paciente</class>
+    <class>com.entidades.Sucursal</class>
+    <class>com.entidades.Venta</class>
+    <class>com.entidades.MedicamentosReceta</class>
+    <class>com.entidades.InventarioSucursal</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Farmacia"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

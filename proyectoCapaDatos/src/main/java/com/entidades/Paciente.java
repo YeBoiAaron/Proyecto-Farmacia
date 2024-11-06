@@ -29,7 +29,7 @@ public class Paciente implements Serializable {
     private float peso;
     private int edad;
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "paciente")
     private List<Receta> listaRecetas;
 
     public Paciente() {

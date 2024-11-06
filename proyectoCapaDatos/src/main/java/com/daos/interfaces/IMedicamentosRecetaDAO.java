@@ -4,10 +4,13 @@
  */
 package com.daos.interfaces;
 
+import com.daos.IDAO;
+import com.entidades.MedicamentosReceta;
+
 /**
  *
  * @author Aaron
  */
-public interface IMedicamentosRecetaDAO {
+public interface IMedicamentosRecetaDAO extends IDAO<MedicamentosReceta> {
     
 }
