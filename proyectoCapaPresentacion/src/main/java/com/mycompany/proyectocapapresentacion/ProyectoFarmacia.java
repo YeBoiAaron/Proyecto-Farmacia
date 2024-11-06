@@ -4,7 +4,7 @@
 
 package com.mycompany.proyectocapapresentacion;
 
-import pantallas.frmLogin;
+import com.pantallas.frmLogin;
 
 /**
  *
