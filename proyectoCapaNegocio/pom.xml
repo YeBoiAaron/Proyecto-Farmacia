@@ -12,4 +12,11 @@
         <exec.mainClass>com.mycompany.proyectocapanegocio.ProyectoCapaNegocio</exec.mainClass>
     </properties>
     <name>CapaNegocio</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CapaDatos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
