@@ -28,7 +28,7 @@ public class Empleado extends Usuario implements Serializable {
     private LocalDate fechaNacimiento;
     private String tipoEmpleado;
     
-    @OneToMany(mappedBy = "cajero", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cajero", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Venta> ventas;
     
     @OneToOne

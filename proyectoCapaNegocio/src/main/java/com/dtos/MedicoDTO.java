@@ -17,17 +17,15 @@ public class MedicoDTO {
     private String numeroTelefono;
     private String cedulaProfesional;
     private LocalDate fechaNacimiento;
-    private List<RecetaDTO> recetas;
 
     public MedicoDTO() {
     }
 
-    public MedicoDTO(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, List<RecetaDTO> recetas) {
+    public MedicoDTO(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento) {
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
         this.cedulaProfesional = cedulaProfesional;
         this.fechaNacimiento = fechaNacimiento;
-        this.recetas = recetas;
     }
 
     public String getNombreCompleto() {
@@ -62,14 +60,6 @@ public class MedicoDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public List<RecetaDTO> getRecetas() {
-        return recetas;
-    }
-
-    public void setRecetas(List<RecetaDTO> recetas) {
-        this.recetas = recetas;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -94,6 +84,6 @@ public class MedicoDTO {
 
     @Override
     public String toString() {
-        return "MedicoDTO{" + "nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", cedulaProfesional=" + cedulaProfesional + ", fechaNacimiento=" + fechaNacimiento + ", recetas=" + recetas + '}';
+        return "MedicoDTO{" + "nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", cedulaProfesional=" + cedulaProfesional + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 }

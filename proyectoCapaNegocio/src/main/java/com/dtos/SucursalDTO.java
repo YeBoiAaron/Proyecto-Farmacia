@@ -16,19 +16,15 @@ public class SucursalDTO {
     private String numero;
     private String colonia;
     private int codigoPostal;
-    private EmpleadoDTO gerente;
-    private List<InventarioSucursalDTO> inventario;
 
     public SucursalDTO() {
     }
 
-    public SucursalDTO(String calle, String numero, String colonia, int codigoPostal, EmpleadoDTO gerente, List<InventarioSucursalDTO> inventario) {
+    public SucursalDTO(String calle, String numero, String colonia, int codigoPostal) {
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
         this.codigoPostal = codigoPostal;
-        this.gerente = gerente;
-        this.inventario = inventario;
     }
 
     public String getCalle() {
@@ -61,22 +57,6 @@ public class SucursalDTO {
 
     public void setCodigoPostal(int codigoPostal) {
         this.codigoPostal = codigoPostal;
-    }
-
-    public EmpleadoDTO getGerente() {
-        return gerente;
-    }
-
-    public void setGerente(EmpleadoDTO gerente) {
-        this.gerente = gerente;
-    }
-
-    public List<InventarioSucursalDTO> getInventario() {
-        return inventario;
-    }
-
-    public void setInventario(List<InventarioSucursalDTO> inventario) {
-        this.inventario = inventario;
     }
 
     @Override
@@ -115,6 +95,6 @@ public class SucursalDTO {
 
     @Override
     public String toString() {
-        return "SucursalDTO{" + "calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", gerente=" + gerente + ", inventario=" + inventario + '}';
+        return "SucursalDTO{" + "calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + '}';
     }
 }

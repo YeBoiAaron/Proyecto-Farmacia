@@ -16,19 +16,15 @@ public class VentaDTO {
     private float subtotal;
     private float total;
     private LocalDate fecha;
-    private EmpleadoDTO cajero;
-    private RecetaDTO receta;
 
     public VentaDTO() {
     }
 
-    public VentaDTO(String folio, float subtotal, float total, LocalDate fecha, EmpleadoDTO cajero, RecetaDTO receta) {
+    public VentaDTO(String folio, float subtotal, float total, LocalDate fecha) {
         this.folio = folio;
         this.subtotal = subtotal;
         this.total = total;
         this.fecha = fecha;
-        this.cajero = cajero;
-        this.receta = receta;
     }
 
     public String getFolio() {
@@ -63,22 +59,6 @@ public class VentaDTO {
         this.fecha = fecha;
     }
 
-    public EmpleadoDTO getCajero() {
-        return cajero;
-    }
-
-    public void setCajero(EmpleadoDTO cajero) {
-        this.cajero = cajero;
-    }
-
-    public RecetaDTO getReceta() {
-        return receta;
-    }
-
-    public void setReceta(RecetaDTO receta) {
-        this.receta = receta;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -103,6 +83,6 @@ public class VentaDTO {
 
     @Override
     public String toString() {
-        return "VentaDTO{" + "folio=" + folio + ", subtotal=" + subtotal + ", total=" + total + ", fecha=" + fecha + ", cajero=" + cajero + ", receta=" + receta + '}';
+        return "VentaDTO{" + "folio=" + folio + ", subtotal=" + subtotal + ", total=" + total + ", fecha=" + fecha + '}';
     }
 }
