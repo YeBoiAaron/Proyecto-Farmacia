@@ -23,6 +23,11 @@
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CapaNegocio</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <name>CapaPresentacion</name>
 </project>
