@@ -28,7 +28,7 @@ public class Medico extends Usuario implements Serializable {
     private String cedulaProfesional;
     private LocalDate fechaNacimiento;
 
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Receta> recetas;
 
     public Medico() {

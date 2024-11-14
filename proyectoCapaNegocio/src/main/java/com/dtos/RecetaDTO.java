@@ -16,23 +16,15 @@ public class RecetaDTO {
     private String diagnostico;
     private String instrucciones;
     private String estado;
-    private VentaDTO venta;
-    private MedicoDTO medico;
-    private PacienteDTO paciente;
-    private List<MedicamentoDTO> listaMedicamentos;
 
     public RecetaDTO() {
     }
 
-    public RecetaDTO(String numeroReceta, String diagnostico, String instrucciones, String estado, VentaDTO venta, MedicoDTO medico, PacienteDTO paciente, List<MedicamentoDTO> listaMedicamentos) {
+    public RecetaDTO(String numeroReceta, String diagnostico, String instrucciones, String estado) {
         this.numeroReceta = numeroReceta;
         this.diagnostico = diagnostico;
         this.instrucciones = instrucciones;
         this.estado = estado;
-        this.venta = venta;
-        this.medico = medico;
-        this.paciente = paciente;
-        this.listaMedicamentos = listaMedicamentos;
     }
 
     public String getNumeroReceta() {
@@ -67,38 +59,6 @@ public class RecetaDTO {
         this.estado = estado;
     }
 
-    public VentaDTO getVenta() {
-        return venta;
-    }
-
-    public void setVenta(VentaDTO venta) {
-        this.venta = venta;
-    }
-
-    public MedicoDTO getMedico() {
-        return medico;
-    }
-
-    public void setMedico(MedicoDTO medico) {
-        this.medico = medico;
-    }
-
-    public PacienteDTO getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(PacienteDTO paciente) {
-        this.paciente = paciente;
-    }
-
-    public List<MedicamentoDTO> getListaMedicamentos() {
-        return listaMedicamentos;
-    }
-
-    public void setListaMedicamentos(List<MedicamentoDTO> listaMedicamentos) {
-        this.listaMedicamentos = listaMedicamentos;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -123,6 +83,6 @@ public class RecetaDTO {
 
     @Override
     public String toString() {
-        return "RecetaDTO{" + "numeroReceta=" + numeroReceta + ", diagnostico=" + diagnostico + ", instrucciones=" + instrucciones + ", estado=" + estado + ", venta=" + venta + ", medico=" + medico + ", paciente=" + paciente + ", listaMedicamentos=" + listaMedicamentos + '}';
+        return "RecetaDTO{" + "numeroReceta=" + numeroReceta + ", diagnostico=" + diagnostico + ", instrucciones=" + instrucciones + ", estado=" + estado + '}';
     }
 }

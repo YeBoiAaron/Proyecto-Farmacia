@@ -24,9 +24,15 @@
             <version>1.4</version>
         </dependency>
         <dependency>
+<<<<<<< HEAD
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE230</version>
+=======
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CapaNegocio</artifactId>
+            <version>${project.version}</version>
+>>>>>>> 9c704d869ad923518c5da63682437cc8bc1c5545
         </dependency>
     </dependencies>
     <name>CapaPresentacion</name>

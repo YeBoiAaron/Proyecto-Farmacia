@@ -20,12 +20,11 @@ public class PacienteDTO {
     private String sexo;
     private float peso;
     private int edad;
-    private List<RecetaDTO> listaRecetas;
 
     public PacienteDTO() {
     }
 
-    public PacienteDTO(String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float peso, int edad, List<RecetaDTO> listaRecetas) {
+    public PacienteDTO(String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float peso, int edad) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.numeroTelefono = numeroTelefono;
@@ -33,7 +32,6 @@ public class PacienteDTO {
         this.sexo = sexo;
         this.peso = peso;
         this.edad = edad;
-        this.listaRecetas = listaRecetas;
     }
 
     public String getNombreCompleto() {
@@ -92,14 +90,6 @@ public class PacienteDTO {
         this.edad = edad;
     }
 
-    public List<RecetaDTO> getListaRecetas() {
-        return listaRecetas;
-    }
-
-    public void setListaRecetas(List<RecetaDTO> listaRecetas) {
-        this.listaRecetas = listaRecetas;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -128,6 +118,6 @@ public class PacienteDTO {
 
     @Override
     public String toString() {
-        return "PacienteDTO{" + "nombreCompleto=" + nombreCompleto + ", fechaNacimiento=" + fechaNacimiento + ", numeroTelefono=" + numeroTelefono + ", correo=" + correo + ", sexo=" + sexo + ", peso=" + peso + ", edad=" + edad + ", listaRecetas=" + listaRecetas + '}';
+        return "PacienteDTO{" + "nombreCompleto=" + nombreCompleto + ", fechaNacimiento=" + fechaNacimiento + ", numeroTelefono=" + numeroTelefono + ", correo=" + correo + ", sexo=" + sexo + ", peso=" + peso + ", edad=" + edad + '}';
     }
 }

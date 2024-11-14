@@ -17,19 +17,15 @@ public class EmpleadoDTO {
     private String numeroTelefono;
     private LocalDate fechaNacimiento;
     private String tipoEmpleado;
-    private List<VentaDTO> ventas;
-    private SucursalDTO sucursal;
 
     public EmpleadoDTO() {
     }
 
-    public EmpleadoDTO(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado, List<VentaDTO> ventas, SucursalDTO sucursal) {
+    public EmpleadoDTO(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado) {
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
         this.tipoEmpleado = tipoEmpleado;
-        this.ventas = ventas;
-        this.sucursal = sucursal;
     }
 
     public String getNombreCompleto() {
@@ -64,22 +60,6 @@ public class EmpleadoDTO {
         this.tipoEmpleado = tipoEmpleado;
     }
 
-    public List<VentaDTO> getVentas() {
-        return ventas;
-    }
-
-    public void setVentas(List<VentaDTO> ventas) {
-        this.ventas = ventas;
-    }
-
-    public SucursalDTO getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(SucursalDTO sucursal) {
-        this.sucursal = sucursal;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -104,6 +84,6 @@ public class EmpleadoDTO {
 
     @Override
     public String toString() {
-        return "EmpleadoDTO{" + "nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + ", tipoEmpleado=" + tipoEmpleado + ", ventas=" + ventas + ", sucursal=" + sucursal + '}';
+        return "EmpleadoDTO{" + "nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + ", tipoEmpleado=" + tipoEmpleado + '}';
     }
 }

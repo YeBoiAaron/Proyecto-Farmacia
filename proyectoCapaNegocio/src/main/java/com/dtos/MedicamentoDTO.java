@@ -17,20 +17,16 @@ public class MedicamentoDTO {
     private String concentracion;
     private String activo;
     private float precio;
-    private List<MedicamentosRecetaDTO> recetas;
-    private List<InventarioSucursalDTO> inventarios;
 
     public MedicamentoDTO() {
     }
 
-    public MedicamentoDTO(String nombre, String presentacion, String concentracion, String activo, float precio, List<MedicamentosRecetaDTO> recetas, List<InventarioSucursalDTO> inventarios) {
+    public MedicamentoDTO(String nombre, String presentacion, String concentracion, String activo, float precio) {
         this.nombre = nombre;
         this.presentacion = presentacion;
         this.concentracion = concentracion;
         this.activo = activo;
         this.precio = precio;
-        this.recetas = recetas;
-        this.inventarios = inventarios;
     }
 
     public String getNombre() {
@@ -73,22 +69,6 @@ public class MedicamentoDTO {
         this.precio = precio;
     }
 
-    public List<MedicamentosRecetaDTO> getRecetas() {
-        return recetas;
-    }
-
-    public void setRecetas(List<MedicamentosRecetaDTO> recetas) {
-        this.recetas = recetas;
-    }
-
-    public List<InventarioSucursalDTO> getInventarios() {
-        return inventarios;
-    }
-
-    public void setInventarios(List<InventarioSucursalDTO> inventarios) {
-        this.inventarios = inventarios;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -121,6 +101,6 @@ public class MedicamentoDTO {
 
     @Override
     public String toString() {
-        return "MedicamentoDTO{" + "nombre=" + nombre + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + ", recetas=" + recetas + ", inventarios=" + inventarios + '}';
+        return "MedicamentoDTO{" + "nombre=" + nombre + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + '}';
     }
 }

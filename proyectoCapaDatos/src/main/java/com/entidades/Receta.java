@@ -38,7 +38,7 @@ public class Receta implements Serializable {
     @JoinColumn(name = "idPaciente")
     private Paciente paciente;
 
-    @OneToMany(mappedBy = "receta")
+    @OneToMany(mappedBy = "receta", fetch = FetchType.LAZY)
     private List<MedicamentosReceta> listaMedicamentos;
 
     public Receta() {
