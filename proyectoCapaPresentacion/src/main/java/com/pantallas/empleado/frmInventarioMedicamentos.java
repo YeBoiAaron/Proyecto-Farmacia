@@ -122,6 +122,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
             }
         });
 
+        jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
+
         jMenu1.setText("Venta");
 
         miRealizarVenta.setText("Realizar Venta");
