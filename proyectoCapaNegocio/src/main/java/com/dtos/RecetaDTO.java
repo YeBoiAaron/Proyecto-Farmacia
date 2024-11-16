@@ -4,7 +4,6 @@
  */
 package com.dtos;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
