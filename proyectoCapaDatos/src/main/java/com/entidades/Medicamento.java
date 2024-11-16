@@ -54,6 +54,70 @@ public class Medicamento implements Serializable {
         this.inventarios = inventarios;
     }
 
+    public Long getIdMedicamento() {
+        return idMedicamento;
+    }
+
+    public void setIdMedicamento(Long idMedicamento) {
+        this.idMedicamento = idMedicamento;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
+    }
+
+    public String getConcentracion() {
+        return concentracion;
+    }
+
+    public void setConcentracion(String concentracion) {
+        this.concentracion = concentracion;
+    }
+
+    public String getActivo() {
+        return activo;
+    }
+
+    public void setActivo(String activo) {
+        this.activo = activo;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public List<MedicamentosReceta> getRecetas() {
+        return recetas;
+    }
+
+    public void setRecetas(List<MedicamentosReceta> recetas) {
+        this.recetas = recetas;
+    }
+
+    public List<InventarioSucursal> getInventarios() {
+        return inventarios;
+    }
+
+    public void setInventarios(List<InventarioSucursal> inventarios) {
+        this.inventarios = inventarios;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
