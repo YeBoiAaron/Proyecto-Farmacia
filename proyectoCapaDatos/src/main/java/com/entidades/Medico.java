@@ -34,6 +34,13 @@ public class Medico extends Usuario implements Serializable {
     public Medico() {
     }
 
+    public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento) {
+        this.nombreCompleto = nombreCompleto;
+        this.numeroTelefono = numeroTelefono;
+        this.cedulaProfesional = cedulaProfesional;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public Medico(String nombreCompleto, String numeroTelefono, String cedulaProfesional, LocalDate fechaNacimiento, String nombreUsuario, String correo, String contrasena) {
         super(nombreUsuario, correo, contrasena);
         this.nombreCompleto = nombreCompleto;
