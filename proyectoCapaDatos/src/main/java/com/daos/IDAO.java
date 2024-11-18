@@ -18,7 +18,7 @@ public interface IDAO<T> {
 
     T actualizar(T entity);
 
-    void Eliminar(T entity);
+    void eliminar(T entity);
 
     List<T> lista();
 

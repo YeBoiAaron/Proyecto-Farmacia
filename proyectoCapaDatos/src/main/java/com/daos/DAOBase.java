@@ -37,7 +37,7 @@ public class DAOBase<T> implements IDAO<T> {
     }
 
     @Override
-    public void Eliminar(T entity) {
+    public void eliminar(T entity) {
         entityManager.getTransaction().begin();
         entityManager.remove(entityManager.merge(entity));
         entityManager.getTransaction().commit();
