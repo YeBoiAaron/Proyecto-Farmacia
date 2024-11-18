@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 public class MedicamentoDTO {
     private String nombre;
+    private String numeroSerie;
     private String presentacion;
     private String concentracion;
     private String activo;
@@ -20,8 +21,9 @@ public class MedicamentoDTO {
     public MedicamentoDTO() {
     }
 
-    public MedicamentoDTO(String nombre, String presentacion, String concentracion, String activo, float precio) {
+    public MedicamentoDTO(String nombre, String numeroSerie, String presentacion, String concentracion, String activo, float precio) {
         this.nombre = nombre;
+        this.numeroSerie = numeroSerie;
         this.presentacion = presentacion;
         this.concentracion = concentracion;
         this.activo = activo;
@@ -34,6 +36,14 @@ public class MedicamentoDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
     }
 
     public String getPresentacion() {
@@ -70,10 +80,8 @@ public class MedicamentoDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.nombre);
-        hash = 83 * hash + Objects.hashCode(this.presentacion);
-        hash = 83 * hash + Objects.hashCode(this.concentracion);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.numeroSerie);
         return hash;
     }
 
@@ -89,17 +97,11 @@ public class MedicamentoDTO {
             return false;
         }
         final MedicamentoDTO other = (MedicamentoDTO) obj;
-        if (!Objects.equals(this.presentacion, other.presentacion)) {
-            return false;
-        }
-        if (!Objects.equals(this.concentracion, other.concentracion)) {
-            return false;
-        }
-        return Objects.equals(this.activo, other.activo);
+        return Objects.equals(this.numeroSerie, other.numeroSerie);
     }
-
+    
     @Override
     public String toString() {
-        return "MedicamentoDTO{" + "nombre=" + nombre + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + '}';
+        return "MedicamentoDTO{" + "nombre=" + nombre + ", numero de serie=" + numeroSerie + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + '}';
     }
 }

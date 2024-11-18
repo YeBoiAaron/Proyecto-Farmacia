@@ -6,6 +6,7 @@ package com.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 /**
@@ -20,6 +21,7 @@ public class Medicamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMedicamento;
+    private String numeroSerie;
     private String nombre;
     private String presentacion;
     private String concentracion;
@@ -35,17 +37,19 @@ public class Medicamento implements Serializable {
     public Medicamento() {
     }
 
-    public Medicamento(String nombre, String presentacion, String concentracion, String activo, float precio) {
+    public Medicamento(String nombre, String numeroSerie, String presentacion, String concentracion, String activo, float precio) {
         this.nombre = nombre;
+        this.numeroSerie = numeroSerie;
         this.presentacion = presentacion;
         this.concentracion = concentracion;
         this.activo = activo;
         this.precio = precio;
     }
 
-    public Medicamento(Long idMedicamento, String nombre, String presentacion, String concentracion, String activo, float precio, List<MedicamentosReceta> recetas, List<InventarioSucursal> inventarios) {
+    public Medicamento(Long idMedicamento, String nombre, String numeroSerie, String presentacion, String concentracion, String activo, float precio, List<MedicamentosReceta> recetas, List<InventarioSucursal> inventarios) {
         this.idMedicamento = idMedicamento;
         this.nombre = nombre;
+        this.numeroSerie = numeroSerie;
         this.presentacion = presentacion;
         this.concentracion = concentracion;
         this.activo = activo;
@@ -68,6 +72,14 @@ public class Medicamento implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
     }
 
     public String getPresentacion() {
@@ -117,30 +129,32 @@ public class Medicamento implements Serializable {
     public void setInventarios(List<InventarioSucursal> inventarios) {
         this.inventarios = inventarios;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idMedicamento != null ? idMedicamento.hashCode() : 0);
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.numeroSerie);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the idMedicamento fields are not set
-        if (!(object instanceof Medicamento)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Medicamento other = (Medicamento) object;
-        if ((this.idMedicamento == null && other.idMedicamento != null) || (this.idMedicamento != null && !this.idMedicamento.equals(other.idMedicamento))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Medicamento other = (Medicamento) obj;
+        return Objects.equals(this.numeroSerie, other.numeroSerie);
     }
 
     @Override
     public String toString() {
-        return "Medicamento{" + "idMedicamento=" + idMedicamento + ", nombre=" + nombre + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + ", recetas=" + recetas + ", inventarios=" + inventarios + '}';
+        return "Medicamento{" + "idMedicamento=" + idMedicamento + ", nombre=" + nombre + ", numero de serie=" + numeroSerie + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + ", recetas=" + recetas + ", inventarios=" + inventarios + '}';
     }
 
 }

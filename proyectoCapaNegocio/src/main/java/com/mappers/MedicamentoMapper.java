@@ -14,11 +14,11 @@ import com.entidades.Medicamento;
 public class MedicamentoMapper {
 
     public static MedicamentoDTO toDTO(Medicamento medicamento) {
-        return new MedicamentoDTO(medicamento.getNombre(), medicamento.getPresentacion(), medicamento.getConcentracion(), medicamento.getConcentracion(), medicamento.getPrecio());
+        return new MedicamentoDTO(medicamento.getNombre(), medicamento.getNumeroSerie(), medicamento.getPresentacion(), medicamento.getConcentracion(), medicamento.getConcentracion(), medicamento.getPrecio());
     }
 
     public static Medicamento toEntity(MedicamentoDTO medicamentodto) {
-        return new Medicamento(medicamentodto.getNombre(), medicamentodto.getPresentacion(), medicamentodto.getConcentracion(), medicamentodto.getConcentracion(), medicamentodto.getPrecio());
+        return new Medicamento(medicamentodto.getNombre(), medicamentodto.getNumeroSerie(), medicamentodto.getPresentacion(), medicamentodto.getConcentracion(), medicamentodto.getConcentracion(), medicamentodto.getPrecio());
     }
     
 }
