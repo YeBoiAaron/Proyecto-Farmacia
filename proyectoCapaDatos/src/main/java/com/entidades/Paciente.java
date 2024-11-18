@@ -26,6 +26,7 @@ public class Paciente implements Serializable {
     private String numeroTelefono;
     private String correo;
     private String sexo;
+    private float altura;
     private float peso;
     private int edad;
 
@@ -35,23 +36,25 @@ public class Paciente implements Serializable {
     public Paciente() {
     }
 
-    public Paciente(String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float peso, int edad) {
+    public Paciente(String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float altura, float peso, int edad) {
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.numeroTelefono = numeroTelefono;
         this.correo = correo;
         this.sexo = sexo;
+        this.altura = altura;
         this.peso = peso;
         this.edad = edad;
     }
 
-    public Paciente(Long idPaciente, String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float peso, int edad, List<Receta> recetas) {
+    public Paciente(Long idPaciente, String nombreCompleto, LocalDate fechaNacimiento, String numeroTelefono, String correo, String sexo, float altura, float peso, int edad, List<Receta> recetas) {
         this.idPaciente = idPaciente;
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
         this.numeroTelefono = numeroTelefono;
         this.correo = correo;
         this.sexo = sexo;
+        this.altura = altura;
         this.peso = peso;
         this.edad = edad;
         this.listaRecetas = recetas;
@@ -103,6 +106,14 @@ public class Paciente implements Serializable {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+    public void setAltura(float altura) {
+        this.altura = altura;
     }
 
     public float getPeso() {

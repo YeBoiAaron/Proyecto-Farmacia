@@ -26,7 +26,7 @@ public class ProyectoCapaDatos {
         IMedicoDAO mdDAO = new MedicoDAO(em);
         
         Medicamento m1 = new Medicamento("Paracetamol", "1234567890", "Tabletas", "600mg", "Paracetamol", 60.00f);
-        Paciente p1 = new Paciente("Juan Perez", LocalDate.parse("1987-11-24"), "1234567890", "jp@gmail.com", "M", 86.0f, (int)(long)ChronoUnit.YEARS.between(LocalDate.parse("1987-11-24"),LocalDate.now()));
+        Paciente p1 = new Paciente("Juan Perez", LocalDate.parse("1987-11-24"), "1234567890", "jp@gmail.com", "M", 172.0f, 86.0f, (int)(long)ChronoUnit.YEARS.between(LocalDate.parse("1987-11-24"),LocalDate.now()));
         Medico md1 = new Medico("Juan Mendez", "0123456789", "123456789a", LocalDate.parse("1976-03-13"), "jmendez76", "drjuanmendez@hotmail.com", "contraseña");
         Receta r1 = new Receta("123456789a", "Dolor de cabeza", "1 tableta paracetamol 600mg c/8h", "sin surtir");
         
