@@ -11,15 +11,13 @@ import com.entidades.Medicamento;
  *
  * @author Aaron
  */
-public class MedicamentoMapper implements IMapper<Medicamento, MedicamentoDTO> {
+public class MedicamentoMapper {
 
-    @Override
-    public MedicamentoDTO toDTO(Medicamento medicamento) {
+    public static MedicamentoDTO toDTO(Medicamento medicamento) {
         return new MedicamentoDTO(medicamento.getNombre(), medicamento.getPresentacion(), medicamento.getConcentracion(), medicamento.getConcentracion(), medicamento.getPrecio());
     }
 
-    @Override
-    public Medicamento toEntity(MedicamentoDTO medicamentodto) {
+    public static Medicamento toEntity(MedicamentoDTO medicamentodto) {
         return new Medicamento(medicamentodto.getNombre(), medicamentodto.getPresentacion(), medicamentodto.getConcentracion(), medicamentodto.getConcentracion(), medicamentodto.getPrecio());
     }
     

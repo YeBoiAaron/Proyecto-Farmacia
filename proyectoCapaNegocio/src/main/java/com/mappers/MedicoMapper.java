@@ -11,15 +11,13 @@ import com.entidades.Medico;
  *
  * @author Aaron
  */
-public class MedicoMapper implements IMapper<Medico, MedicoDTO> {
+public class MedicoMapper {
 
-    @Override
-    public MedicoDTO toDTO(Medico medico) {
+    public static MedicoDTO toDTO(Medico medico) {
         return new MedicoDTO(medico.getNombreCompleto(), medico.getNumeroTelefono(), medico.getCedulaProfesional(), medico.getFechaNacimiento());
     }
 
-    @Override
-    public Medico toEntity(MedicoDTO obj) {
+    public static Medico toEntity(MedicoDTO obj) {
         return new Medico(obj.getNombreCompleto(), obj.getNumeroTelefono(), obj.getCedulaProfesional(), obj.getFechaNacimiento());
     }
     

@@ -11,15 +11,13 @@ import com.entidades.Paciente;
  *
  * @author Aaron
  */
-public class PacienteMapper implements IMapper<Paciente, PacienteDTO> {
+public class PacienteMapper {
 
-    @Override
-    public PacienteDTO toDTO(Paciente paciente) {
+    public static PacienteDTO toDTO(Paciente paciente) {
         return new PacienteDTO(paciente.getNombreCompleto(), paciente.getFechaNacimiento(), paciente.getNumeroTelefono(), paciente.getCorreo(), paciente.getSexo(), paciente.getPeso(), paciente.getEdad());
     }
 
-    @Override
-    public Paciente toEntity(PacienteDTO pacientedto) {
+    public static Paciente toEntity(PacienteDTO pacientedto) {
         return new Paciente(pacientedto.getNombreCompleto(), pacientedto.getFechaNacimiento(), pacientedto.getNumeroTelefono(), pacientedto.getCorreo(), pacientedto.getSexo(), pacientedto.getPeso(), pacientedto.getEdad());
     }
     

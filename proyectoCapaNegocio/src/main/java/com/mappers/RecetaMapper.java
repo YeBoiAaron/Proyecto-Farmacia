@@ -11,16 +11,14 @@ import com.entidades.Receta;
  *
  * @author Aaron
  */
-public class RecetaMapper implements IMapper<Receta,RecetaDTO>{
+public class RecetaMapper {
     
-    @Override
-    public RecetaDTO toDTO(Receta receta) {
+    public static RecetaDTO toDTO(Receta receta) {
         RecetaDTO recetadto = new RecetaDTO(receta.getNumeroReceta(), receta.getDiagnostico(), receta.getInstrucciones(), receta.getEstado());
         return recetadto;
     }
     
-    @Override
-    public Receta toEntity(RecetaDTO recetadto) {
+    public static Receta toEntity(RecetaDTO recetadto) {
         Receta receta = new Receta(recetadto.getNumeroReceta(), recetadto.getDiagnostico(), recetadto.getInstrucciones(), recetadto.getEstado());
         return receta;
     }
