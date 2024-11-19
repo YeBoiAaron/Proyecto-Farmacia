@@ -21,11 +21,15 @@ public class Medico extends Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_medico")
     private Long idMedico;
-    
+    @Column(name = "nombre_completo")
     private String nombreCompleto;
+    @Column(name = "numero_telefono")
     private String numeroTelefono;
+    @Column(name = "cedula_profesional")
     private String cedulaProfesional;
+    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
     @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

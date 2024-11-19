@@ -18,15 +18,17 @@ public class MedicamentosReceta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_medicamentos_receta")
     private Long id;
+    @Column(name = "cantidad")
     private int cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "idMedicamento")
+    @JoinColumn(name = "id_medicamento")
     private Medicamento medicamento;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idReceta")
+    @JoinColumn(name = "id_receta")
     private Receta receta;
 
     public MedicamentosReceta() {

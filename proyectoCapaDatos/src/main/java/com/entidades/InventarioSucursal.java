@@ -18,15 +18,17 @@ public class InventarioSucursal implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_inventario")
     private Long idInventario;
+    @Column(name = "cantidad")
     private int cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "idMedicamento")
+    @JoinColumn(name = "id_medicamento")
     private Medicamento medicamento;
 
     @ManyToOne
-    @JoinColumn(name = "idSucursal")
+    @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal;
 
     public InventarioSucursal() {

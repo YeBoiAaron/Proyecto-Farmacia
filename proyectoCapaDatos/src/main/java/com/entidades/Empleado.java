@@ -21,11 +21,15 @@ public class Empleado extends Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_empleado")
     private Long idEmpleado;
-    
+    @Column(name = "nombre_completo")
     private String nombreCompleto;
+    @Column(name = "numero_telefono")
     private String numeroTelefono;
+    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
+    @Column(name = "tipo_empleado")
     private String tipoEmpleado;
     
     @OneToMany(mappedBy = "cajero", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
@@ -36,6 +40,13 @@ public class Empleado extends Usuario implements Serializable {
     private Sucursal sucursal;
 
     public Empleado() {
+    }
+
+    public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado) {
+        this.nombreCompleto = nombreCompleto;
+        this.numeroTelefono = numeroTelefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.tipoEmpleado = tipoEmpleado;
     }
 
     public Empleado(String nombreCompleto, String numeroTelefono, LocalDate fechaNacimiento, String tipoEmpleado, String nombreUsuario, String correo, String contrasena) {

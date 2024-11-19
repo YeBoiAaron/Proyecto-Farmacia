@@ -20,12 +20,19 @@ public class Medicamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_medicamento")
     private Long idMedicamento;
+    @Column(name = "numero_serie")
     private String numeroSerie;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "presentacion")
     private String presentacion;
+    @Column(name = "concentracion")
     private String concentracion;
+    @Column(name = "activo")
     private String activo;
+    @Column(name = "precio")
     private float precio;
 
     @OneToMany(mappedBy = "medicamento", fetch = FetchType.LAZY)

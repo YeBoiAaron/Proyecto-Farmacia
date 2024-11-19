@@ -20,10 +20,15 @@ public class Sucursal implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_sucursal")
     private Long idSucursal;
+    @Column(name = "calle")
     private String calle;
+    @Column(name = "numero")
     private String numero;
+    @Column(name = "colonia")
     private String colonia;
+    @Column(name = "codigo_postal")
     private int codigoPostal;
 
     @OneToOne(mappedBy = "sucursal")

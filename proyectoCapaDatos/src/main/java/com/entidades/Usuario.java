@@ -14,8 +14,11 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class Usuario{
 
+    @Column(name = "nombre_usuario")
     private String nombreUsuario;
+    @Column(name = "correo")
     private String correo;
+    @Column(name = "contrasena")
     private String contrasena;
 
     public Usuario() {

@@ -19,10 +19,15 @@ public class Venta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_venta")
     private Long idVenta;
+    @Column(name = "folio")
     private String folio;
+    @Column(name = "subtotal")
     private float subtotal;
+    @Column(name = "total")
     private float total;
+    @Column(name = "fecha")
     private LocalDate fecha;
 
     @ManyToOne

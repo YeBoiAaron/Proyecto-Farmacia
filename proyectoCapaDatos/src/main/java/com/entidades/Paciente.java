@@ -20,14 +20,23 @@ public class Paciente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_paciente")
     private Long idPaciente;
+    @Column(name = "nombre_completo")
     private String nombreCompleto;
+    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
+    @Column(name = "numero_telefono")
     private String numeroTelefono;
+    @Column(name = "correo")
     private String correo;
+    @Column(name = "sexo")
     private String sexo;
+    @Column(name = "altura")
     private float altura;
+    @Column(name = "peso")
     private float peso;
+    @Column(name = "edad")
     private int edad;
 
     @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)

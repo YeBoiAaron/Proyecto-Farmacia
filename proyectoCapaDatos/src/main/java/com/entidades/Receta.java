@@ -20,10 +20,15 @@ public class Receta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_receta")
     private Long idReceta;
+    @Column(name = "numero_receta")
     private String numeroReceta;
+    @Column(name = "diagnostico")
     private String diagnostico;
+    @Column(name = "instrucciones")
     private String instrucciones;
+    @Column(name = "estado")
     private String estado;
 
     @OneToOne
