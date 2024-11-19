@@ -12,5 +12,5 @@ import com.entidades.Receta;
  * @author Aaron
  */
 public interface IRecetaDAO extends IDAO<Receta> {
-    
+    public Receta obtenerPorNumeroReceta(String numeroReceta);
 }

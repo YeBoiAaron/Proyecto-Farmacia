@@ -18,5 +18,11 @@ public class MedicamentoDAO extends DAOBase<Medicamento> implements IMedicamento
     public MedicamentoDAO(EntityManager entityManager) {
         super(entityManager);
     }
+
+    @Override
+    public Medicamento obtenerPorNumeroSerie(String numeroSerie) {
+        String jpql = "SELECT medicamento FROM Medicamento medicamento WHERE medicamento.numeroSerie = :numeroSerie";
+        return entityManager.createQuery(jpql, Medicamento.class).setParameter("numeroSerie", numeroSerie).getSingleResult();
+    }
     
 }

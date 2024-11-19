@@ -12,5 +12,5 @@ import com.entidades.Paciente;
  * @author Aaron
  */
 public interface IPacienteDAO extends IDAO<Paciente> {
-    
+    public Paciente obtenerPorCorreo(String correo);
 }

@@ -8,6 +8,7 @@ import com.daos.DAOBase;
 import com.daos.interfaces.IPacienteDAO;
 import com.entidades.Paciente;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -17,6 +18,16 @@ public class PacienteDAO extends DAOBase<Paciente> implements IPacienteDAO {
     
     public PacienteDAO(EntityManager entityManager) {
         super(entityManager);
+    }
+
+    @Override
+    public Paciente obtenerPorCorreo(String correo) {
+        try {
+            String jpql = "SELECT paciente FROM Paciente paciente WHERE paciente.correo = :correo";
+            return entityManager.createQuery(jpql, Paciente.class).setParameter("correo", correo).getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
     
 }

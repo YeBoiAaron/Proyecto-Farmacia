@@ -12,5 +12,5 @@ import com.entidades.Empleado;
  * @author Aaron
  */
 public interface IEmpleadoDAO extends IDAO<Empleado> {
-    
+    public Empleado obtenerPorNombreUsuario(String nombreUsuario);
 }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface IDAO<T> {
 
-    T obtener(Long id);
+    T obtenerPorId(Long id);
 
     T agregar(T entity);
 

@@ -12,5 +12,5 @@ import com.entidades.Medicamento;
  * @author Aaron
  */
 public interface IMedicamentoDAO extends IDAO<Medicamento> {
-    
+    public Medicamento obtenerPorNumeroSerie(String numeroSerie);
 }

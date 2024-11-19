@@ -12,5 +12,5 @@ import com.entidades.Medico;
  * @author Aaron
  */
 public interface IMedicoDAO extends IDAO<Medico> {
-    
+    public Medico obtenerPorNombreUsuario(String nombreUsuario);
 }

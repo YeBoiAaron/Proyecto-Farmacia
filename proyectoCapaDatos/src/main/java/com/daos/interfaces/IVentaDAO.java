@@ -12,5 +12,5 @@ import com.entidades.Venta;
  * @author Aaron
  */
 public interface IVentaDAO extends IDAO<Venta> {
-    
+    public Venta obtenerPorFolio(String folio);
 }

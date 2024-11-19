@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
  */
 public class DAOBase<T> implements IDAO<T> {
 
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     private Class<T> type;
 
     public DAOBase(EntityManager entityManager) {
@@ -55,7 +55,7 @@ public class DAOBase<T> implements IDAO<T> {
     }
 
     @Override
-    public T obtener(Long id) {
+    public T obtenerPorId(Long id) {
         return entityManager.find(type, id);
     }
 

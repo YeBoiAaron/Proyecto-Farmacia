@@ -8,6 +8,7 @@ import com.daos.DAOBase;
 import com.daos.interfaces.IMedicoDAO;
 import com.entidades.Medico;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -17,6 +18,16 @@ public class MedicoDAO extends DAOBase<Medico> implements IMedicoDAO {
     
     public MedicoDAO(EntityManager entityManager) {
         super(entityManager);
+    }
+
+    @Override
+    public Medico obtenerPorNombreUsuario(String nombreUsuario) {
+        try {
+            String jpql = "SELECT medico FROM Medico medico WHERE medico.nombreUsuario = :nombreUsuario";
+            return entityManager.createQuery(jpql, Medico.class).setParameter("nombreUsuario", nombreUsuario).getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
     
 }
