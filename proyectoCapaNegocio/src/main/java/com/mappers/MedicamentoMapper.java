@@ -17,8 +17,8 @@ public class MedicamentoMapper {
         return new MedicamentoDTO(medicamento.getNombre(), medicamento.getNumeroSerie(), medicamento.getPresentacion(), medicamento.getConcentracion(), medicamento.getConcentracion(), medicamento.getPrecio());
     }
 
-    public static Medicamento toEntity(MedicamentoDTO medicamentodto) {
-        return new Medicamento(medicamentodto.getNombre(), medicamentodto.getNumeroSerie(), medicamentodto.getPresentacion(), medicamentodto.getConcentracion(), medicamentodto.getConcentracion(), medicamentodto.getPrecio());
+    public static Medicamento toEntity(MedicamentoDTO medicamentoDto) {
+        return new Medicamento(medicamentoDto.getNombre(), medicamentoDto.getNumeroSerie(), medicamentoDto.getPresentacion(), medicamentoDto.getConcentracion(), medicamentoDto.getConcentracion(), medicamentoDto.getPrecio());
     }
     
 }

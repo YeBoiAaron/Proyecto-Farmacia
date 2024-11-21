@@ -17,8 +17,8 @@ public class PacienteMapper {
         return new PacienteDTO(paciente.getNombreCompleto(), paciente.getFechaNacimiento(), paciente.getNumeroTelefono(), paciente.getCorreo(), paciente.getSexo(), paciente.getAltura(), paciente.getPeso(), paciente.getEdad());
     }
 
-    public static Paciente toEntity(PacienteDTO pacientedto) {
-        return new Paciente(pacientedto.getNombreCompleto(), pacientedto.getFechaNacimiento(), pacientedto.getNumeroTelefono(), pacientedto.getCorreo(), pacientedto.getSexo(), pacientedto.getAltura(), pacientedto.getPeso(), pacientedto.getEdad());
+    public static Paciente toEntity(PacienteDTO pacienteDto) {
+        return new Paciente(pacienteDto.getNombreCompleto(), pacienteDto.getFechaNacimiento(), pacienteDto.getNumeroTelefono(), pacienteDto.getCorreo(), pacienteDto.getSexo(), pacienteDto.getAltura(), pacienteDto.getPeso(), pacienteDto.getEdad());
     }
     
 }

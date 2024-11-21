@@ -17,8 +17,8 @@ public class MedicoMapper {
         return new MedicoDTO(medico.getNombreCompleto(), medico.getNumeroTelefono(), medico.getCedulaProfesional(), medico.getFechaNacimiento());
     }
 
-    public static Medico toEntity(MedicoDTO medicodto) {
-        return new Medico(medicodto.getNombreCompleto(), medicodto.getNumeroTelefono(), medicodto.getCedulaProfesional(), medicodto.getFechaNacimiento());
+    public static Medico toEntity(MedicoDTO medicoDto) {
+        return new Medico(medicoDto.getNombreCompleto(), medicoDto.getNumeroTelefono(), medicoDto.getCedulaProfesional(), medicoDto.getFechaNacimiento());
     }
     
 }

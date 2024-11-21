@@ -18,8 +18,8 @@ public class RecetaMapper {
         return recetadto;
     }
     
-    public static Receta toEntity(RecetaDTO recetadto) {
-        Receta receta = new Receta(recetadto.getNumeroReceta(), recetadto.getDiagnostico(), recetadto.getInstrucciones(), recetadto.getEstado());
+    public static Receta toEntity(RecetaDTO recetaDto) {
+        Receta receta = new Receta(recetaDto.getNumeroReceta(), recetaDto.getDiagnostico(), recetaDto.getInstrucciones(), recetaDto.getEstado());
         return receta;
     }
 }
