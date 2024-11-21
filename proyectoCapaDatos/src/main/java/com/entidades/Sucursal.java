@@ -22,6 +22,8 @@ public class Sucursal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_sucursal")
     private Long idSucursal;
+    @Column(name = "nombre_sucursal")
+    private String nombreSucursal;
     @Column(name = "calle")
     private String calle;
     @Column(name = "numero")
@@ -40,15 +42,17 @@ public class Sucursal implements Serializable {
     public Sucursal() {
     }
 
-    public Sucursal(String calle, String numero, String colonia, int codigoPostal) {
+    public Sucursal(String nombreSucursal, String calle, String numero, String colonia, int codigoPostal) {
+        this.nombreSucursal = nombreSucursal;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
         this.codigoPostal = codigoPostal;
     }
 
-    public Sucursal(Long idSucursal, String calle, String numero, String colonia, int codigoPostal, Empleado gerente, List<InventarioSucursal> inventario) {
+    public Sucursal(Long idSucursal, String nombreSucursal, String calle, String numero, String colonia, int codigoPostal, Empleado gerente, List<InventarioSucursal> inventario) {
         this.idSucursal = idSucursal;
+        this.nombreSucursal = nombreSucursal;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
@@ -63,6 +67,14 @@ public class Sucursal implements Serializable {
 
     public void setIdSucursal(Long idSucursal) {
         this.idSucursal = idSucursal;
+    }
+
+    public String getNombreSucursal() {
+        return nombreSucursal;
+    }
+
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
     }
 
     public String getCalle() {
@@ -132,12 +144,15 @@ public class Sucursal implements Serializable {
             return false;
         }
         final Sucursal other = (Sucursal) obj;
+        if (!Objects.equals(this.nombreSucursal, other.nombreSucursal)) {
+            return false;
+        }
         return Objects.equals(this.idSucursal, other.idSucursal);
     }
 
     @Override
     public String toString() {
-        return "Sucursal{" + "idSucursal=" + idSucursal + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", gerente=" + gerente + ", inventario=" + inventario + '}';
+        return "Sucursal{" + "idSucursal=" + idSucursal + ", nombre sucursal=" + nombreSucursal + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", gerente=" + gerente + ", inventario=" + inventario + '}';
     }
 
 }
