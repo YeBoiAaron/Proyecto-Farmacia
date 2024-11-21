@@ -12,16 +12,16 @@ import java.util.Objects;
  */
 public class InventarioSucursalDTO {
     private int cantidad;
-    private MedicamentoDTO medicamento;
-    private SucursalDTO sucursal;
+    private String numeroSerieMedicamento;
+    private String nombreSucursal;
 
     public InventarioSucursalDTO() {
     }
 
-    public InventarioSucursalDTO(int cantidad, MedicamentoDTO medicamento, SucursalDTO sucursal) {
+    public InventarioSucursalDTO(int cantidad, String numeroSerieMedicamento, String nombreSucursal) {
         this.cantidad = cantidad;
-        this.medicamento = medicamento;
-        this.sucursal = sucursal;
+        this.numeroSerieMedicamento = numeroSerieMedicamento;
+        this.nombreSucursal = nombreSucursal;
     }
 
     public int getCantidad() {
@@ -32,27 +32,27 @@ public class InventarioSucursalDTO {
         this.cantidad = cantidad;
     }
 
-    public MedicamentoDTO getMedicamento() {
-        return medicamento;
+    public String getNumeroSerieMedicamento() {
+        return numeroSerieMedicamento;
     }
 
-    public void setMedicamento(MedicamentoDTO medicamento) {
-        this.medicamento = medicamento;
+    public void setNumeroSerieMedicamento(String numeroSerieMedicamento) {
+        this.numeroSerieMedicamento = numeroSerieMedicamento;
     }
 
-    public SucursalDTO getSucursal() {
-        return sucursal;
+    public String getNombreSucursal() {
+        return nombreSucursal;
     }
 
-    public void setSucursal(SucursalDTO sucursal) {
-        this.sucursal = sucursal;
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.medicamento);
-        hash = 83 * hash + Objects.hashCode(this.sucursal);
+        hash = 83 * hash + Objects.hashCode(this.numeroSerieMedicamento);
+        hash = 83 * hash + Objects.hashCode(this.nombreSucursal);
         return hash;
     }
 
@@ -68,14 +68,14 @@ public class InventarioSucursalDTO {
             return false;
         }
         final InventarioSucursalDTO other = (InventarioSucursalDTO) obj;
-        if (!Objects.equals(this.medicamento, other.medicamento)) {
+        if (!Objects.equals(this.numeroSerieMedicamento, other.numeroSerieMedicamento)) {
             return false;
         }
-        return Objects.equals(this.sucursal, other.sucursal);
+        return Objects.equals(this.nombreSucursal, other.nombreSucursal);
     }
 
     @Override
     public String toString() {
-        return "InventarioSucursalDTO{" + "cantidad=" + cantidad + ", medicamento=" + medicamento + ", sucursal=" + sucursal + '}';
+        return "InventarioSucursalDTO{" + "cantidad=" + cantidad + ", numero de serie medicamento=" + numeroSerieMedicamento + ", nombre sucursal=" + nombreSucursal + '}';
     }
 }

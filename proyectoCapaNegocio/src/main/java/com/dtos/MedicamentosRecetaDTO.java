@@ -12,16 +12,16 @@ import java.util.Objects;
  */
 public class MedicamentosRecetaDTO {
     private int cantidad;
-    private MedicamentoDTO medicamento;
-    private RecetaDTO receta;
+    private String numeroSerieMedicamento;
+    private String numeroReceta;
 
     public MedicamentosRecetaDTO() {
     }
 
-    public MedicamentosRecetaDTO(int cantidad, MedicamentoDTO medicamento, RecetaDTO receta) {
+    public MedicamentosRecetaDTO(int cantidad, String medicamento, String receta) {
         this.cantidad = cantidad;
-        this.medicamento = medicamento;
-        this.receta = receta;
+        this.numeroSerieMedicamento = medicamento;
+        this.numeroReceta = receta;
     }
 
     public int getCantidad() {
@@ -32,27 +32,27 @@ public class MedicamentosRecetaDTO {
         this.cantidad = cantidad;
     }
 
-    public MedicamentoDTO getMedicamento() {
-        return medicamento;
+    public String getNumeroSerieMedicamento() {
+        return numeroSerieMedicamento;
     }
 
-    public void setMedicamento(MedicamentoDTO medicamento) {
-        this.medicamento = medicamento;
+    public void setNumeroSerieMedicamento(String medicamento) {
+        this.numeroSerieMedicamento = medicamento;
     }
 
-    public RecetaDTO getReceta() {
-        return receta;
+    public String getNumeroReceta() {
+        return numeroReceta;
     }
 
-    public void setReceta(RecetaDTO receta) {
-        this.receta = receta;
+    public void setNumeroReceta(String receta) {
+        this.numeroReceta = receta;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.medicamento);
-        hash = 47 * hash + Objects.hashCode(this.receta);
+        hash = 47 * hash + Objects.hashCode(this.numeroSerieMedicamento);
+        hash = 47 * hash + Objects.hashCode(this.numeroReceta);
         return hash;
     }
 
@@ -68,14 +68,14 @@ public class MedicamentosRecetaDTO {
             return false;
         }
         final MedicamentosRecetaDTO other = (MedicamentosRecetaDTO) obj;
-        if (!Objects.equals(this.medicamento, other.medicamento)) {
+        if (!Objects.equals(this.numeroSerieMedicamento, other.numeroSerieMedicamento)) {
             return false;
         }
-        return Objects.equals(this.receta, other.receta);
+        return Objects.equals(this.numeroReceta, other.numeroReceta);
     }
 
     @Override
     public String toString() {
-        return "MedicamentosRecetaDTO{" + "cantidad=" + cantidad + ", medicamento=" + medicamento + ", receta=" + receta + '}';
+        return "MedicamentosRecetaDTO{" + "cantidad=" + cantidad + ", medicamento=" + numeroSerieMedicamento + ", receta=" + numeroReceta + '}';
     }
 }
