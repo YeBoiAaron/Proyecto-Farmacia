@@ -8,6 +8,7 @@ import com.daos.implementaciones.MedicamentoDAO;
 import com.daos.interfaces.IMedicamentoDAO;
 import com.dtos.MedicamentoDTO;
 import com.entidades.Medicamento;
+import com.mappers.MedicamentoMapper;
 import javax.persistence.EntityManager;
 
 /**
@@ -24,14 +25,7 @@ public class MedicamentoPersistencia {
     }
     
     public void agregarMedicamento(MedicamentoDTO medicamentoDTO){
-        Medicamento medicamento = new Medicamento();
-        medicamento.setNombre(medicamentoDTO.getNombre());
-        medicamento.setNumeroSerie(medicamentoDTO.getNumeroSerie());
-        medicamento.setPresentacion(medicamentoDTO.getPresentacion());
-        medicamento.setConcentracion(medicamentoDTO.getConcentracion());
-        medicamento.setActivo(medicamentoDTO.getActivo());
-        medicamento.setPrecio(medicamentoDTO.getPrecio());
-        
+        Medicamento medicamento = MedicamentoMapper.toEntity(medicamentoDTO);
         mdao.agregar(medicamento);
     }
 }
