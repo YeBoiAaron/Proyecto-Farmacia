@@ -152,7 +152,7 @@ public class Sucursal implements Serializable {
 
     @Override
     public String toString() {
-        return "Sucursal{" + "idSucursal=" + idSucursal + ", nombre sucursal=" + nombreSucursal + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + ", gerente=" + gerente + ", inventario=" + inventario + '}';
+        return "Sucursal{" + "idSucursal=" + idSucursal + ", nombre sucursal=" + nombreSucursal + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigo postal=" + codigoPostal + ", gerente=" + gerente + ", inventario=" + inventario + '}';
     }
 
 }

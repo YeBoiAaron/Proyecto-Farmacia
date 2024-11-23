@@ -11,6 +11,7 @@ import java.util.Objects;
  * @author Aaron
  */
 public class SucursalDTO {
+    private String nombreSucursal;
     private String calle;
     private String numero;
     private String colonia;
@@ -19,11 +20,20 @@ public class SucursalDTO {
     public SucursalDTO() {
     }
 
-    public SucursalDTO(String calle, String numero, String colonia, int codigoPostal) {
+    public SucursalDTO(String nombreSucursal, String calle, String numero, String colonia, int codigoPostal) {
+        this.nombreSucursal = nombreSucursal;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
         this.codigoPostal = codigoPostal;
+    }
+
+    public String getNombreSucursal() {
+        return nombreSucursal;
+    }
+
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
     }
 
     public String getCalle() {
@@ -60,11 +70,8 @@ public class SucursalDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.calle);
-        hash = 13 * hash + Objects.hashCode(this.numero);
-        hash = 13 * hash + Objects.hashCode(this.colonia);
-        hash = 13 * hash + this.codigoPostal;
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.nombreSucursal);
         return hash;
     }
 
@@ -80,20 +87,11 @@ public class SucursalDTO {
             return false;
         }
         final SucursalDTO other = (SucursalDTO) obj;
-        if (this.codigoPostal != other.codigoPostal) {
-            return false;
-        }
-        if (!Objects.equals(this.calle, other.calle)) {
-            return false;
-        }
-        if (!Objects.equals(this.numero, other.numero)) {
-            return false;
-        }
-        return Objects.equals(this.colonia, other.colonia);
+        return Objects.equals(this.nombreSucursal, other.nombreSucursal);
     }
 
     @Override
     public String toString() {
-        return "SucursalDTO{" + "calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigoPostal=" + codigoPostal + '}';
+        return "SucursalDTO{" + "nombre sucursal=" + nombreSucursal + ", calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + ", codigo postal=" + codigoPostal + '}';
     }
 }
