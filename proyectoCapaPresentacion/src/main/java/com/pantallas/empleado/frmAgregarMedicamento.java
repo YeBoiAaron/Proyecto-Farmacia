@@ -6,8 +6,7 @@ package com.pantallas.empleado;
 
 import com.dtos.MedicamentoDTO;
 import com.persistencias.MedicamentoPersistencia;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -202,13 +201,15 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
         MedicamentoDTO medicamentoDTO = new MedicamentoDTO();
         MedicamentoPersistencia medPersist = new MedicamentoPersistencia();
         
-        medicamentoDTO.setNombre(txfPresentacion.getText());
+        medicamentoDTO.setNombre(txfNombre.getText());
         medicamentoDTO.setNumeroSerie(txfNSerie.getText());
         medicamentoDTO.setPresentacion(txfPresentacion.getText());
         medicamentoDTO.setConcentracion(txfConcentracion.getText());
         medicamentoDTO.setActivo(txfActivo.getText());
         medicamentoDTO.setPrecio(Float.parseFloat(txfPrecio.getText()));
         medPersist.agregarMedicamento(medicamentoDTO);
+        JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     /**
