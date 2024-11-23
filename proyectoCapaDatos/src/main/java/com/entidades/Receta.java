@@ -32,15 +32,15 @@ public class Receta implements Serializable {
     private String estado;
 
     @OneToOne
-    @JoinColumn(name = "idVenta", referencedColumnName = "idVenta")
+    @JoinColumn(name = "id_venta", referencedColumnName = "id_venta")
     private Venta venta;
 
     @ManyToOne
-    @JoinColumn(name = "idMedico")
+    @JoinColumn(name = "id_medico")
     private Medico medico;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idPaciente")
+    @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
     @OneToMany(mappedBy = "receta", fetch = FetchType.LAZY)

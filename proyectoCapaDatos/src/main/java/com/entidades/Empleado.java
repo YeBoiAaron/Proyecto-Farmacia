@@ -36,7 +36,7 @@ public class Empleado extends Usuario implements Serializable {
     private List<Venta> ventas;
     
     @OneToOne
-    @JoinColumn(name = "idSucursal")
+    @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal;
 
     public Empleado() {

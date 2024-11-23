@@ -31,11 +31,11 @@ public class Venta implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne
-    @JoinColumn(name = "idCajero")
+    @JoinColumn(name = "id_cajero")
     private Empleado cajero;
 
     @OneToOne
-    @JoinColumn(name = "idReceta", referencedColumnName = "idReceta")
+    @JoinColumn(name = "id_receta", referencedColumnName = "id_receta")
     private Receta receta;
 
     public Venta() {
