@@ -12,13 +12,14 @@ import java.util.Objects;
  */
 public class MedicamentosRecetaDTO {
     private int cantidad;
+    private String instrucciones;
     private String numeroSerieMedicamento;
     private String numeroReceta;
 
     public MedicamentosRecetaDTO() {
     }
 
-    public MedicamentosRecetaDTO(int cantidad, String medicamento, String receta) {
+    public MedicamentosRecetaDTO(int cantidad, String instrucciones, String medicamento, String receta) {
         this.cantidad = cantidad;
         this.numeroSerieMedicamento = medicamento;
         this.numeroReceta = receta;
@@ -30,6 +31,14 @@ public class MedicamentosRecetaDTO {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getInstrucciones() {
+        return instrucciones;
+    }
+
+    public void setInstrucciones(String instrucciones) {
+        this.instrucciones = instrucciones;
     }
 
     public String getNumeroSerieMedicamento() {
@@ -76,6 +85,6 @@ public class MedicamentosRecetaDTO {
 
     @Override
     public String toString() {
-        return "MedicamentosRecetaDTO{" + "cantidad=" + cantidad + ", medicamento=" + numeroSerieMedicamento + ", receta=" + numeroReceta + '}';
+        return "MedicamentosRecetaDTO{" + "cantidad=" + cantidad + ", instrucciones=" + instrucciones + ", medicamento=" + numeroSerieMedicamento + ", receta=" + numeroReceta + '}';
     }
 }

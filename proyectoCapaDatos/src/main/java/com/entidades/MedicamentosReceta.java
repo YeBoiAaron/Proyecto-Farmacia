@@ -22,6 +22,8 @@ public class MedicamentosReceta implements Serializable {
     private Long id;
     @Column(name = "cantidad")
     private int cantidad;
+    @Column(name = "instrucciones")
+    private String instrucciones;
 
     @ManyToOne
     @JoinColumn(name = "id_medicamento")
@@ -34,15 +36,17 @@ public class MedicamentosReceta implements Serializable {
     public MedicamentosReceta() {
     }
 
-    public MedicamentosReceta(int cantidad, Medicamento medicamento, Receta receta) {
+    public MedicamentosReceta(int cantidad, String instrucciones, Medicamento medicamento, Receta receta) {
         this.cantidad = cantidad;
+        this.instrucciones = instrucciones;
         this.medicamento = medicamento;
         this.receta = receta;
     }
 
-    public MedicamentosReceta(Long id, int cantidad, Medicamento medicamento, Receta receta) {
+    public MedicamentosReceta(Long id, int cantidad, String instrucciones, Medicamento medicamento, Receta receta) {
         this.id = id;
         this.cantidad = cantidad;
+        this.instrucciones = instrucciones;
         this.medicamento = medicamento;
         this.receta = receta;
     }
@@ -79,6 +83,14 @@ public class MedicamentosReceta implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public String getInstrucciones() {
+        return instrucciones;
+    }
+
+    public void setInstrucciones(String instrucciones) {
+        this.instrucciones = instrucciones;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -101,7 +113,7 @@ public class MedicamentosReceta implements Serializable {
 
     @Override
     public String toString() {
-        return "MedicamentosReceta{" + "id=" + id + ", cantidad=" + cantidad + ", medicamento=" + medicamento + ", receta=" + receta + '}';
+        return "MedicamentosReceta{" + "id=" + id + ", cantidad=" + cantidad + ", instrucciones=" + instrucciones + ", medicamento=" + medicamento + ", receta=" + receta + '}';
     }
-
+    
 }
