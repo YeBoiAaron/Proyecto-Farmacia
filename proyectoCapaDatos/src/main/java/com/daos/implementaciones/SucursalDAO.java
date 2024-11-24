@@ -21,10 +21,10 @@ public class SucursalDAO extends DAOBase<Sucursal> implements ISucursalDAO {
     }
 
     @Override
-    public Sucursal obtener(String identificador) {
+    public Sucursal obtenerPorNombreSucursal(String nombreSucursal) {
         try {
-            String jpql = "SELECT sucursal FROM Sucursal sucursal WHERE sucursal.identificador = :identificador";
-            return entityManager.createQuery(jpql, Sucursal.class).setParameter("identificador", identificador).getSingleResult();
+            String jpql = "SELECT sucursal FROM Sucursal sucursal WHERE sucursal.nombreSucursal = :nombreSucursal";
+            return entityManager.createQuery(jpql, Sucursal.class).setParameter("nombreSucursal", nombreSucursal).getSingleResult();
         } catch(NoResultException e) {
             return null;
         }

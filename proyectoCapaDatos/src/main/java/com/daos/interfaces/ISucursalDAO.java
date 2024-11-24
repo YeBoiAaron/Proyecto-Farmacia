@@ -12,5 +12,5 @@ import com.entidades.Sucursal;
  * @author Aaron
  */
 public interface ISucursalDAO extends IDAO<Sucursal> {
-    public Sucursal obtener(String identificador);
+    public Sucursal obtenerPorNombreSucursal(String nombreSucursal);
 }
