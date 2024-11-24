@@ -26,8 +26,6 @@ public class Receta implements Serializable {
     private String numeroReceta;
     @Column(name = "diagnostico")
     private String diagnostico;
-    @Column(name = "instrucciones")
-    private String instrucciones;
     @Column(name = "estado")
     private String estado;
 
@@ -49,18 +47,16 @@ public class Receta implements Serializable {
     public Receta() {
     }
 
-    public Receta(String numeroReceta, String diagnostico, String instrucciones, String estado) {
+    public Receta(String numeroReceta, String diagnostico, String estado) {
         this.numeroReceta = numeroReceta;
         this.diagnostico = diagnostico;
-        this.instrucciones = instrucciones;
         this.estado = estado;
     }
 
-    public Receta(Long idReceta, String numeroReceta, String diagnostico, String instrucciones, String estado, Venta venta, Medico medico, Paciente paciente, List<MedicamentosReceta> medicamentos) {
+    public Receta(Long idReceta, String numeroReceta, String diagnostico, String estado, Venta venta, Medico medico, Paciente paciente, List<MedicamentosReceta> medicamentos) {
         this.idReceta = idReceta;
         this.numeroReceta = numeroReceta;
         this.diagnostico = diagnostico;
-        this.instrucciones = instrucciones;
         this.estado = estado;
         this.venta = venta;
         this.medico = medico;
@@ -91,15 +87,6 @@ public class Receta implements Serializable {
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
     }
-
-    public String getInstrucciones() {
-        return instrucciones;
-    }
-
-    public void setInstrucciones(String instrucciones) {
-        this.instrucciones = instrucciones;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -162,4 +149,9 @@ public class Receta implements Serializable {
         return Objects.equals(this.idReceta, other.idReceta);
     }
 
+    @Override
+    public String toString() {
+        return "Receta{" + "idReceta=" + idReceta + ", numero de receta=" + numeroReceta + ", diagnostico=" + diagnostico + ", estado=" + estado + ", venta=" + venta + ", medico=" + medico + ", paciente=" + paciente + ", lista de medicamentos=" + listaMedicamentos + '}';
+    }
+    
 }

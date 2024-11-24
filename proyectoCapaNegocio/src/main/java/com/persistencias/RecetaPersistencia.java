@@ -50,7 +50,7 @@ public class RecetaPersistencia {
         List<MedicamentosReceta> medicamentos = new ArrayList<>();
         for (MedicamentosRecetaDTO medicamentosreceta : medicamentosrecetadto) {
             Medicamento medicamento = mdao.obtenerPorNumeroSerie(medicamentosreceta.getNumeroSerieMedicamento());
-            medicamentos.add(new MedicamentosReceta(medicamentosreceta.getCantidad(), medicamento, receta));
+            medicamentos.add(new MedicamentosReceta(medicamentosreceta.getCantidad(), medicamentosreceta.getInstrucciones(), medicamento, receta));
         }
         
         receta.setListaMedicamentos(medicamentos);

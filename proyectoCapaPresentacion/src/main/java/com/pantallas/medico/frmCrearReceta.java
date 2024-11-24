@@ -227,7 +227,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
         byte[] array = new byte[7];
         new Random().nextBytes(array);
         String numeroReceta = new String(array, Charset.forName("UTF-8"));
-        rp.crearReceta(new RecetaDTO(numeroReceta, tfDiagnostico.getText(), "stuff", "1"), new ArrayList<MedicamentosRecetaDTO>(), new MedicoDTO(), new PacienteDTO(tfNombrePaciente.getText(), dfFechaNacimiento.getDate(), "123456789", "jp12345", tfSexo.getText(), Float.parseFloat(tfAltura.getText()), Float.parseFloat(tfPeso.getText()), (int)(long)ChronoUnit.YEARS.between(dfFechaNacimiento.getDate(),LocalDate.now())));
+        rp.crearReceta(new RecetaDTO(numeroReceta, tfDiagnostico.getText(), "1"), new ArrayList<MedicamentosRecetaDTO>(), new MedicoDTO(), new PacienteDTO(tfNombrePaciente.getText(), dfFechaNacimiento.getDate(), "123456789", "jp12345", tfSexo.getText(), Float.parseFloat(tfAltura.getText()), Float.parseFloat(tfPeso.getText()), (int)(long)ChronoUnit.YEARS.between(dfFechaNacimiento.getDate(),LocalDate.now())));
         JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnGuardarActionPerformed
 

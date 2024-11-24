@@ -14,12 +14,12 @@ import com.entidades.Receta;
 public class RecetaMapper {
     
     public static RecetaDTO toDTO(Receta receta) {
-        RecetaDTO recetadto = new RecetaDTO(receta.getNumeroReceta(), receta.getDiagnostico(), receta.getInstrucciones(), receta.getEstado());
+        RecetaDTO recetadto = new RecetaDTO(receta.getNumeroReceta(), receta.getDiagnostico(), receta.getEstado());
         return recetadto;
     }
     
     public static Receta toEntity(RecetaDTO recetaDto) {
-        Receta receta = new Receta(recetaDto.getNumeroReceta(), recetaDto.getDiagnostico(), recetaDto.getInstrucciones(), recetaDto.getEstado());
+        Receta receta = new Receta(recetaDto.getNumeroReceta(), recetaDto.getDiagnostico(), recetaDto.getEstado());
         return receta;
     }
 }
