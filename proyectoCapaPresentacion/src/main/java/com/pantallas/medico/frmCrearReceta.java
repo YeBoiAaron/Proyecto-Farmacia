@@ -4,6 +4,16 @@
  */
 package com.pantallas.medico;
 
+import com.dtos.MedicamentosRecetaDTO;
+import com.dtos.MedicoDTO;
+import com.dtos.PacienteDTO;
+import com.dtos.RecetaDTO;
+import com.persistencias.RecetaPersistencia;
+import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,13 +43,19 @@ public class frmCrearReceta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tfNombrePaciente = new javax.swing.JTextField();
-        tfMedicamento = new javax.swing.JTextField();
+        tfDiagnostico = new javax.swing.JTextField();
         tfSexo = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMedicamentos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        dfFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel4 = new javax.swing.JLabel();
+        tfAltura = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tfPeso = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         moCrearReceta = new javax.swing.JMenuItem();
@@ -54,9 +70,9 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
         jLabel3.setText("Sexo");
 
-        tfMedicamento.addActionListener(new java.awt.event.ActionListener() {
+        tfDiagnostico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfMedicamentoActionPerformed(evt);
+                tfDiagnosticoActionPerformed(evt);
             }
         });
 
@@ -76,7 +92,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
         jLabel6.setText("Diagnóstico");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -87,7 +103,18 @@ public class frmCrearReceta extends javax.swing.JFrame {
                 "Medicamentos", "Indicaciones", "Cantidad"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMedicamentos);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Altura");
+
+        jLabel5.setText("Peso");
 
         jMenu1.setText("Recetas");
 
@@ -128,22 +155,36 @@ public class frmCrearReceta extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCancelar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCancelar)
+                                .addGap(149, 149, 149)
+                                .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
-                                .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(49, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -154,21 +195,28 @@ public class frmCrearReceta extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(dfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(tfMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnCancelar)
+                    .addComponent(jButton1))
                 .addGap(17, 17, 17))
         );
 
@@ -176,6 +224,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        byte[] array = new byte[7];
+        new Random().nextBytes(array);
+        String numeroReceta = new String(array, Charset.forName("UTF-8"));
+        rp.crearReceta(new RecetaDTO(numeroReceta, tfDiagnostico.getText(), "stuff", "1"), new ArrayList<MedicamentosRecetaDTO>(), new MedicoDTO(), new PacienteDTO(tfNombrePaciente.getText(), dfFechaNacimiento.getDate(), "123456789", "jp12345", tfSexo.getText(), Float.parseFloat(tfAltura.getText()), Float.parseFloat(tfPeso.getText()), (int)(long)ChronoUnit.YEARS.between(dfFechaNacimiento.getDate(),LocalDate.now())));
         JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -185,10 +237,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void tfMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMedicamentoActionPerformed
+    private void tfDiagnosticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDiagnosticoActionPerformed
         dlgSeleccionarMedicamento seleccion_medicamento = new dlgSeleccionarMedicamento(this);
         seleccion_medicamento.setVisible(true);
-    }//GEN-LAST:event_tfMedicamentoActionPerformed
+    }//GEN-LAST:event_tfDiagnosticoActionPerformed
 
     private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
         frmConsultarReceta consultar_receta = new frmConsultarReceta();
@@ -201,6 +253,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
         crear_receta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_moConsultarRecetaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,18 +296,25 @@ public class frmCrearReceta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private com.github.lgooddatepicker.components.DatePicker dfFechaNacimiento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem moConsultarReceta;
     private javax.swing.JMenuItem moCrearReceta;
-    private javax.swing.JTextField tfMedicamento;
+    private javax.swing.JTable tblMedicamentos;
+    private javax.swing.JTextField tfAltura;
+    private javax.swing.JTextField tfDiagnostico;
     private javax.swing.JTextField tfNombrePaciente;
+    private javax.swing.JTextField tfPeso;
     private javax.swing.JTextField tfSexo;
     // End of variables declaration//GEN-END:variables
+    private RecetaPersistencia rp;
 }
