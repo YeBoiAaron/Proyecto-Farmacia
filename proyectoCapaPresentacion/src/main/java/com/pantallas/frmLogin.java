@@ -4,8 +4,11 @@
  */
 package com.pantallas;
 
+import com.Sesion;
+import com.dtos.UsuarioDTO;
 import com.pantallas.medico.frmInicioMedico;
 import com.pantallas.empleado.frmInicioEmpleadoFarmacia;
+import com.persistencias.UsuarioPersistencia;
 
 /**
  *
@@ -109,11 +112,14 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        if(tfUsuario.getText().equals("doc")){
+        UsuarioDTO usuario = up.validarCredenciales(tfUsuario.getText(), pfContrasena.getPassword());
+        Sesion.setUsuarioLogueado(usuario);
+        
+        if(usuario.getTipoUsuario().equals("medico")){
             frmInicioMedico medico = new frmInicioMedico();
             medico.setVisible(true);
             this.dispose();
-        } else {
+        } else if(usuario.getTipoUsuario().equals("empleado")) {
             frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
             empleado.setVisible(true);
             this.dispose();
@@ -164,4 +170,5 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField pfContrasena;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
+    private UsuarioPersistencia up;
 }

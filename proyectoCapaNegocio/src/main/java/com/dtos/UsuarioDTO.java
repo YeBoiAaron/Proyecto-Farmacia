@@ -14,14 +14,16 @@ public class UsuarioDTO {
     private String nombreUsuario;
     private String correo;
     private String contrasena;
+    private String tipoUsuario;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String nombreUsuario, String correo, String contrasena) {
+    public UsuarioDTO(String nombreUsuario, String correo, String contrasena, String tipoUsuario) {
         this.nombreUsuario = nombreUsuario;
         this.correo = correo;
         this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public String getNombreUsuario() {
@@ -48,6 +50,14 @@ public class UsuarioDTO {
         this.contrasena = contrasena;
     }
 
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -72,6 +82,6 @@ public class UsuarioDTO {
 
     @Override
     public String toString() {
-        return "UsuarioDTO{" + "nombreUsuario=" + nombreUsuario + ", correo=" + correo + ", contrasena=" + contrasena + '}';
+        return "UsuarioDTO{" + "nombre usuario=" + nombreUsuario + ", correo=" + correo + ", contrasena=" + contrasena + ", tipo usuario=" + tipoUsuario + '}';
     }
 }
