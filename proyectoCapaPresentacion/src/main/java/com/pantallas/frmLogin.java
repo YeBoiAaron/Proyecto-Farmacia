@@ -9,6 +9,7 @@ import com.dtos.UsuarioDTO;
 import com.pantallas.medico.frmInicioMedico;
 import com.pantallas.empleado.frmInicioEmpleadoFarmacia;
 import com.persistencias.UsuarioPersistencia;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,7 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
         setLocationRelativeTo(null);
+        this.usrPersistencia = new UsuarioPersistencia();
     }
 
     /**
@@ -112,17 +114,22 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        UsuarioDTO usuario = up.validarCredenciales(tfUsuario.getText(), pfContrasena.getPassword());
-        Sesion.setUsuarioLogueado(usuario);
-        
-        if(usuario.getTipoUsuario().equals("medico")){
-            frmInicioMedico medico = new frmInicioMedico();
-            medico.setVisible(true);
-            this.dispose();
-        } else if(usuario.getTipoUsuario().equals("empleado")) {
-            frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
-            empleado.setVisible(true);
-            this.dispose();
+        UsuarioDTO usuario = usrPersistencia.validarCredenciales(tfUsuario.getText(), pfContrasena.getPassword());
+
+        if(usuario == null) {
+            JOptionPane.showMessageDialog(null, "Credenciales Inválidas", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Sesion.setUsuarioLogueado(usuario);
+
+            if(usuario.getTipoUsuario().equals("medico")) {
+                frmInicioMedico medico = new frmInicioMedico();
+                medico.setVisible(true);
+                this.dispose();
+            } else if(usuario.getTipoUsuario().equals("empleado")) {
+                frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
+                empleado.setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
@@ -170,5 +177,5 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField pfContrasena;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
-    private UsuarioPersistencia up;
+    private UsuarioPersistencia usrPersistencia;
 }
