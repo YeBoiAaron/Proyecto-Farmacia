@@ -4,9 +4,11 @@
  */
 package com.pantallas;
 import com.dtos.EmpleadoDTO;
+import com.dtos.MedicoDTO;
 import com.dtos.UsuarioDTO;
 import com.persistencias.UsuarioPersistencia;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 /**
  *
  * @author martinez
@@ -18,6 +20,7 @@ public class frmRegistrar extends javax.swing.JFrame {
      */
     public frmRegistrar() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,19 +36,21 @@ public class frmRegistrar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txfNumeroTelefono = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txfFechaNacimiento = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        txfTipoEmpleado = new javax.swing.JLabel();
+        txtTipoEmpleado = new javax.swing.JTextField();
+        lblTipoEmpleado = new javax.swing.JLabel();
         txfNombreUsuario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txfCorreo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txfContrasena = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txfTipoUsuario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
+        dfFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        cbxMedico = new javax.swing.JCheckBox();
+        cbxEmpleado = new javax.swing.JCheckBox();
+        cbxEmpleado.setSelected(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,7 +60,7 @@ public class frmRegistrar extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha nacimiento");
 
-        txfTipoEmpleado.setText("Tipo empleado");
+        lblTipoEmpleado.setText("Tipo empleado");
 
         jLabel5.setText("Nombre de Usuario");
 
@@ -72,6 +77,20 @@ public class frmRegistrar extends javax.swing.JFrame {
             }
         });
 
+        cbxMedico.setText("Medico");
+        cbxMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMedicoActionPerformed(evt);
+            }
+        });
+
+        cbxEmpleado.setText("Empleado");
+        cbxEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxEmpleadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,26 +98,31 @@ public class frmRegistrar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(txfTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(txfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txfNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfTipoEmpleado)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(txfNumeroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(txfNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegistrar)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRegistrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(txfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(txfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txfNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTipoEmpleado)
+                            .addComponent(txtTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(txfNumeroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(txfNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbxMedico)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxEmpleado)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -115,11 +139,11 @@ public class frmRegistrar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txfTipoEmpleado)
+                .addComponent(dfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(lblTipoEmpleado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -134,34 +158,65 @@ public class frmRegistrar extends javax.swing.JFrame {
                 .addComponent(txfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txfTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxMedico)
+                    .addComponent(cbxEmpleado))
+                .addGap(28, 28, 28)
                 .addComponent(btnRegistrar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        // TODO add your handling code here:
-        String fechaTexto = txfFechaNacimiento.getText();
-        LocalDate fechaNacimiento = LocalDate.parse(fechaTexto);
-        EmpleadoDTO edto = new EmpleadoDTO(
-                txfNombreCompleto.getText(),
-                txfNumeroTelefono.getText(),
-                fechaNacimiento,
-                txfTipoEmpleado.getText()
-        );
-        edto.setNombreUsuario(txfNombreUsuario.getText());
-        edto.setCorreo(txfCorreo.getText());
-        edto.setContrasena(txfContrasena.getText());
-        edto.setTipoUsuario(txfTipoUsuario.getText());
-        
         UsuarioPersistencia up = new UsuarioPersistencia();
-        up.agregarUsuarioEmpleado(edto);
+        LocalDate fechaNacimiento = dfFechaNacimiento.getDate();
+        
+        if(cbxEmpleado.isSelected()){
+            EmpleadoDTO edto = new EmpleadoDTO(
+                    txfNombreCompleto.getText().trim(),
+                    txfNumeroTelefono.getText().trim(),
+                    fechaNacimiento,txtTipoEmpleado.getText().trim()
+            );
+            edto.setNombreUsuario(txfNombreUsuario.getText().trim());
+            edto.setCorreo(txfCorreo.getText().trim());
+            edto.setContrasena(txfContrasena.getText().trim());
+            edto.setTipoUsuario("empleado");
+            
+            up.agregarUsuarioEmpleado(edto);
+            JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else if(cbxMedico.isSelected()) {
+            MedicoDTO mdto = new MedicoDTO(
+                    txfNombreCompleto.getText().trim(),
+                    txfNumeroTelefono.getText().trim(),
+                    txtTipoEmpleado.getText().trim(),
+                    fechaNacimiento
+            );
+            mdto.setNombreUsuario(txfNombreUsuario.getText().trim());
+            mdto.setCorreo(txfCorreo.getText().trim());
+            mdto.setContrasena(txfContrasena.getText().trim());
+            mdto.setTipoUsuario("medico");
+            
+            up.agregarMedico(mdto);
+            JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnRegistrarMouseClicked
+
+    private void cbxMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMedicoActionPerformed
+        cbxMedico.setSelected(true);
+        cbxEmpleado.setSelected(false);
+        lblTipoEmpleado.setText("Cédula Profesional");
+    }//GEN-LAST:event_cbxMedicoActionPerformed
+
+    private void cbxEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEmpleadoActionPerformed
+        cbxMedico.setSelected(false);
+        cbxEmpleado.setSelected(true);
+        lblTipoEmpleado.setText("Tipo empleado");
+    }//GEN-LAST:event_cbxEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +255,9 @@ public class frmRegistrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JCheckBox cbxEmpleado;
+    private javax.swing.JCheckBox cbxMedico;
+    private com.github.lgooddatepicker.components.DatePicker dfFechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -207,14 +265,12 @@ public class frmRegistrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblTipoEmpleado;
     private javax.swing.JTextField txfContrasena;
     private javax.swing.JTextField txfCorreo;
-    private javax.swing.JTextField txfFechaNacimiento;
     private javax.swing.JTextField txfNombreCompleto;
     private javax.swing.JTextField txfNombreUsuario;
     private javax.swing.JTextField txfNumeroTelefono;
-    private javax.swing.JLabel txfTipoEmpleado;
-    private javax.swing.JTextField txfTipoUsuario;
+    private javax.swing.JTextField txtTipoEmpleado;
     // End of variables declaration//GEN-END:variables
 }
