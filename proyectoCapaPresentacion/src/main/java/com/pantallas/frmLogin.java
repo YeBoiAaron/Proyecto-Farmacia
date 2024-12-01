@@ -41,9 +41,9 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         pfContrasena = new javax.swing.JPasswordField();
         btnIniciarSesion = new javax.swing.JButton();
+        lblRegistrarUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
         setSize(getPreferredSize());
 
@@ -70,6 +70,13 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
+        lblRegistrarUsuario.setText("Registrar usuario");
+        lblRegistrarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistrarUsuarioMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,11 +93,16 @@ public class frmLogin extends javax.swing.JFrame {
                             .addComponent(pfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(182, 182, 182))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(182, 182, 182))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblRegistrarUsuario)
+                        .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +117,11 @@ public class frmLogin extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(18, 18, 18)
+                .addComponent(lblRegistrarUsuario)
+                .addGap(11, 11, 11))
         );
 
         pack();
@@ -132,6 +146,12 @@ public class frmLogin extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void lblRegistrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarUsuarioMouseClicked
+        // TODO add your handling code here:
+        frmRegistrar registro = new frmRegistrar();
+        registro.setVisible(true);
+    }//GEN-LAST:event_lblRegistrarUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -174,6 +194,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblRegistrarUsuario;
     private javax.swing.JPasswordField pfContrasena;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
