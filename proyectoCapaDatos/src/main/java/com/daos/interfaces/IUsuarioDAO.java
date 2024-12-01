@@ -12,5 +12,5 @@ import com.entidades.Usuario;
  * @author Aaron
  */
 public interface IUsuarioDAO extends IDAO<Usuario> {
-    public Usuario obtenerPorNombreUsuarioYContrasena(String nombreUsuario, String contrasena);
+    public Usuario obtenerPorNombreUsuario(String nombreUsuario);
 }

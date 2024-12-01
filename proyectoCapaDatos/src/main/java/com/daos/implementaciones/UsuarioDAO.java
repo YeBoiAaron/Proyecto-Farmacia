@@ -23,19 +23,17 @@ public class UsuarioDAO extends DAOBase<Usuario> implements IUsuarioDAO{
     }
     
     @Override
-    public Usuario obtenerPorNombreUsuarioYContrasena(String nombreUsuario, String contrasena) {
+    public Usuario obtenerPorNombreUsuario(String nombreUsuario) {
         try {
-            String jpqlMedico = "SELECT usuario FROM Medico usuario WHERE usuario.nombreUsuario = :nombreUsuario AND usuario.contrasena = :contrasena";
+            String jpqlMedico = "SELECT usuario FROM Medico usuario WHERE usuario.nombreUsuario = :nombreUsuario";
             return entityManager.createQuery(jpqlMedico, Medico.class)
                     .setParameter("nombreUsuario", nombreUsuario)
-                    .setParameter("contrasena", contrasena)
                     .getSingleResult();
         } catch(NoResultException e1) {
             try {
-                String jpqlEmpleado = "SELECT usuario FROM Empleado usuario WHERE usuario.nombreUsuario = :nombreUsuario AND usuario.contrasena = :contrasena";
+                String jpqlEmpleado = "SELECT usuario FROM Empleado usuario WHERE usuario.nombreUsuario = :nombreUsuario";
                 return entityManager.createQuery(jpqlEmpleado, Empleado.class)
                         .setParameter("nombreUsuario", nombreUsuario)
-                        .setParameter("contrasena", contrasena)
                         .getSingleResult();
             } catch(NoResultException e2) {
                 return null;
