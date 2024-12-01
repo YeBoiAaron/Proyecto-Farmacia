@@ -32,12 +32,10 @@ public class RecetaPersistencia {
     
     private EntityManager em;
     private IRecetaDAO rdao;
-    private IMedicamentosRecetaDAO mrdao;
     private IMedicamentoDAO mdao;
 
     public RecetaPersistencia() {
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        mrdao = new MedicamentosRecetaDAO(em);
         rdao = new RecetaDAO(em);
         mdao = new MedicamentoDAO(em);
     }
