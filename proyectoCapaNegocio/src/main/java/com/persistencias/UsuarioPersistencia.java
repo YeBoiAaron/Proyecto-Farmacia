@@ -4,6 +4,7 @@
  */
 package com.persistencias;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.daos.implementaciones.EmpleadoDAO;
 import com.daos.implementaciones.MedicoDAO;
 import com.daos.implementaciones.UsuarioDAO;
@@ -36,6 +37,22 @@ public class UsuarioPersistencia {
         udao = new UsuarioDAO(em);
         mdao = new MedicoDAO(em);
         edao = new EmpleadoDAO(em);
+    }
+    
+    public void agregarUsuarioEmpleado(EmpleadoDTO edto){
+        Empleado empleado = EmpleadoMapper.toEntity(edto);
+        String password = edto.getContrasena();
+        String hashedPass = encriptar(password);
+        empleado.setContrasena(hashedPass);
+        edao.agregar(empleado);
+    }
+    
+    public static String encriptar(String pass){
+        return BCrypt.withDefaults().hashToString(12, pass.toCharArray());
+    }
+    public static boolean verificar(String pass, String hashedPass){
+        BCrypt.Result result = BCrypt.verifyer().verify(pass.toCharArray(), hashedPass);
+        return result.verified;
     }
     
     public UsuarioDTO validarCredenciales(String nombreUsuario, char[] contrasena) {
