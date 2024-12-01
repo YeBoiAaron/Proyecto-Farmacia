@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Aaron
  */
-public class EmpleadoDTO {
+public class EmpleadoDTO extends UsuarioDTO{
     private String nombreCompleto;
     private String numeroTelefono;
     private LocalDate fechaNacimiento;

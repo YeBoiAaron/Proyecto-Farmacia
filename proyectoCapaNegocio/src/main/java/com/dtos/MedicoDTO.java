@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Aaron
  */
-public class MedicoDTO {
+public class MedicoDTO extends UsuarioDTO{
     private String nombreCompleto;
     private String numeroTelefono;
     private String cedulaProfesional;
