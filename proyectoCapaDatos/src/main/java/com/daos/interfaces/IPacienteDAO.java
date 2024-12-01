@@ -6,6 +6,7 @@ package com.daos.interfaces;
 
 import com.daos.IDAO;
 import com.entidades.Paciente;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,6 @@ import com.entidades.Paciente;
  */
 public interface IPacienteDAO extends IDAO<Paciente> {
     public Paciente obtenerPorCorreo(String correo);
+    
+    public List<Paciente> obtenerPorNombre(String nombrePaciente);
 }

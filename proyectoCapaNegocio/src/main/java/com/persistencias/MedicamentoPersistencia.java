@@ -9,6 +9,8 @@ import com.daos.interfaces.IMedicamentoDAO;
 import com.dtos.MedicamentoDTO;
 import com.entidades.Medicamento;
 import com.mappers.MedicamentoMapper;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,11 +23,37 @@ public class MedicamentoPersistencia {
     
     public MedicamentoPersistencia(){
         em = JPAUtil.getEntityManagerFactory().createEntityManager();
-         mdao = new MedicamentoDAO(em);
+        mdao = new MedicamentoDAO(em);
     }
     
     public void agregarMedicamento(MedicamentoDTO medicamentoDTO){
         Medicamento medicamento = MedicamentoMapper.toEntity(medicamentoDTO);
         mdao.agregar(medicamento);
+    }
+    
+    public List<MedicamentoDTO> listaMedicamentos() {
+        List<MedicamentoDTO> medicamentosDto = new ArrayList<>();
+        List<Medicamento> medicamentos = mdao.lista();
+        if(!medicamentos.isEmpty()) {
+            for (Medicamento medicamento : medicamentos) {
+                medicamentosDto.add(MedicamentoMapper.toDTO(medicamento));
+            }
+            return medicamentosDto;
+        }
+        
+        return null;
+    }
+    
+    public List<MedicamentoDTO> obtenerMedicamentosPorNombre(String nombreMedicamento) {
+        List<MedicamentoDTO> medicamentosDto = new ArrayList<>();
+        List<Medicamento> medicamentos = mdao.obtenerPorNombre(nombreMedicamento);
+        if(!medicamentos.isEmpty()) {
+            for (Medicamento medicamento : medicamentos) {
+                medicamentosDto.add(MedicamentoMapper.toDTO(medicamento));
+            }
+            return medicamentosDto;
+        }
+        
+        return null;
     }
 }

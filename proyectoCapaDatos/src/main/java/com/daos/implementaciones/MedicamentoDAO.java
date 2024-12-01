@@ -7,6 +7,7 @@ package com.daos.implementaciones;
 import com.daos.DAOBase;
 import com.daos.interfaces.IMedicamentoDAO;
 import com.entidades.Medicamento;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -23,6 +24,12 @@ public class MedicamentoDAO extends DAOBase<Medicamento> implements IMedicamento
     public Medicamento obtenerPorNumeroSerie(String numeroSerie) {
         String jpql = "SELECT medicamento FROM Medicamento medicamento WHERE medicamento.numeroSerie = :numeroSerie";
         return entityManager.createQuery(jpql, Medicamento.class).setParameter("numeroSerie", numeroSerie).getSingleResult();
+    }
+
+    @Override
+    public List<Medicamento> obtenerPorNombre(String nombreMedicamento) {
+        String jpql = "SELECT medicamento FROM Medicamento medicamento WHERE LOWER(medicamento.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))";
+        return entityManager.createQuery(jpql, Medicamento.class).setParameter("nombre", nombreMedicamento).getResultList();
     }
     
 }

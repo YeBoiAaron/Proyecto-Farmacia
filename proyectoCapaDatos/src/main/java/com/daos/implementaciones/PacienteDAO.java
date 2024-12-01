@@ -7,6 +7,7 @@ package com.daos.implementaciones;
 import com.daos.DAOBase;
 import com.daos.interfaces.IPacienteDAO;
 import com.entidades.Paciente;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
@@ -28,6 +29,12 @@ public class PacienteDAO extends DAOBase<Paciente> implements IPacienteDAO {
         } catch(NoResultException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Paciente> obtenerPorNombre(String nombrePaciente) {
+        String jpql = "SELECT paciente FROM Paciente paciente WHERE LOWER(paciente.nombreCompleto) LIKE LOWER(CONCAT('%', :nombreCompleto, '%'))";
+        return entityManager.createQuery(jpql, Paciente.class).setParameter("nombreCompleto", nombrePaciente).getResultList();
     }
     
 }

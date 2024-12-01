@@ -6,6 +6,7 @@ package com.daos.interfaces;
 
 import com.daos.IDAO;
 import com.entidades.Medicamento;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,6 @@ import com.entidades.Medicamento;
  */
 public interface IMedicamentoDAO extends IDAO<Medicamento> {
     public Medicamento obtenerPorNumeroSerie(String numeroSerie);
+    
+    public List<Medicamento> obtenerPorNombre(String nombreMedicamento);
 }
