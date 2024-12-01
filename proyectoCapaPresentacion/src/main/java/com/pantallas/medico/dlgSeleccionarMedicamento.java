@@ -4,6 +4,22 @@
  */
 package com.pantallas.medico;
 
+import com.dtos.MedicamentoDTO;
+import com.dtos.MedicamentosRecetaDTO;
+import com.persistencias.MedicamentoPersistencia;
+import com.servicios.ConversionesTablas;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Aaron
@@ -15,8 +31,27 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
      */
     public dlgSeleccionarMedicamento(java.awt.Frame parent) {
         super(parent);
+        this.parent = (frmCrearReceta) parent;
         initComponents();
         setLocationRelativeTo(null);
+        medPersistencia = new MedicamentoPersistencia();
+        convers = new ConversionesTablas();
+        actualizarTabla();
+    }
+    
+    private void actualizarTabla() {
+        this.tblMedicamentos.setModel(convers.listaMedicamentosToTableModel(medPersistencia.listaMedicamentos()));
+    }
+    
+    private MedicamentoDTO obtenerMedicamentoSeleccionado(int fila) {
+        DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();
+        MedicamentoDTO medicamento = new MedicamentoDTO();
+        medicamento.setNombre((String) modelo.getValueAt(fila, 0));
+        medicamento.setActivo((String) modelo.getValueAt(fila, 1));
+        medicamento.setPresentacion((String) modelo.getValueAt(fila, 2));
+        medicamento.setConcentracion((String) modelo.getValueAt(fila, 3));
+        medicamento.setNumeroSerie((String) modelo.getValueAt(fila, 4));
+        return medicamento;
     }
 
     /**
@@ -34,13 +69,28 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
-        btnConfirmar = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMedicamentos = new javax.swing.JTable();
+        tblMedicamentos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                // Cambiar el color si la fila está procesada
+                if (filasProcesadas.contains(row)) {
+                    comp.setBackground(Color.getHSBColor(0.3f, 1f, 0.3f));
+                } else {
+                    comp.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+                }
+                return comp;
+            }
+        });
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfNombreMedicamento = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -91,7 +141,7 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
         btnCancelar.setBackground(new java.awt.Color(51, 51, 51));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Salir");
         btnCancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.setBorderPainted(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,34 +150,47 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
             }
         });
 
-        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
-        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
-        btnConfirmar.setText("Seleccionar");
-        btnConfirmar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnConfirmar.setBorderPainted(false);
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionar.setBackground(new java.awt.Color(51, 51, 51));
+        btnSeleccionar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSeleccionar.setBorderPainted(false);
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
+                btnSeleccionarActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Activo", "Presentacion", "Concentracion"
+                "Nombre", "Activo", "Presentacion", "Concentracion", "Numero de Serie"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblMedicamentos);
+        if (tblMedicamentos.getColumnModel().getColumnCount() > 0) {
+            tblMedicamentos.getColumnModel().getColumn(4).setMinWidth(0);
+            tblMedicamentos.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tblMedicamentos.getColumnModel().getColumn(4).setMaxWidth(0);
+        }
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -140,6 +203,11 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
         btnBuscar.setText("Buscar");
         btnBuscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnBuscar.setBorderPainted(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -149,7 +217,7 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNombreMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(147, Short.MAX_VALUE))
@@ -164,9 +232,21 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfNombreMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
+
+        btnConfirmar.setBackground(new java.awt.Color(51, 51, 51));
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -176,6 +256,8 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,8 +274,9 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -202,9 +285,53 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnConfirmarActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        listaMedicamentos = new ArrayList<>();
+        int filaSeleccionada = tblMedicamentos.getSelectedRow();
+        if(filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un medicamento de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        MedicamentosRecetaDTO medicamentorecetaDto = new MedicamentosRecetaDTO();
+        medicamentorecetaDto.setNumeroSerieMedicamento(obtenerMedicamentoSeleccionado(filaSeleccionada).getNumeroSerie());
+        
+        JTextField tfCantidad = new JTextField();
+        JTextField tfInstrucciones = new JTextField();
+        Object[] mensaje = {
+            "Cantidad:", tfCantidad,
+            "Instrucciones:", tfInstrucciones
+        };
+
+        int opcion = JOptionPane.showConfirmDialog(
+            this,
+            mensaje,
+            "Ingrese cantidad e instrucciones",
+            JOptionPane.OK_CANCEL_OPTION
+        );
+        
+        if(opcion == JOptionPane.OK_OPTION) {
+            try {
+                int cantidad = Integer.parseInt(tfCantidad.getText().trim());
+                String instrucciones = tfInstrucciones.getText().trim();
+
+                if(cantidad <= 0 || instrucciones.isEmpty()) {
+                    throw new IllegalArgumentException("Debe ingresar una cantidad válida");
+                }
+                
+                medicamentorecetaDto.setCantidad(cantidad);
+                medicamentorecetaDto.setInstrucciones(instrucciones);
+                listaMedicamentos.add(medicamentorecetaDto);
+                
+                filasProcesadas.add(filaSeleccionada);
+                tblMedicamentos.repaint();
+                
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero válido", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch(IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
@@ -214,6 +341,16 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCerrarMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        this.tblMedicamentos.setModel(convers.listaMedicamentosToTableModel(medPersistencia.obtenerMedicamentosPorNombre(tfNombreMedicamento.getText())));
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        parent.setTablaMedicamentos(listaMedicamentos);
+        JOptionPane.showMessageDialog(null, "Medicamentos agregados con éxito", "Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +399,7 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -269,7 +407,12 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblMedicamentos;
+    private javax.swing.JTextField tfNombreMedicamento;
     // End of variables declaration//GEN-END:variables
+    private frmCrearReceta parent;
+    private MedicamentoPersistencia medPersistencia;
+    private List<MedicamentosRecetaDTO> listaMedicamentos;
+    private ConversionesTablas convers;
+    private Set<Integer> filasProcesadas = new HashSet<>();
 }
