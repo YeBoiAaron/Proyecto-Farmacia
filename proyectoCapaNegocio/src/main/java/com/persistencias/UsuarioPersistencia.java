@@ -4,7 +4,7 @@
  */
 package com.persistencias;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 import com.daos.implementaciones.EmpleadoDAO;
 import com.daos.implementaciones.MedicoDAO;
 import com.daos.implementaciones.UsuarioDAO;
@@ -44,21 +44,28 @@ public class UsuarioPersistencia {
         String password = edto.getContrasena();
         String hashedPass = encriptar(password);
         empleado.setContrasena(hashedPass);
+        empleado.setNombreUsuario(edto.getNombreUsuario());
+        empleado.setCorreo(edto.getCorreo());
         edao.agregar(empleado);
     }
     
-    public static String encriptar(String pass){
-        return BCrypt.withDefaults().hashToString(12, pass.toCharArray());
-    }
-    public static boolean verificar(String pass, String hashedPass){
-        BCrypt.Result result = BCrypt.verifyer().verify(pass.toCharArray(), hashedPass);
-        return result.verified;
+    public void agregarMedico(MedicoDTO medicoDto) {
+        Medico medico = MedicoMapper.toEntity(medicoDto);
+        String password = medicoDto.getContrasena();
+        String hashedPass = encriptar(password);
+        medico.setContrasena(hashedPass);
+        medico.setNombreUsuario(medicoDto.getNombreUsuario());
+        medico.setCorreo(medicoDto.getCorreo());
+        mdao.agregar(medico);
     }
     
-    public UsuarioDTO validarCredenciales(String nombreUsuario, char[] contrasena) {
-        String stringContrasena = String.valueOf(contrasena);
-        Usuario usuario = udao.obtenerPorNombreUsuarioYContrasena(nombreUsuario, stringContrasena);
-        if(usuario != null) {
+    public static String encriptar(String pass){
+        return BCrypt.hashpw(pass, BCrypt.gensalt());
+    }
+    public UsuarioDTO verificarCredenciales(String nombreUsuario, String stringContra) {
+        Usuario usuario = udao.obtenerPorNombreUsuario(nombreUsuario);
+        
+        if(usuario != null && BCrypt.checkpw(stringContra, usuario.getContrasena())) {
             if(usuario instanceof Medico) {
                 return UsuarioMapper.toDto(usuario, "medico");
             } else if(usuario instanceof Empleado) {

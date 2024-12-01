@@ -37,7 +37,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfUsuario = new javax.swing.JTextField();
+        tfNombreUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         pfContrasena = new javax.swing.JPasswordField();
         btnIniciarSesion = new javax.swing.JButton();
@@ -53,9 +53,9 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Nombre de usuario");
 
-        tfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tfNombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña");
@@ -91,7 +91,7 @@ public class frmLogin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(pfContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
                 .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -112,7 +112,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -128,21 +128,26 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        UsuarioDTO usuario = usrPersistencia.validarCredenciales(tfUsuario.getText(), pfContrasena.getPassword());
-
-        if(usuario == null) {
-            JOptionPane.showMessageDialog(null, "Credenciales Inválidas", "Error", JOptionPane.ERROR_MESSAGE);
+        String nombreUsuario = tfNombreUsuario.getText();
+        String stringContra = new String(pfContrasena.getPassword());
+        
+        if(nombreUsuario.isEmpty() || stringContra.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa usuario y contraseña", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            Sesion.setUsuarioLogueado(usuario);
-
-            if(usuario.getTipoUsuario().equals("medico")) {
-                frmInicioMedico medico = new frmInicioMedico();
-                medico.setVisible(true);
-                this.dispose();
-            } else if(usuario.getTipoUsuario().equals("empleado")) {
-                frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
-                empleado.setVisible(true);
-                this.dispose();
+            try {
+                UsuarioDTO usuario = usrPersistencia.verificarCredenciales(nombreUsuario, stringContra);
+                Sesion.setUsuarioLogueado(usuario);
+                if(usuario.getTipoUsuario().equals("medico")) {
+                    frmInicioMedico medico = new frmInicioMedico();
+                    medico.setVisible(true);
+                    this.dispose();
+                } else if(usuario.getTipoUsuario().equals("empleado")) {
+                    frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
+                    empleado.setVisible(true);
+                    this.dispose();
+                }
+            } catch(NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Credenciales inválidas", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
@@ -196,7 +201,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblRegistrarUsuario;
     private javax.swing.JPasswordField pfContrasena;
-    private javax.swing.JTextField tfUsuario;
+    private javax.swing.JTextField tfNombreUsuario;
     // End of variables declaration//GEN-END:variables
     private UsuarioPersistencia usrPersistencia;
 }
