@@ -6,6 +6,8 @@ package com.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -113,7 +115,7 @@ public class MedicamentosReceta implements Serializable {
 
     @Override
     public String toString() {
-        return "MedicamentosReceta{" + "id=" + id + ", cantidad=" + cantidad + ", instrucciones=" + instrucciones + ", medicamento=" + medicamento + ", receta=" + receta + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
 }

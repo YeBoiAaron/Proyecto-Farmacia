@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -148,6 +150,6 @@ public class Empleado extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", fechaNacimiento=" + fechaNacimiento + ", tipoEmpleado=" + tipoEmpleado + ", ventas=" + ventas + ", sucursal=" + sucursal + '}' + super.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

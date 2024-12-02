@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -161,7 +163,7 @@ public class Medicamento implements Serializable {
 
     @Override
     public String toString() {
-        return "Medicamento{" + "idMedicamento=" + idMedicamento + ", nombre=" + nombre + ", numero de serie=" + numeroSerie + ", presentacion=" + presentacion + ", concentracion=" + concentracion + ", activo=" + activo + ", precio=" + precio + ", recetas=" + recetas + ", inventarios=" + inventarios + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 }

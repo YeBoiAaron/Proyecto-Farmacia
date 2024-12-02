@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -135,7 +137,7 @@ public class Medico extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Medico{" + "idMedico=" + idMedico + ", nombreCompleto=" + nombreCompleto + ", numeroTelefono=" + numeroTelefono + ", cedulaProfesional=" + cedulaProfesional + ", fechaNacimiento=" + fechaNacimiento + ", recetas=" + recetas + '}' + super.toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 }

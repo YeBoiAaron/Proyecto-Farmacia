@@ -6,6 +6,8 @@ package com.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -101,7 +103,7 @@ public class InventarioSucursal implements Serializable {
 
     @Override
     public String toString() {
-        return "InventarioSucursal{" + "idInventario=" + idInventario + ", cantidad=" + cantidad + ", medicamento=" + medicamento + ", sucursal=" + sucursal + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 }

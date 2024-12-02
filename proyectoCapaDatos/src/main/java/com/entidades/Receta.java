@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -41,7 +43,7 @@ public class Receta implements Serializable {
     @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
-    @OneToMany(mappedBy = "receta", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "receta", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<MedicamentosReceta> listaMedicamentos;
 
     public Receta() {
@@ -151,7 +153,7 @@ public class Receta implements Serializable {
 
     @Override
     public String toString() {
-        return "Receta{" + "idReceta=" + idReceta + ", numero de receta=" + numeroReceta + ", diagnostico=" + diagnostico + ", estado=" + estado + ", venta=" + venta + ", medico=" + medico + ", paciente=" + paciente + ", lista de medicamentos=" + listaMedicamentos + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
 }

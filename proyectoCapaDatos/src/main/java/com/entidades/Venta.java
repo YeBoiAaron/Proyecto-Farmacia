@@ -7,6 +7,8 @@ package com.entidades;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -136,7 +138,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", folio=" + folio + ", subtotal=" + subtotal + ", total=" + total + ", fecha=" + fecha + ", cajero=" + cajero + ", receta=" + receta + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 }

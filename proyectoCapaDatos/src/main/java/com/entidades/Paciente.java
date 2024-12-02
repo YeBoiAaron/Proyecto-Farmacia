@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -171,7 +173,7 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "Paciente{" + "idPaciente=" + idPaciente + ", nombreCompleto=" + nombreCompleto + ", fechaNacimiento=" + fechaNacimiento + ", numeroTelefono=" + numeroTelefono + ", correo=" + correo + ", sexo=" + sexo + ", peso=" + peso + ", edad=" + edad + ", recetas=" + listaRecetas + '}';
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 }
