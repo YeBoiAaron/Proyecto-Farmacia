@@ -302,14 +302,14 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
             "Instrucciones:", tfInstrucciones
         };
 
-        int opcion = JOptionPane.showConfirmDialog(
+        int respuesta = JOptionPane.showConfirmDialog(
             this,
             mensaje,
             "Ingrese cantidad e instrucciones",
             JOptionPane.OK_CANCEL_OPTION
         );
         
-        if(opcion == JOptionPane.OK_OPTION) {
+        if(respuesta == JOptionPane.OK_OPTION) {
             try {
                 int cantidad = Integer.parseInt(tfCantidad.getText().trim());
                 String instrucciones = tfInstrucciones.getText().trim();
@@ -343,7 +343,15 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.tblMedicamentos.setModel(convers.listaMedicamentosToTableModel(medPersistencia.obtenerMedicamentosPorNombre(tfNombreMedicamento.getText())));
+        if(tfNombreMedicamento.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingresa el nombre de un medicamento para poder buscarlo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                this.tblMedicamentos.setModel(convers.listaMedicamentosToTableModel(medPersistencia.obtenerMedicamentosPorNombre(tfNombreMedicamento.getText())));
+            } catch(NullPointerException e) {
+                JOptionPane.showMessageDialog(this, "No existe un medicamento bajo ese nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
