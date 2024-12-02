@@ -43,4 +43,8 @@ public class PacientePersistencia {
         
         return null;
     }
+    
+    public PacienteDTO buscarPorCorreo(String correo) {
+        return PacienteMapper.toDTO(pdao.obtenerPorCorreo(correo));
+    }
 }
