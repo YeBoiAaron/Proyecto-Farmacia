@@ -14,7 +14,12 @@ import com.entidades.Medico;
 public class MedicoMapper {
 
     public static MedicoDTO toDTO(Medico medico) {
-        return new MedicoDTO(medico.getNombreCompleto(), medico.getNumeroTelefono(), medico.getCedulaProfesional(), medico.getFechaNacimiento());
+        MedicoDTO medicoDto = new MedicoDTO(medico.getNombreCompleto(), medico.getNumeroTelefono(), medico.getCedulaProfesional(), medico.getFechaNacimiento());
+        medicoDto.setNombreUsuario(medico.getNombreUsuario());
+        medicoDto.setCorreo(medico.getCorreo());
+        medicoDto.setContrasena(medico.getContrasena());
+        
+        return medicoDto;
     }
 
     public static Medico toEntity(MedicoDTO medicoDto) {
