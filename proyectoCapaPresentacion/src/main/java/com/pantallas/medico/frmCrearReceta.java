@@ -8,6 +8,7 @@ import com.Sesion;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
 import com.dtos.RecetaDTO;
+import com.persistencias.PacientePersistencia;
 import com.persistencias.RecetaPersistencia;
 import com.persistencias.UsuarioPersistencia;
 import com.servicios.ConversionesTablas;
@@ -15,7 +16,10 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,15 +36,76 @@ public class frmCrearReceta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         recetaPersistencia = new RecetaPersistencia();
         usrPersistencia = new UsuarioPersistencia();
+        pctPersistencia = new PacientePersistencia();
         convers = new ConversionesTablas();
+        paciente = new PacienteDTO();
     }
     
     public void setTablaMedicamentos(List<MedicamentosRecetaDTO> listaMedicamentos) {
         this.tblMedicamentos.setModel(convers.listaMedicamentosRecetaToTableModel(listaMedicamentos));
     }
     
-    public void actualizarTabla(DefaultTableModel modelo) {
+    public void actualizarTablaMedicamentos(DefaultTableModel modelo) {
         this.tblMedicamentos.setModel(modelo);
+    }
+    
+    public void actualizarPaciente() {
+        tfNombrePaciente.setText(paciente.getNombreCompleto());
+        tfSexo.setText(paciente.getSexo());
+        tfAltura.setText(Float.toString(paciente.getAltura()));
+        tfPeso.setText(Float.toString(paciente.getPeso()));
+    }
+    
+    public void crearNuevoPaciente(String nombrePaciente) {
+        JTextField txfNombreCompleto = new JTextField(nombrePaciente);
+        com.github.lgooddatepicker.components.DatePicker dtfFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        JTextField txfNumeroTelefono = new JTextField();
+        JTextField txfCorreo = new JTextField();
+        JTextField txfSexo = new JTextField();
+        JTextField txfAltura = new JTextField();
+        JTextField txfPeso = new JTextField();
+        Object[] mensaje = {
+            "Nombre Completo:", txfNombreCompleto,
+            "Fecha de Nacimiento", dtfFechaNacimiento,
+            "Número de teléfono:", txfNumeroTelefono,
+            "Correo electrónico:", txfCorreo,
+            "Sexo:", txfSexo,
+            "Altura (cm):", txfAltura,
+            "Peso (kg):", txfPeso,};
+
+        int respuesta = JOptionPane.showConfirmDialog(
+                this,
+                mensaje,
+                "Ingresa los datos del paciente",
+                JOptionPane.OK_CANCEL_OPTION
+        );
+
+        if(respuesta == JOptionPane.OK_OPTION) {
+            try {
+                float altura = Float.parseFloat(txfAltura.getText().trim());
+                float peso = Float.parseFloat(txfPeso.getText().trim());
+                LocalDate fechaNacimiento = dtfFechaNacimiento.getDate();
+                if(fechaNacimiento.isAfter(LocalDate.now())) {
+                    throw new IllegalArgumentException("Debe ingresar una fecha válida");
+                }
+
+                paciente.setNombreCompleto(txfNombreCompleto.getText().trim());
+                paciente.setFechaNacimiento(fechaNacimiento);
+                paciente.setCorreo(txfCorreo.getText().trim());
+                paciente.setNumeroTelefono(txfNumeroTelefono.getText().trim());
+                paciente.setSexo(txfSexo.getText().trim());
+                paciente.setAltura(altura);
+                paciente.setPeso(peso);
+                paciente.setEdad((int) ChronoUnit.YEARS.between(paciente.getFechaNacimiento(), LocalDate.now()));
+
+                pctPersistencia.crearPaciente(paciente);
+                actualizarPaciente();
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "La altura y peso deben ser un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch(IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     /**
@@ -77,6 +142,8 @@ public class frmCrearReceta extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnEliminar.setVisible(false);
         btnEliminar.setEnabled(false);
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         moCrearReceta = new javax.swing.JMenuItem();
@@ -109,15 +176,20 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
         tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Medicamentos", "Indicaciones", "Cantidad"
+                "Medicamentos", "Indicaciones", "Cantidad", "Numero Serie"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblMedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMedicamentosMouseClicked(evt);
@@ -125,9 +197,9 @@ public class frmCrearReceta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblMedicamentos);
         if (tblMedicamentos.getColumnModel().getColumnCount() > 0) {
-            tblMedicamentos.getColumnModel().getColumn(0).setHeaderValue("Medicamentos");
-            tblMedicamentos.getColumnModel().getColumn(1).setHeaderValue("Indicaciones");
-            tblMedicamentos.getColumnModel().getColumn(2).setHeaderValue("Cantidad");
+            tblMedicamentos.getColumnModel().getColumn(3).setMinWidth(0);
+            tblMedicamentos.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tblMedicamentos.getColumnModel().getColumn(3).setMaxWidth(0);
         }
 
         btnAgregarMedicamentos.setText("Agregar Medicamentos");
@@ -161,6 +233,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("cm");
+
+        jLabel7.setText("kg");
 
         jMenu1.setText("Recetas");
 
@@ -202,7 +278,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel3)
@@ -211,18 +287,22 @@ public class frmCrearReceta extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(tfDiagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                                .addComponent(tfNombrePaciente)
+                                .addComponent(btnBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel2)
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(btnBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfNombrePaciente)))))
+                                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel7))))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -241,7 +321,9 @@ public class frmCrearReceta extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -262,23 +344,27 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        byte[] array = new byte[7];
-        new Random().nextBytes(array);
-        String numeroReceta = new String(array);
+        String numeroReceta = new Random().ints(7, 0, "0123456789".length())
+                .mapToObj("0123456789"::charAt)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
         recetaPersistencia.crearReceta(
                 new RecetaDTO(
                         numeroReceta, 
                         tfDiagnostico.getText(), 
-                        "1"
+                        "sin surtir"
                 ), 
                 new ConversionesTablas().tablaMedicamentosRecetaToArray(
                         tblMedicamentos.getModel(), 
                         numeroReceta
                 ), 
                 usrPersistencia.obtenerMedico(Sesion.getUsuarioLogueado()),
-                new PacienteDTO()
+                this.paciente
         );
         JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+        frmInicioMedico inicio = new frmInicioMedico();
+        inicio.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -305,7 +391,43 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarMedicamentosActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
+        String nombrePaciente = tfNombrePaciente.getText().trim();
         
+        if(nombrePaciente.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el nombre del paciente a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            List<PacienteDTO> rsltBusquedaPaciente = pctPersistencia.buscarPaciente(nombrePaciente);
+            if(!rsltBusquedaPaciente.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Existen paciente(s) bajo ese nombre", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                JTable tblPacientes = new JTable(convers.listaPacientesToTableModel(rsltBusquedaPaciente));
+                tblPacientes.setRowSelectionAllowed(true);
+                
+                Object[] opciones = {
+                    "Seleccionar paciente",
+                    "Crear nuevo",
+                    "Cancelar"};
+                
+                int respuesta = JOptionPane.showOptionDialog(
+                        this,
+                        tblPacientes,
+                        "Selecciona un paciente",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[0]
+                );
+                
+                if(respuesta == JOptionPane.YES_OPTION && tblPacientes.getSelectedRow() != -1) {
+                    paciente = pctPersistencia.buscarPorCorreo((String) tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 2));
+                    actualizarPaciente();
+                } else {
+                    crearNuevoPaciente(nombrePaciente);
+                }
+            } else {
+                crearNuevoPaciente(nombrePaciente);
+            }
+        }
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
     private void tblMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicamentosMouseClicked
@@ -324,7 +446,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();
             modelo.removeRow(tblMedicamentos.getSelectedRow());
         } catch(IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione una fila para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor selecciona un medicamento para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -374,10 +496,12 @@ public class frmCrearReceta extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -392,6 +516,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private RecetaPersistencia recetaPersistencia;
     private UsuarioPersistencia usrPersistencia;
+    private PacientePersistencia pctPersistencia;
     private PacienteDTO paciente;
     private ConversionesTablas convers;
 }

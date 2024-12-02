@@ -7,7 +7,7 @@ package com.servicios;
 import com.daos.implementaciones.MedicamentoDAO;
 import com.dtos.MedicamentoDTO;
 import com.dtos.MedicamentosRecetaDTO;
-import com.entidades.Medicamento;
+import com.dtos.PacienteDTO;
 import com.persistencias.JPAUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +19,19 @@ import javax.swing.table.TableModel;
  * @author Aaron
  */
 public class ConversionesTablas {
-    private String nombresColumnasTablaMedicamentosReceta[] = {"Medicamentos", "Indicaciones", "Cantidad"};
+    private String nombresColumnasTablaMedicamentosReceta[] = {"Medicamentos", "Indicaciones", "Cantidad", "Numero Serie"};
     private String nombresColumnasTablaMedicamentos[] = {"Nombre", "Activo", "Presentacion", "Concentración", "Numero Serie"};
+    private String nombresColumnasTablaPacientes[] = {"Nombre", "Fecha de Nacimiento", "Correo Electronico"};
     
     public ArrayList<MedicamentosRecetaDTO> tablaMedicamentosRecetaToArray(TableModel tabla, String numeroReceta) {
         ArrayList<MedicamentosRecetaDTO> listaMedicamentos = new ArrayList<>();
+        MedicamentosRecetaDTO medicamento = new MedicamentosRecetaDTO();
         for (int i = 0; i < tabla.getRowCount(); i++) {
-            listaMedicamentos.add(new MedicamentosRecetaDTO((int)tabla.getValueAt(i, 2), (String)tabla.getValueAt(i, 1), (String)tabla.getValueAt(i, 0), numeroReceta));
+            medicamento.setNumeroReceta(numeroReceta);
+            medicamento.setNumeroSerieMedicamento((String) tabla.getValueAt(i, 3));
+            medicamento.setInstrucciones((String)tabla.getValueAt(i, 1));
+            medicamento.setCantidad((int) tabla.getValueAt(i, 2));
+            listaMedicamentos.add(medicamento);
         }
         
         return listaMedicamentos;
@@ -37,7 +43,8 @@ public class ConversionesTablas {
             Object[] datosFila = {
                 new MedicamentoDAO(JPAUtil.getEntityManagerFactory().createEntityManager()).obtenerPorNumeroSerie(medicamento.getNumeroSerieMedicamento()).getNombre(),
                 medicamento.getInstrucciones(),
-                medicamento.getCantidad()
+                medicamento.getCantidad(),
+                medicamento.getNumeroSerieMedicamento()
             };
             modelo.addRow(datosFila);
         }
@@ -54,6 +61,20 @@ public class ConversionesTablas {
                 medicamento.getPresentacion(),
                 medicamento.getConcentracion(),
                 medicamento.getNumeroSerie()
+            };
+            modelo.addRow(datosFila);
+        }
+        
+        return modelo;
+    }
+    
+    public DefaultTableModel listaPacientesToTableModel(List<PacienteDTO> listaPacientes) {
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaPacientes, 0);
+        for (PacienteDTO paciente : listaPacientes) {
+            Object[] datosFila = {
+                paciente.getNombreCompleto(),
+                paciente.getFechaNacimiento().toString(),
+                paciente.getCorreo()
             };
             modelo.addRow(datosFila);
         }
