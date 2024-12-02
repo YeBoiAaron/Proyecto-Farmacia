@@ -5,7 +5,6 @@
 package com.pantallas;
 import com.dtos.EmpleadoDTO;
 import com.dtos.MedicoDTO;
-import com.dtos.UsuarioDTO;
 import com.persistencias.UsuarioPersistencia;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -178,7 +177,8 @@ public class frmRegistrar extends javax.swing.JFrame {
             EmpleadoDTO edto = new EmpleadoDTO(
                     txfNombreCompleto.getText().trim(),
                     txfNumeroTelefono.getText().trim(),
-                    fechaNacimiento,txtTipoEmpleado.getText().trim()
+                    fechaNacimiento,
+                    txtTipoEmpleado.getText().trim()
             );
             edto.setNombreUsuario(txfNombreUsuario.getText().trim());
             edto.setCorreo(txfCorreo.getText().trim());
