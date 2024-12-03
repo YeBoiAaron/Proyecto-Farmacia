@@ -296,6 +296,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
+            if(listaMedicamentos.isEmpty()) {
+                throw new IllegalArgumentException("No ha seleccionado ningun medicamento");
+            }
+            
             String numeroReceta = recetaServicio.generarNumeroReceta();
             receta.setNumeroReceta(numeroReceta);
             receta.setDiagnostico(txfDiagnostico.getText());
@@ -311,6 +315,8 @@ public class frmCrearReceta extends javax.swing.JFrame {
             frmInicioMedico inicio = new frmInicioMedico();
             inicio.setVisible(true);
             this.dispose();
+        } catch(IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
