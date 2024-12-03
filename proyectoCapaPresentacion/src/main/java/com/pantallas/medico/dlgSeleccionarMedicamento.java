@@ -355,7 +355,7 @@ public class dlgSeleccionarMedicamento extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        parent.setTablaMedicamentos(listaMedicamentos);
+        parent.actualizarListaMedicamentos(listaMedicamentos);
         JOptionPane.showMessageDialog(null, "Medicamentos agregados con éxito", "Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
