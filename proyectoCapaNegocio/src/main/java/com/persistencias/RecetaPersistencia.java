@@ -5,12 +5,10 @@
 package com.persistencias;
 
 import com.daos.implementaciones.MedicamentoDAO;
-import com.daos.implementaciones.MedicamentosRecetaDAO;
 import com.daos.implementaciones.MedicoDAO;
 import com.daos.implementaciones.PacienteDAO;
 import com.daos.implementaciones.RecetaDAO;
 import com.daos.interfaces.IMedicamentoDAO;
-import com.daos.interfaces.IMedicamentosRecetaDAO;
 import com.daos.interfaces.IMedicoDAO;
 import com.daos.interfaces.IPacienteDAO;
 import com.daos.interfaces.IRecetaDAO;
@@ -21,9 +19,8 @@ import com.dtos.RecetaDTO;
 import com.entidades.Medicamento;
 import com.entidades.MedicamentosReceta;
 import com.entidades.Receta;
-import com.mappers.MedicoMapper;
-import com.mappers.PacienteMapper;
 import com.mappers.RecetaMapper;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -67,6 +64,21 @@ public class RecetaPersistencia {
         Receta receta = recetaDao.obtenerPorNumeroReceta(numeroReceta);
         if(receta != null) {
             return RecetaMapper.toDTO(receta);
-        } return null;
+        } 
+        
+        return null;
+    }
+    
+    public List<RecetaDTO> buscarPorPaciente(String nombrePaciente, LocalDate fechaNacimiento) {
+        List<Receta> recetas = recetaDao.obtenerPorPaciente(nombrePaciente, fechaNacimiento);
+        if(recetas != null) {
+            List<RecetaDTO> recetasDto = new ArrayList<>();
+            for (Receta receta : recetas) {
+                recetasDto.add(RecetaMapper.toDTO(receta));
+            }
+            return recetasDto;
+        }
+        
+        return null;
     }
 }

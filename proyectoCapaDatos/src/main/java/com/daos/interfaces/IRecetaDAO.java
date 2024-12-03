@@ -6,6 +6,8 @@ package com.daos.interfaces;
 
 import com.daos.IDAO;
 import com.entidades.Receta;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,6 @@ import com.entidades.Receta;
  */
 public interface IRecetaDAO extends IDAO<Receta> {
     public Receta obtenerPorNumeroReceta(String numeroReceta);
+    
+    public List<Receta> obtenerPorPaciente(String nombrePaciente, LocalDate fechaNacimiento);
 }
