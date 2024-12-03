@@ -421,7 +421,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
                 if(respuesta == JOptionPane.YES_OPTION && tblPacientes.getSelectedRow() != -1) {
                     paciente = pctPersistencia.buscarPorCorreo((String) tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 2));
                     actualizarPaciente();
-                } else {
+                } else if(respuesta == JOptionPane.NO_OPTION) {
                     crearNuevoPaciente(nombrePaciente);
                 }
             } else {
