@@ -25,7 +25,7 @@ public class RecetaDAO extends DAOBase<Receta> implements IRecetaDAO {
     @Override
     public Receta obtenerPorNumeroReceta(String numeroReceta) {
         try {
-            String jpql = "SELECT receta FROM Receta receta" + 
+            String jpql = "SELECT receta FROM Receta receta " + 
                     "WHERE receta.numeroReceta = :numeroReceta";
             return entityManager.createQuery(jpql, Receta.class).setParameter("numeroReceta", numeroReceta).getSingleResult();
         } catch(NoResultException e) {
@@ -36,8 +36,8 @@ public class RecetaDAO extends DAOBase<Receta> implements IRecetaDAO {
     @Override
     public List<Receta> obtenerPorPaciente(String nombrePaciente, LocalDate fechaNacimiento) {
         try {
-            String jpql = "SELECT receta FROM Receta receta" +
-                    "WHERE receta.paciente.nombreCompleto = :nombreCompleto" +
+            String jpql = "SELECT receta FROM Receta receta " +
+                    "WHERE receta.paciente.nombreCompleto = :nombreCompleto " +
                     "AND receta.paciente.fechaNacimiento = :fechaNacimiento";
             return entityManager.createQuery(jpql, Receta.class).
                     setParameter("nombreCompleto", nombrePaciente).
