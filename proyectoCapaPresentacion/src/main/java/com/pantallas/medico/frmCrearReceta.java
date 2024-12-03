@@ -5,21 +5,17 @@
 package com.pantallas.medico;
 
 import com.Sesion;
+import com.control.RecetaControl;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
 import com.dtos.RecetaDTO;
-import com.persistencias.PacientePersistencia;
 import com.persistencias.RecetaPersistencia;
 import com.persistencias.UsuarioPersistencia;
 import com.servicios.ConversionesTablas;
+import com.servicios.RecetaServicio;
+import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Random;
-import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,75 +32,29 @@ public class frmCrearReceta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         recetaPersistencia = new RecetaPersistencia();
         usrPersistencia = new UsuarioPersistencia();
-        pctPersistencia = new PacientePersistencia();
+        recetaServicio = new RecetaServicio();
+        control = new RecetaControl();
         convers = new ConversionesTablas();
+        listaMedicamentos = new ArrayList<>();
         paciente = new PacienteDTO();
+        receta = new RecetaDTO();
     }
     
-    public void setTablaMedicamentos(List<MedicamentosRecetaDTO> listaMedicamentos) {
+    public void actualizarListaMedicamentos(List<MedicamentosRecetaDTO> listaMedicamentos) {
+        this.listaMedicamentos.addAll(listaMedicamentos);
+        actualizarTablaMedicamentos(listaMedicamentos);
+    }
+    
+    public void actualizarTablaMedicamentos(List<MedicamentosRecetaDTO> listaMedicamentos) {
         this.tblMedicamentos.setModel(convers.listaMedicamentosRecetaToTableModel(listaMedicamentos));
     }
     
-    public void actualizarTablaMedicamentos(DefaultTableModel modelo) {
-        this.tblMedicamentos.setModel(modelo);
-    }
-    
     public void actualizarPaciente() {
-        tfNombrePaciente.setText(paciente.getNombreCompleto());
-        tfSexo.setText(paciente.getSexo());
-        tfAltura.setText(Float.toString(paciente.getAltura()));
-        tfPeso.setText(Float.toString(paciente.getPeso()));
-    }
-    
-    public void crearNuevoPaciente(String nombrePaciente) {
-        JTextField txfNombreCompleto = new JTextField(nombrePaciente);
-        com.github.lgooddatepicker.components.DatePicker dtfFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
-        JTextField txfNumeroTelefono = new JTextField();
-        JTextField txfCorreo = new JTextField();
-        JTextField txfSexo = new JTextField();
-        JTextField txfAltura = new JTextField();
-        JTextField txfPeso = new JTextField();
-        Object[] mensaje = {
-            "Nombre Completo:", txfNombreCompleto,
-            "Fecha de Nacimiento", dtfFechaNacimiento,
-            "Número de teléfono:", txfNumeroTelefono,
-            "Correo electrónico:", txfCorreo,
-            "Sexo:", txfSexo,
-            "Altura (cm):", txfAltura,
-            "Peso (kg):", txfPeso,};
-
-        int respuesta = JOptionPane.showConfirmDialog(
-                this,
-                mensaje,
-                "Ingresa los datos del paciente",
-                JOptionPane.OK_CANCEL_OPTION
-        );
-
-        if(respuesta == JOptionPane.OK_OPTION) {
-            try {
-                float altura = Float.parseFloat(txfAltura.getText().trim());
-                float peso = Float.parseFloat(txfPeso.getText().trim());
-                LocalDate fechaNacimiento = dtfFechaNacimiento.getDate();
-                if(fechaNacimiento.isAfter(LocalDate.now())) {
-                    throw new IllegalArgumentException("Debe ingresar una fecha válida");
-                }
-
-                paciente.setNombreCompleto(txfNombreCompleto.getText().trim());
-                paciente.setFechaNacimiento(fechaNacimiento);
-                paciente.setCorreo(txfCorreo.getText().trim());
-                paciente.setNumeroTelefono(txfNumeroTelefono.getText().trim());
-                paciente.setSexo(txfSexo.getText().trim());
-                paciente.setAltura(altura);
-                paciente.setPeso(peso);
-                paciente.setEdad((int) ChronoUnit.YEARS.between(paciente.getFechaNacimiento(), LocalDate.now()));
-
-                pctPersistencia.crearPaciente(paciente);
-                actualizarPaciente();
-            } catch(NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "La altura y peso deben ser un número válido", "Error", JOptionPane.ERROR_MESSAGE);
-            } catch(IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        if(paciente != null) {
+            tfNombrePaciente.setText(paciente.getNombreCompleto());
+            tfSexo.setText(paciente.getSexo());
+            tfAltura.setText(Float.toString(paciente.getAltura()));
+            tfPeso.setText(Float.toString(paciente.getPeso()));
         }
     }
 
@@ -344,22 +294,16 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String numeroReceta = new Random().ints(7, 0, "0123456789".length())
-                .mapToObj("0123456789"::charAt)
-                .map(String::valueOf)
-                .collect(Collectors.joining());
+        String numeroReceta = recetaServicio.generarNumeroReceta();
+        receta.setNumeroReceta(numeroReceta);
+        receta.setDiagnostico(tfDiagnostico.getText());
+        receta.setEstado("sin surtir");
+        
         recetaPersistencia.crearReceta(
-                new RecetaDTO(
-                        numeroReceta, 
-                        tfDiagnostico.getText(), 
-                        "sin surtir"
-                ), 
-                new ConversionesTablas().tablaMedicamentosRecetaToArray(
-                        tblMedicamentos.getModel(), 
-                        numeroReceta
-                ), 
+                receta, 
+                listaMedicamentos, 
                 usrPersistencia.obtenerMedico(Sesion.getUsuarioLogueado()),
-                this.paciente
+                paciente
         );
         JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
         frmInicioMedico inicio = new frmInicioMedico();
@@ -392,42 +336,8 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
         String nombrePaciente = tfNombrePaciente.getText().trim();
-        
-        if(nombrePaciente.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa el nombre del paciente a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        } else {
-            List<PacienteDTO> rsltBusquedaPaciente = pctPersistencia.buscarPaciente(nombrePaciente);
-            if(!rsltBusquedaPaciente.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Existen paciente(s) bajo ese nombre", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                JTable tblPacientes = new JTable(convers.listaPacientesToTableModel(rsltBusquedaPaciente));
-                tblPacientes.setRowSelectionAllowed(true);
-                
-                Object[] opciones = {
-                    "Seleccionar paciente",
-                    "Crear nuevo",
-                    "Cancelar"};
-                
-                int respuesta = JOptionPane.showOptionDialog(
-                        this,
-                        tblPacientes,
-                        "Selecciona un paciente",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        opciones,
-                        opciones[0]
-                );
-                
-                if(respuesta == JOptionPane.YES_OPTION && tblPacientes.getSelectedRow() != -1) {
-                    paciente = pctPersistencia.buscarPorCorreo((String) tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 2));
-                    actualizarPaciente();
-                } else if(respuesta == JOptionPane.NO_OPTION) {
-                    crearNuevoPaciente(nombrePaciente);
-                }
-            } else {
-                crearNuevoPaciente(nombrePaciente);
-            }
-        }
+        paciente = control.buscarPaciente(this, nombrePaciente);
+        actualizarPaciente();
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
     private void tblMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMedicamentosMouseClicked
@@ -516,7 +426,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private RecetaPersistencia recetaPersistencia;
     private UsuarioPersistencia usrPersistencia;
-    private PacientePersistencia pctPersistencia;
-    private PacienteDTO paciente;
+    private RecetaServicio recetaServicio;
+    private RecetaControl control;
     private ConversionesTablas convers;
+    private List<MedicamentosRecetaDTO> listaMedicamentos;
+    private PacienteDTO paciente;
+    private RecetaDTO receta;
 }
