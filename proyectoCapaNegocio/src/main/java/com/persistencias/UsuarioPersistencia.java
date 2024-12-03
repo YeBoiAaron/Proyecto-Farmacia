@@ -76,6 +76,12 @@ public class UsuarioPersistencia {
         return null;
     }
     
+    public boolean nombreUsuarioExiste(String nombreUsuario) {
+        boolean enEmpleado = (edao.obtenerPorNombreUsuario(nombreUsuario) != null);
+        boolean enMedico = (mdao.obtenerPorNombreUsuario(nombreUsuario) != null);
+        return (enEmpleado || enMedico);
+    }
+    
     public MedicoDTO obtenerMedico(UsuarioDTO usuario) {
         if(usuario.getTipoUsuario().equals("medico")) {
             Medico medico = mdao.obtenerPorNombreUsuario(usuario.getNombreUsuario());
