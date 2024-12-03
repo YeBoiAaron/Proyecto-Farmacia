@@ -23,7 +23,7 @@ public class Venta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venta")
     private Long idVenta;
-    @Column(name = "folio")
+    @Column(name = "folio", unique = true)
     private String folio;
     @Column(name = "subtotal")
     private float subtotal;

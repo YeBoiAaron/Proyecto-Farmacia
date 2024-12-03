@@ -29,7 +29,7 @@ public class Medico extends Usuario implements Serializable {
     private String nombreCompleto;
     @Column(name = "numero_telefono")
     private String numeroTelefono;
-    @Column(name = "cedula_profesional")
+    @Column(name = "cedula_profesional", unique = true)
     private String cedulaProfesional;
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;

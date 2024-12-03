@@ -24,7 +24,7 @@ public class Sucursal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_sucursal")
     private Long idSucursal;
-    @Column(name = "nombre_sucursal")
+    @Column(name = "nombre_sucursal", unique = true)
     private String nombreSucursal;
     @Column(name = "calle")
     private String calle;

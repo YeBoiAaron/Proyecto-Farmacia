@@ -14,7 +14,7 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class Usuario{
 
-    @Column(name = "nombre_usuario")
+    @Column(name = "nombre_usuario", unique = true)
     private String nombreUsuario;
     @Column(name = "correo")
     private String correo;

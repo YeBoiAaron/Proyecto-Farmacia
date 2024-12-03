@@ -30,7 +30,7 @@ public class Paciente implements Serializable {
     private LocalDate fechaNacimiento;
     @Column(name = "numero_telefono")
     private String numeroTelefono;
-    @Column(name = "correo")
+    @Column(name = "correo", unique = true)
     private String correo;
     @Column(name = "sexo")
     private String sexo;

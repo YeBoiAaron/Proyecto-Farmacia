@@ -24,7 +24,7 @@ public class Medicamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_medicamento")
     private Long idMedicamento;
-    @Column(name = "numero_serie")
+    @Column(name = "numero_serie", unique = true)
     private String numeroSerie;
     @Column(name = "nombre")
     private String nombre;
