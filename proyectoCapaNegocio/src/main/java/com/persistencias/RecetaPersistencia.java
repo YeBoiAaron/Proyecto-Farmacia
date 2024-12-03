@@ -64,6 +64,9 @@ public class RecetaPersistencia {
     }
     
     public RecetaDTO buscarReceta(String numeroReceta) {
-        return RecetaMapper.toDTO(recetaDao.obtenerPorNumeroReceta(numeroReceta));
+        Receta receta = recetaDao.obtenerPorNumeroReceta(numeroReceta);
+        if(receta != null) {
+            return RecetaMapper.toDTO(receta);
+        } return null;
     }
 }
