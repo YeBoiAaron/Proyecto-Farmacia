@@ -46,7 +46,7 @@ public class frmRegistrar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
-        dfFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        dtpFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
         cbxMedico = new javax.swing.JCheckBox();
         cbxEmpleado = new javax.swing.JCheckBox();
         cbxEmpleado.setSelected(true);
@@ -116,7 +116,7 @@ public class frmRegistrar extends javax.swing.JFrame {
                             .addComponent(txfNumeroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(txfNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtpFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxMedico)
                                 .addGap(18, 18, 18)
@@ -138,7 +138,7 @@ public class frmRegistrar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dtpFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(lblTipoEmpleado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -172,7 +172,7 @@ public class frmRegistrar extends javax.swing.JFrame {
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
         UsuarioPersistencia up = new UsuarioPersistencia();
         String nombreUsuario = txfNombreUsuario.getText().trim();
-        LocalDate fechaNacimiento = dfFechaNacimiento.getDate();
+        LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();
         
         if(!up.nombreUsuarioExiste(nombreUsuario)) {
             if(cbxEmpleado.isSelected()){
@@ -262,7 +262,7 @@ public class frmRegistrar extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JCheckBox cbxEmpleado;
     private javax.swing.JCheckBox cbxMedico;
-    private com.github.lgooddatepicker.components.DatePicker dfFechaNacimiento;
+    private com.github.lgooddatepicker.components.DatePicker dtpFechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

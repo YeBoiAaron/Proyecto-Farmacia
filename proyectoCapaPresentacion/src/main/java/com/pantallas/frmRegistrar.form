@@ -46,7 +46,7 @@
                           <Component id="txfNumeroTelefono" alignment="0" min="-2" pref="275" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="txfNombreCompleto" min="-2" pref="275" max="-2" attributes="0"/>
-                          <Component id="dfFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="dtpFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cbxMedico" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="dfFechaNacimiento" min="-2" max="-2" attributes="0"/>
+              <Component id="dtpFechaNacimiento" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="lblTipoEmpleado" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -166,7 +166,7 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRegistrarMouseClicked"/>
       </Events>
     </Component>
-    <Component class="com.github.lgooddatepicker.components.DatePicker" name="dfFechaNacimiento">
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="dtpFechaNacimiento">
     </Component>
     <Component class="javax.swing.JCheckBox" name="cbxMedico">
       <Properties>

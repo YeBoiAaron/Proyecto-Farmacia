@@ -72,7 +72,7 @@ public class RecetaControl {
     public PacienteDTO crearNuevoPaciente(JFrame parent, String nombrePaciente) {
         PacienteDTO paciente = new PacienteDTO();
         JTextField txfNombreCompleto = new JTextField(nombrePaciente);
-        com.github.lgooddatepicker.components.DatePicker dtfFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        com.github.lgooddatepicker.components.DatePicker dtpFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
         JTextField txfNumeroTelefono = new JTextField();
         JTextField txfCorreo = new JTextField();
         JTextField txfSexo = new JTextField();
@@ -80,7 +80,7 @@ public class RecetaControl {
         JTextField txfPeso = new JTextField();
         Object[] mensaje = {
             "Nombre Completo:", txfNombreCompleto,
-            "Fecha de Nacimiento", dtfFechaNacimiento,
+            "Fecha de Nacimiento", dtpFechaNacimiento,
             "Número de teléfono:", txfNumeroTelefono,
             "Correo electrónico:", txfCorreo,
             "Sexo:", txfSexo,
@@ -98,7 +98,7 @@ public class RecetaControl {
             try {
                 float altura = Float.parseFloat(txfAltura.getText().trim());
                 float peso = Float.parseFloat(txfPeso.getText().trim());
-                LocalDate fechaNacimiento = dtfFechaNacimiento.getDate();
+                LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();
                 if(fechaNacimiento.isAfter(LocalDate.now())) {
                     throw new IllegalArgumentException("Debe ingresar una fecha válida");
                 }

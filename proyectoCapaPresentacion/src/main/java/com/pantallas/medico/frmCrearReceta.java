@@ -52,10 +52,10 @@ public class frmCrearReceta extends javax.swing.JFrame {
     
     public void actualizarPaciente() {
         if(paciente != null) {
-            tfNombrePaciente.setText(paciente.getNombreCompleto());
-            tfSexo.setText(paciente.getSexo());
-            tfAltura.setText(Float.toString(paciente.getAltura()));
-            tfPeso.setText(Float.toString(paciente.getPeso()));
+            txfNombrePaciente.setText(paciente.getNombreCompleto());
+            txfSexo.setText(paciente.getSexo());
+            txfAltura.setText(Float.toString(paciente.getAltura()));
+            txfPeso.setText(Float.toString(paciente.getPeso()));
         }
     }
 
@@ -71,9 +71,9 @@ public class frmCrearReceta extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfNombrePaciente = new javax.swing.JTextField();
-        tfDiagnostico = new javax.swing.JTextField();
-        tfSexo = new javax.swing.JTextField();
+        txfNombrePaciente = new javax.swing.JTextField();
+        txfDiagnostico = new javax.swing.JTextField();
+        txfSexo = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -83,9 +83,9 @@ public class frmCrearReceta extends javax.swing.JFrame {
         tblMedicamentos.setColumnSelectionAllowed(false);
         btnAgregarMedicamentos = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        tfAltura = new javax.swing.JTextField();
+        txfAltura = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tfPeso = new javax.swing.JTextField();
+        txfPeso = new javax.swing.JTextField();
         btnBuscarPaciente = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnActualizar.setVisible(false);
@@ -237,21 +237,21 @@ public class frmCrearReceta extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfDiagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                                .addComponent(tfNombrePaciente)
+                                .addComponent(txfDiagnostico, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                                .addComponent(txfNombrePaciente)
                                 .addComponent(btnBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel2)
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel7))))))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -261,24 +261,24 @@ public class frmCrearReceta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarPaciente)
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(tfDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -298,7 +298,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
         try {
             String numeroReceta = recetaServicio.generarNumeroReceta();
             receta.setNumeroReceta(numeroReceta);
-            receta.setDiagnostico(tfDiagnostico.getText());
+            receta.setDiagnostico(txfDiagnostico.getText());
             receta.setEstado("sin surtir");
         
             recetaPersistencia.crearReceta(
@@ -341,7 +341,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarMedicamentosActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
-        String nombrePaciente = tfNombrePaciente.getText().trim();
+        String nombrePaciente = txfNombrePaciente.getText().trim();
         paciente = control.buscarPaciente(this, nombrePaciente);
         actualizarPaciente();
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
@@ -428,11 +428,11 @@ public class frmCrearReceta extends javax.swing.JFrame {
     private javax.swing.JMenuItem moConsultarReceta;
     private javax.swing.JMenuItem moCrearReceta;
     private javax.swing.JTable tblMedicamentos;
-    private javax.swing.JTextField tfAltura;
-    private javax.swing.JTextField tfDiagnostico;
-    private javax.swing.JTextField tfNombrePaciente;
-    private javax.swing.JTextField tfPeso;
-    private javax.swing.JTextField tfSexo;
+    private javax.swing.JTextField txfAltura;
+    private javax.swing.JTextField txfDiagnostico;
+    private javax.swing.JTextField txfNombrePaciente;
+    private javax.swing.JTextField txfPeso;
+    private javax.swing.JTextField txfSexo;
     // End of variables declaration//GEN-END:variables
     private RecetaPersistencia recetaPersistencia;
     private UsuarioPersistencia usrPersistencia;
