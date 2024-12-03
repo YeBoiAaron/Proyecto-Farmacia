@@ -4,6 +4,7 @@
  */
 package com.control;
 
+import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
 import com.persistencias.PacientePersistencia;
 import com.servicios.ConversionesTablas;
@@ -121,5 +122,44 @@ public class RecetaControl {
         }
         
         return null;
+    }
+    
+    public MedicamentosRecetaDTO actualizarMedicamentoReceta(JFrame parent, MedicamentosRecetaDTO medicamento) {
+        JTextField tfCantidad = new JTextField();
+        JTextField tfInstrucciones = new JTextField();
+        tfCantidad.setText(Integer.toString(medicamento.getCantidad()));
+        tfInstrucciones.setText(medicamento.getInstrucciones());
+        Object[] mensaje = {
+            "Cantidad:", tfCantidad,
+            "Instrucciones:", tfInstrucciones
+        };
+
+        int respuesta = JOptionPane.showConfirmDialog(
+            parent,
+            mensaje,
+            "Ingrese cantidad e instrucciones",
+            JOptionPane.OK_CANCEL_OPTION
+        );
+        
+        if(respuesta == JOptionPane.OK_OPTION) {
+            try {
+                int cantidad = Integer.parseInt(tfCantidad.getText().trim());
+                String instrucciones = tfInstrucciones.getText().trim();
+
+                if(cantidad <= 0 || instrucciones.isEmpty()) {
+                    throw new IllegalArgumentException("Debe ingresar una cantidad e instrucciones válidas");
+                }
+                
+                medicamento.setCantidad(cantidad);
+                medicamento.setInstrucciones(instrucciones);
+                
+                return medicamento;
+                
+            } catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(parent, "La cantidad debe ser un número entero válido", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch(IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(parent, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } return medicamento;
     }
 }

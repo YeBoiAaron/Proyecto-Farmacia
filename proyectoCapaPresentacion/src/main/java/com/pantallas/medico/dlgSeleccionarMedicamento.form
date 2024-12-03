@@ -116,9 +116,7 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="btnSeleccionar" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnConfirmar" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnCancelar" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
@@ -139,7 +137,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSeleccionar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="btnConfirmar" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
@@ -244,9 +241,6 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tblMedicamentos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {&#xd;&#xa;    @Override&#xd;&#xa;    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {&#xd;&#xa;        Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);&#xd;&#xa;&#xd;&#xa;        // Cambiar el color si la fila est&#xe1; procesada&#xd;&#xa;        if (filasProcesadas.contains(row)) {&#xd;&#xa;            comp.setBackground(Color.getHSBColor(0.3f, 1f, 0.3f));&#xd;&#xa;        } else {&#xd;&#xa;            comp.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());&#xd;&#xa;        }&#xd;&#xa;        return comp;&#xd;&#xa;    }&#xd;&#xa;});"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -326,29 +320,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnConfirmar">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="33" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
-              </Border>
-            </Property>
-            <Property name="borderPainted" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

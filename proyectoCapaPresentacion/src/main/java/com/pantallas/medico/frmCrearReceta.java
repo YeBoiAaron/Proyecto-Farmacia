@@ -40,13 +40,14 @@ public class frmCrearReceta extends javax.swing.JFrame {
         receta = new RecetaDTO();
     }
     
-    public void actualizarListaMedicamentos(List<MedicamentosRecetaDTO> listaMedicamentos) {
-        this.listaMedicamentos.addAll(listaMedicamentos);
+    public void agregarMedicamentoReceta(MedicamentosRecetaDTO medicamento) {
+        this.listaMedicamentos.add(medicamento);
         actualizarTablaMedicamentos(listaMedicamentos);
     }
     
     public void actualizarTablaMedicamentos(List<MedicamentosRecetaDTO> listaMedicamentos) {
         this.tblMedicamentos.setModel(convers.listaMedicamentosRecetaToTableModel(listaMedicamentos));
+        this.tblMedicamentos.getColumnModel().removeColumn(tblMedicamentos.getColumnModel().getColumn(3));
     }
     
     public void actualizarPaciente() {
@@ -294,21 +295,26 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String numeroReceta = recetaServicio.generarNumeroReceta();
-        receta.setNumeroReceta(numeroReceta);
-        receta.setDiagnostico(tfDiagnostico.getText());
-        receta.setEstado("sin surtir");
+        try {
+            String numeroReceta = recetaServicio.generarNumeroReceta();
+            receta.setNumeroReceta(numeroReceta);
+            receta.setDiagnostico(tfDiagnostico.getText());
+            receta.setEstado("sin surtir");
         
-        recetaPersistencia.crearReceta(
-                receta, 
-                listaMedicamentos, 
-                usrPersistencia.obtenerMedico(Sesion.getUsuarioLogueado()),
-                paciente
-        );
-        JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
-        frmInicioMedico inicio = new frmInicioMedico();
-        inicio.setVisible(true);
-        this.dispose();
+            recetaPersistencia.crearReceta(
+                    receta, 
+                    listaMedicamentos, 
+                    usrPersistencia.obtenerMedico(Sesion.getUsuarioLogueado()),
+                    paciente
+            );
+            JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            frmInicioMedico inicio = new frmInicioMedico();
+            inicio.setVisible(true);
+            this.dispose();
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -348,12 +354,16 @@ public class frmCrearReceta extends javax.swing.JFrame {
     }//GEN-LAST:event_tblMedicamentosMouseClicked
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        MedicamentosRecetaDTO medicamento = listaMedicamentos.get(tblMedicamentos.getSelectedRow());
+        MedicamentosRecetaDTO medicamentoActualizado = control.actualizarMedicamentoReceta(this, medicamento);
+        listaMedicamentos.set(tblMedicamentos.getSelectedRow(), medicamentoActualizado);
+        actualizarTablaMedicamentos(listaMedicamentos);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
             DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();
+            listaMedicamentos.remove(tblMedicamentos.getSelectedRow());
             modelo.removeRow(tblMedicamentos.getSelectedRow());
         } catch(IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Por favor selecciona un medicamento para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
