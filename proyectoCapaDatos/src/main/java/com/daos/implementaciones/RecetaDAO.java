@@ -24,7 +24,7 @@ public class RecetaDAO extends DAOBase<Receta> implements IRecetaDAO {
     public Receta obtenerPorNumeroReceta(String numeroReceta) {
         try {
             String jpql = "SELECT receta FROM Receta receta WHERE receta.numeroReceta = :numeroReceta";
-            return entityManager.createQuery(jpql, Receta.class).setParameter("nombreUsuario", numeroReceta).getSingleResult();
+            return entityManager.createQuery(jpql, Receta.class).setParameter("numeroReceta", numeroReceta).getSingleResult();
         } catch(NoResultException e) {
             return null;
         }
