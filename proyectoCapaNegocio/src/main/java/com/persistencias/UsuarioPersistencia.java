@@ -4,6 +4,7 @@
  */
 package com.persistencias;
 
+import com.servicios.JPAUtil;
 import org.mindrot.jbcrypt.BCrypt;
 import com.daos.implementaciones.EmpleadoDAO;
 import com.daos.implementaciones.MedicoDAO;

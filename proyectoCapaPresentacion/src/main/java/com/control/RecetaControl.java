@@ -6,7 +6,9 @@ package com.control;
 
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
+import com.dtos.RecetaDTO;
 import com.persistencias.PacientePersistencia;
+import com.persistencias.RecetaPersistencia;
 import com.servicios.ConversionesTablas;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -15,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,9 +26,11 @@ import javax.swing.JTextField;
 public class RecetaControl {
     private PacientePersistencia pctPersistencia;
     private ConversionesTablas convers;
+    private RecetaPersistencia recetaPersistencia;
     
     public RecetaControl() {
         pctPersistencia = new PacientePersistencia();
+        recetaPersistencia = new RecetaPersistencia();
         convers = new ConversionesTablas();
     }
     
@@ -161,5 +166,12 @@ public class RecetaControl {
                 JOptionPane.showMessageDialog(parent, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         } return medicamento;
+    }
+    
+    public DefaultTableModel consultarRecetas(String nombrePaciente, LocalDate fechaNacimiento) {
+        List<RecetaDTO> recetas = recetaPersistencia.buscarPorPaciente(nombrePaciente, fechaNacimiento);
+        DefaultTableModel modelo = convers.listaRecetasToTableModel(recetas);
+        
+        return modelo;
     }
 }

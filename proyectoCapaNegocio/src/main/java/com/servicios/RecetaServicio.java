@@ -4,8 +4,13 @@
  */
 package com.servicios;
 
+import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.RecetaDTO;
+import com.persistencias.MedicamentoPersistencia;
+import com.persistencias.MedicamentosRecetaPersistencia;
 import com.persistencias.RecetaPersistencia;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -15,9 +20,13 @@ import java.util.stream.Collectors;
  */
 public class RecetaServicio {
     private RecetaPersistencia recetaPersistencia;
+    private MedicamentoPersistencia medPersistencia;
+    private MedicamentosRecetaPersistencia medsRecetaPersistencia;
 
     public RecetaServicio() {
         recetaPersistencia = new RecetaPersistencia();
+        medPersistencia = new MedicamentoPersistencia();
+        medsRecetaPersistencia = new MedicamentosRecetaPersistencia();
     }
     
     public String generarNumeroReceta() {
@@ -37,6 +46,20 @@ public class RecetaServicio {
             return busquedaNumReceta.trim().equals(numeroReceta.trim());
         } 
         return false;
+    }
+    
+    public List<String> obtenerMedicamentosInstruccionesDeReceta(String numeroReceta) {
+        List<String> listaMedicamentosInstrucciones = new ArrayList<>();
+        List<MedicamentosRecetaDTO> medsRecetaDto = medsRecetaPersistencia.buscarPorNumeroReceta(numeroReceta);
+        if(medsRecetaDto != null) {
+            for (MedicamentosRecetaDTO medRecetaDto : medsRecetaDto) {
+                String medicamentoInstrucciones = medPersistencia.buscarMedicamento(medRecetaDto.getNumeroSerieMedicamento()).getNombre() + ": " + medRecetaDto.getInstrucciones();
+                listaMedicamentosInstrucciones.add(medicamentoInstrucciones);
+            }
+            return listaMedicamentosInstrucciones;
+        }
+        
+        return null;
     }
         
 }

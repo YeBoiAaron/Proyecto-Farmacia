@@ -4,6 +4,7 @@
  */
 package com.persistencias;
 
+import com.servicios.JPAUtil;
 import com.daos.implementaciones.MedicamentoDAO;
 import com.daos.interfaces.IMedicamentoDAO;
 import com.dtos.MedicamentoDTO;
@@ -29,6 +30,15 @@ public class MedicamentoPersistencia {
     public void agregarMedicamento(MedicamentoDTO medicamentoDTO){
         Medicamento medicamento = MedicamentoMapper.toEntity(medicamentoDTO);
         mdao.agregar(medicamento);
+    }
+    
+    public MedicamentoDTO buscarMedicamento(String numeroSerie) {
+        Medicamento medicamento = mdao.obtenerPorNumeroSerie(numeroSerie);
+        if(medicamento != null) {
+            return MedicamentoMapper.toDTO(medicamento);
+        }
+        
+        return null;
     }
     
     public List<MedicamentoDTO> listaMedicamentos() {

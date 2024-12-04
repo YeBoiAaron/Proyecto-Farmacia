@@ -4,6 +4,7 @@
  */
 package com.persistencias;
 
+import com.servicios.JPAUtil;
 import com.daos.implementaciones.MedicamentoDAO;
 import com.daos.implementaciones.MedicoDAO;
 import com.daos.implementaciones.PacienteDAO;
@@ -31,18 +32,18 @@ import javax.persistence.EntityManager;
  */
 public class RecetaPersistencia {
     
-    private EntityManager em;
+    private EntityManager entityManager;
     private IRecetaDAO recetaDao;
     private IMedicamentoDAO medicamentoDao;
     private IMedicoDAO medicoDao;
     private IPacienteDAO pacienteDao;
 
     public RecetaPersistencia() {
-        em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        recetaDao = new RecetaDAO(em);
-        medicamentoDao = new MedicamentoDAO(em);
-        medicoDao = new MedicoDAO(em);
-        pacienteDao = new PacienteDAO(em);
+        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        recetaDao = new RecetaDAO(entityManager);
+        medicamentoDao = new MedicamentoDAO(entityManager);
+        medicoDao = new MedicoDAO(entityManager);
+        pacienteDao = new PacienteDAO(entityManager);
     }
     
     public void crearReceta(RecetaDTO recetadto, List<MedicamentosRecetaDTO> medicamentosrecetadto, MedicoDTO medicodto, PacienteDTO pacientedto) {

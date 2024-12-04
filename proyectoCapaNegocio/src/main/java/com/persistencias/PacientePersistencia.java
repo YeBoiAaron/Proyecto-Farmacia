@@ -4,6 +4,7 @@
  */
 package com.persistencias;
 
+import com.servicios.JPAUtil;
 import com.daos.implementaciones.PacienteDAO;
 import com.daos.interfaces.IPacienteDAO;
 import com.dtos.PacienteDTO;

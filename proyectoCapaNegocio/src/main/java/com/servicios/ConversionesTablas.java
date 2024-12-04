@@ -8,7 +8,7 @@ import com.daos.implementaciones.MedicamentoDAO;
 import com.dtos.MedicamentoDTO;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
-import com.persistencias.JPAUtil;
+import com.dtos.RecetaDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +22,9 @@ public class ConversionesTablas {
     private String nombresColumnasTablaMedicamentosReceta[] = {"Medicamentos", "Indicaciones", "Cantidad", "Numero Serie"};
     private String nombresColumnasTablaMedicamentos[] = {"Nombre", "Activo", "Presentacion", "Concentración", "Numero Serie"};
     private String nombresColumnasTablaPacientes[] = {"Nombre", "Fecha de Nacimiento", "Correo Electronico"};
+    private String nombresColumnasTablaRecetas[] = {"Numero de Receta", "Instrucciones"};
+    
+    private RecetaServicio recetaServicio = new RecetaServicio();
     
     public ArrayList<MedicamentosRecetaDTO> tablaMedicamentosRecetaToArray(TableModel tabla, String numeroReceta) {
         ArrayList<MedicamentosRecetaDTO> listaMedicamentos = new ArrayList<>();
@@ -75,6 +78,20 @@ public class ConversionesTablas {
                 paciente.getNombreCompleto(),
                 paciente.getFechaNacimiento().toString(),
                 paciente.getCorreo()
+            };
+            modelo.addRow(datosFila);
+        }
+        
+        return modelo;
+    }
+    
+    public DefaultTableModel listaRecetasToTableModel(List<RecetaDTO> listaRecetas) {
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaRecetas, 0);
+        for (RecetaDTO receta : listaRecetas) {
+            String numeroReceta = receta.getNumeroReceta();
+            List<String> recetas = recetaServicio.obtenerMedicamentosInstruccionesDeReceta(numeroReceta);
+            Object[] datosFila = {
+                numeroReceta, String.join("\n", recetas)
             };
             modelo.addRow(datosFila);
         }

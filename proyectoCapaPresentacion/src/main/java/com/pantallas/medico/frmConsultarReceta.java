@@ -4,7 +4,12 @@
  */
 package com.pantallas.medico;
 
+import com.control.RecetaControl;
+import com.servicios.ConversionesTablas;
+import com.servicios.MultiLineCellRenderer;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +21,15 @@ public class frmConsultarReceta extends javax.swing.JFrame {
      * Creates new form frmConsultarReceta
      */
     public frmConsultarReceta() {
+        control = new RecetaControl();
         initComponents();
         setLocationRelativeTo(null);
+        tblBusqueda.getColumnModel().getColumn(1).setCellRenderer(new MultiLineCellRenderer());
+    }
+    
+    public void actualizarTablaMedicamentos(DefaultTableModel modelo) {
+        tblBusqueda.setModel(modelo);
+        tblBusqueda.getColumnModel().getColumn(1).setCellRenderer(new MultiLineCellRenderer());
     }
 
     /**
@@ -34,7 +46,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBusqueda = new javax.swing.JTable();
-        tfNombrePaciente = new javax.swing.JTextField();
+        txfNombrePaciente = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -70,26 +82,14 @@ public class frmConsultarReceta extends javax.swing.JFrame {
 
         tblBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Numero de Receta", "Medicamentos", "Instrucciones"
+                "Numero Receta", "Instrucciones"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -99,9 +99,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblBusqueda);
         if (tblBusqueda.getColumnModel().getColumnCount() > 0) {
             tblBusqueda.getColumnModel().getColumn(0).setResizable(false);
-            tblBusqueda.getColumnModel().getColumn(0).setPreferredWidth(30);
             tblBusqueda.getColumnModel().getColumn(1).setResizable(false);
-            tblBusqueda.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnEditar.setText("Editar");
@@ -189,7 +187,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dtpFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar)
@@ -208,7 +206,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +230,10 @@ public class frmConsultarReceta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();
+        String nombrePaciente = txfNombrePaciente.getText().trim();
+        DefaultTableModel modelo = control.consultarRecetas(nombrePaciente, fechaNacimiento);
+        actualizarTablaMedicamentos(modelo);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -315,6 +316,8 @@ public class frmConsultarReceta extends javax.swing.JFrame {
     private javax.swing.JMenuItem miConsultarReceta;
     private javax.swing.JMenuItem miCrearReceta;
     private javax.swing.JTable tblBusqueda;
-    private javax.swing.JTextField tfNombrePaciente;
+    private javax.swing.JTextField txfNombrePaciente;
     // End of variables declaration//GEN-END:variables
+    RecetaControl control;
+    ConversionesTablas convers;
 }

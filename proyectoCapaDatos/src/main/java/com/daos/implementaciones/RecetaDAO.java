@@ -7,6 +7,7 @@ package com.daos.implementaciones;
 import com.daos.DAOBase;
 import com.daos.interfaces.IRecetaDAO;
 import com.entidades.Receta;
+import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -36,14 +37,16 @@ public class RecetaDAO extends DAOBase<Receta> implements IRecetaDAO {
     @Override
     public List<Receta> obtenerPorPaciente(String nombrePaciente, LocalDate fechaNacimiento) {
         try {
-            String jpql = "SELECT receta FROM Receta receta " +
-                    "WHERE receta.paciente.nombreCompleto = :nombreCompleto " +
-                    "AND receta.paciente.fechaNacimiento = :fechaNacimiento";
-            return entityManager.createQuery(jpql, Receta.class).
-                    setParameter("nombreCompleto", nombrePaciente).
-                    setParameter("fechaNacimiento", fechaNacimiento).
-                    getResultList();
+            String jpql = "SELECT receta FROM Receta receta "
+                    + "WHERE LOWER(receta.paciente.nombreCompleto) LIKE LOWER(CONCAT('%', :nombreCompleto, '%')) "
+                    + "AND receta.paciente.fechaNacimiento = :fechaNacimiento";
+
+            return entityManager.createQuery(jpql, Receta.class)
+                    .setParameter("nombreCompleto", nombrePaciente)
+                    .setParameter("fechaNacimiento", fechaNacimiento)
+                    .getResultList();
         } catch(NoResultException e) {
+            System.out.println("nah");
             return null;
         }
     }

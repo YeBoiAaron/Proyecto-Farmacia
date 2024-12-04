@@ -8,7 +8,7 @@ import com.daos.implementaciones.MedicamentoDAO;
 import com.daos.implementaciones.RecetaDAO;
 import com.dtos.MedicamentosRecetaDTO;
 import com.entidades.MedicamentosReceta;
-import com.persistencias.JPAUtil;
+import com.servicios.JPAUtil;
 
 /**
  *
@@ -17,11 +17,11 @@ import com.persistencias.JPAUtil;
 public class MedicamentosRecetaMapper {
     
     public static MedicamentosRecetaDTO toDto(MedicamentosReceta medicamentosReceta) {
-        MedicamentosRecetaDTO medicamentosRecetaDto = new MedicamentosRecetaDTO(
-                medicamentosReceta.getCantidad(),
-                medicamentosReceta.getInstrucciones(),
-                medicamentosReceta.getMedicamento().getNumeroSerie(),
-                medicamentosReceta.getReceta().getNumeroReceta());
+        MedicamentosRecetaDTO medicamentosRecetaDto = new MedicamentosRecetaDTO();
+        medicamentosRecetaDto.setCantidad(medicamentosReceta.getCantidad());
+        medicamentosRecetaDto.setInstrucciones(medicamentosReceta.getInstrucciones());
+        medicamentosRecetaDto.setNumeroReceta(medicamentosReceta.getReceta().getNumeroReceta());
+        medicamentosRecetaDto.setNumeroSerieMedicamento(medicamentosReceta.getMedicamento().getNumeroSerie());
         return medicamentosRecetaDto;
     }
     

@@ -6,11 +6,12 @@ package com.daos.interfaces;
 
 import com.daos.IDAO;
 import com.entidades.MedicamentosReceta;
+import java.util.List;
 
 /**
  *
  * @author Aaron
  */
 public interface IMedicamentosRecetaDAO extends IDAO<MedicamentosReceta> {
-    
+    public List<MedicamentosReceta> obtenerPorNumeroDeReceta(String numeroReceta);
 }
