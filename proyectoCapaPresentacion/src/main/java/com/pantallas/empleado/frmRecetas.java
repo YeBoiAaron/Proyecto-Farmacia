@@ -9,6 +9,7 @@ import com.control.Sesion;
 import com.servicios.ConversionesTablas;
 import com.servicios.MultiLineCellRenderer;
 import java.time.LocalDate;
+import javax.swing.Box;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -142,6 +143,7 @@ public class frmRecetas extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         menLabelSucursal.setToolTipText("");
+        jMenuBar1.add(Box.createHorizontalGlue());
         jMenuBar1.add(menLabelSucursal);
 
         setJMenuBar(jMenuBar1);

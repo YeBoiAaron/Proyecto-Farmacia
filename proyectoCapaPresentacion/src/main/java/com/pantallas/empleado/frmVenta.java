@@ -9,6 +9,7 @@ import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.RecetaDTO;
 import com.persistencias.MedicamentosRecetaPersistencia;
 import java.util.List;
+import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,8 +63,8 @@ public class frmVenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Numero de Receta:");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         btnBuscarReceta.setText("Buscar");
         btnBuscarReceta.addActionListener(new java.awt.event.ActionListener() {
@@ -72,8 +73,8 @@ public class frmVenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Subtotal:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jButton5.setText("Confirmar");
 
@@ -145,6 +146,7 @@ public class frmVenta extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         menLabelSucursal.setToolTipText("");
+        jMenuBar1.add(Box.createHorizontalGlue());
         jMenuBar1.add(menLabelSucursal);
 
         setJMenuBar(jMenuBar1);

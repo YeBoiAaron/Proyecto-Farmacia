@@ -6,6 +6,7 @@ package com.pantallas.empleado;
 
 import com.control.Sesion;
 import com.dtos.SucursalDTO;
+import javax.swing.Box;
 
 /**
  *
@@ -166,6 +167,7 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         menLabelSucursal.setToolTipText("");
+        jMenuBar1.add(Box.createHorizontalGlue());
         jMenuBar1.add(menLabelSucursal);
 
         setJMenuBar(jMenuBar1);

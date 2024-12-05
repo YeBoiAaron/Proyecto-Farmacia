@@ -56,6 +56,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePre" type="java.lang.String" value="jMenuBar1.add(Box.createHorizontalGlue());"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="menLabelSucursal.setEnabled(false);&#xa;menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());"/>
           </AuxValues>
         </Menu>
