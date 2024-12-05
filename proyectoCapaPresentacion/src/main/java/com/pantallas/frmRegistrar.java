@@ -207,7 +207,12 @@ public class frmRegistrar extends javax.swing.JFrame {
                     empleadoDto.setContrasena(txfContrasena.getText().trim());
                     empleadoDto.setTipoUsuario("empleado");
                     
-                    SucursalDTO sucursalDto = sesionControl.seleccionarSucursal();
+                    SucursalDTO sucursalDto = sesionControl.seleccionarSucursal(empleadoDto);
+                    
+                    if(tipoEmpleado.equals("Cajero") && sucursalDto == null) {
+                        JOptionPane.showMessageDialog(null, "No hay sucursales disponibles", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        throw new NullPointerException();
+                    }
                     
                     if(tipoEmpleado.equals("Gerente") && sesionControl.validarGerenteExiste(sucursalDto.getNombreSucursal())) {
                         throw new IllegalArgumentException("Esta sucursal ya tiene un gerente asignado");

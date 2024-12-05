@@ -4,6 +4,7 @@
  */
 package com.control;
 
+import com.dtos.EmpleadoDTO;
 import com.dtos.SucursalDTO;
 import com.dtos.UsuarioDTO;
 import com.pantallas.empleado.frmInicioEmpleadoFarmacia;
@@ -62,11 +63,11 @@ public class SesionControl extends Control{
         return scrslPersistencia.obtenerGerenteSucursal(nombreSucursal) != null;
     }
     
-    public SucursalDTO seleccionarSucursal() {
+    public SucursalDTO seleccionarSucursal(EmpleadoDTO empleadoDto) {
         List<SucursalDTO> sucursalesDto = scrslPersistencia.listaSucursales();
-        if(sucursalesDto == null) {
+        if(sucursalesDto == null && empleadoDto.getTipoEmpleado().equals("Gerente")) {
             return crearSucursal();
-        } else {
+        } else if (sucursalesDto != null){
             JTable tblSucursales = new JTable(convers.listaSucursalesToTableModel(sucursalesDto));
             tblSucursales.setRowSelectionAllowed(true);
             
@@ -94,9 +95,9 @@ public class SesionControl extends Control{
             } else if(respuesta == JOptionPane.NO_OPTION) {
                 return crearSucursal();
             }
-            
-            return null;
         }
+        
+        return null;
     }
     
     public SucursalDTO crearSucursal() {
