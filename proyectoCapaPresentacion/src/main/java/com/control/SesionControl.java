@@ -57,8 +57,8 @@ public class SesionControl extends Control{
         }
     }
     
-    public void crearNuevaSucursal(EmpleadoDTO empleado) {
-        
+    public boolean validarGerenteExiste(String nombreSucursal) {
+        return scrslPersistencia.obtenerGerenteSucursal(nombreSucursal) != null;
     }
     
     public SucursalDTO seleccionarSucursal() {

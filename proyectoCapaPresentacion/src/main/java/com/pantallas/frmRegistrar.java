@@ -208,12 +208,11 @@ public class frmRegistrar extends javax.swing.JFrame {
                     empleadoDto.setTipoUsuario("empleado");
                     
                     SucursalDTO sucursalDto = sesionControl.seleccionarSucursal();
-                    usrPersistencia.agregarEmpleado(empleadoDto, sucursalDto);
                     
-                    if(tipoEmpleado.equals("Gerente")) {
-                        JOptionPane.showMessageDialog(null, "Asigna una sucursal", "Atención", JOptionPane.INFORMATION_MESSAGE);
-                    
+                    if(tipoEmpleado.equals("Gerente") && sesionControl.validarGerenteExiste(sucursalDto.getNombreSucursal())) {
+                        throw new IllegalArgumentException("Esta sucursal ya tiene un gerente asignado");
                     }
+                    usrPersistencia.agregarEmpleado(empleadoDto, sucursalDto);
                     JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                 } else if(chbMedico.isSelected()) {
@@ -238,6 +237,8 @@ public class frmRegistrar extends javax.swing.JFrame {
             }
         } catch(IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+        } catch(NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Se canceló la operación", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
