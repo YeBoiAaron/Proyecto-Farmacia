@@ -4,6 +4,13 @@
  */
 package com.pantallas.empleado;
 
+import com.dtos.RecetaDTO;
+import com.persistencias.VentaPersistencia;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author martinez
@@ -15,7 +22,9 @@ public class frmVenta extends javax.swing.JFrame {
      */
     public frmVenta() {
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); 
+        receta= new RecetaDTO(); 
+     
     }
 
     /**
@@ -28,9 +37,9 @@ public class frmVenta extends javax.swing.JFrame {
     private void initComponents() {
 
         label1 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
+        txfBuscarReceta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        BotonBuscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -49,10 +58,21 @@ public class frmVenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txfBuscarReceta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfBuscarRecetaActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Numero de Receta:");
 
-        jButton4.setText("Buscar");
+        BotonBuscar.setText("Buscar");
+        BotonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Subtotal:");
@@ -147,9 +167,9 @@ public class frmVenta extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfBuscarReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton4))
+                            .addComponent(BotonBuscar))
                         .addComponent(TablaIndicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -159,8 +179,8 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(txfBuscarReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(TablaIndicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -198,6 +218,58 @@ public class frmVenta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
+                                                 
+    try {
+        // Configura el EntityManager
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Farmacia_PU");
+        EntityManager entityManager = emf.createEntityManager();
+
+        // Crear instancia de VentaPersistencia con el EntityManager
+        VentaPersistencia r = new VentaPersistencia(entityManager);
+
+        // Obtener el texto de búsqueda del campo
+        String buscarReceta = txfBuscarReceta.getText().trim();
+
+        // Buscar la receta
+        RecetaDTO receta = r.buscarReceta(buscarReceta);
+
+        // Mostrar los detalles de la receta o un mensaje si no se encontró
+        if (receta != null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                receta.toString(), // Asegúrate de que RecetaDTO tenga un método toString legible
+                "Detalles de la Receta",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "No se encontró ninguna receta con el número: " + buscarReceta,
+                "Búsqueda fallida",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
+
+        // Cerrar el EntityManager
+        entityManager.close();
+        emf.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(
+            this,
+            "Ocurrió un error al buscar la receta. Inténtalo de nuevo.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+       
+    }//GEN-LAST:event_BotonBuscarActionPerformed
+
+    private void txfBuscarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBuscarRecetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfBuscarRecetaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -234,9 +306,9 @@ public class frmVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonBuscar;
     private javax.swing.JScrollPane TablaIndicaciones;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
@@ -245,11 +317,12 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTable jTablaIndicaciones;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private java.awt.Label label1;
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;
+    private javax.swing.JTextField txfBuscarReceta;
     // End of variables declaration//GEN-END:variables
+  private RecetaDTO receta;
 }
