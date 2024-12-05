@@ -4,12 +4,17 @@
  */
 package com.pantallas.empleado;
 
+import com.control.VentaControl;
+import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.RecetaDTO;
+import com.persistencias.MedicamentosRecetaPersistencia;
 import com.persistencias.VentaPersistencia;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,9 +27,9 @@ public class frmVenta extends javax.swing.JFrame {
      */
     public frmVenta() {
         initComponents();
-        setLocationRelativeTo(null); 
-        receta= new RecetaDTO(); 
-     
+        setLocationRelativeTo(null);
+        receta = new RecetaDTO();
+
     }
 
     /**
@@ -213,57 +218,41 @@ public class frmVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_miConsultarInventarioActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        frmInicioEmpleadoFarmacia frmAM= new frmInicioEmpleadoFarmacia();
+        frmInicioEmpleadoFarmacia frmAM = new frmInicioEmpleadoFarmacia();
         frmAM.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
-                                                 
-    try {
-        // Configura el EntityManager
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Farmacia_PU");
-        EntityManager entityManager = emf.createEntityManager();
 
-        // Crear instancia de VentaPersistencia con el EntityManager
-        VentaPersistencia r = new VentaPersistencia(entityManager);
+        String numeroReceta = txfBuscarReceta.getText().trim();
 
-        // Obtener el texto de búsqueda del campo
-        String buscarReceta = txfBuscarReceta.getText().trim();
-
-        // Buscar la receta
-        RecetaDTO receta = r.buscarReceta(buscarReceta);
-
-        // Mostrar los detalles de la receta o un mensaje si no se encontró
-        if (receta != null) {
-            JOptionPane.showMessageDialog(
-                this, 
-                receta.toString(), // Asegúrate de que RecetaDTO tenga un método toString legible
-                "Detalles de la Receta",
-                JOptionPane.INFORMATION_MESSAGE
-            );
-        } else {
-            JOptionPane.showMessageDialog(
-                this,
-                "No se encontró ninguna receta con el número: " + buscarReceta,
-                "Búsqueda fallida",
-                JOptionPane.WARNING_MESSAGE
-            );
+        if (numeroReceta.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un número de receta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
         }
 
-        // Cerrar el EntityManager
-        entityManager.close();
-        emf.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(
-            this,
-            "Ocurrió un error al buscar la receta. Inténtalo de nuevo.",
-            "Error",
-            JOptionPane.ERROR_MESSAGE
-        );
-    }
-       
+        MedicamentosRecetaPersistencia persistencia = new MedicamentosRecetaPersistencia();
+        List<MedicamentosRecetaDTO> medicamentosRecetaDTOs = persistencia.buscarPorNumeroReceta(numeroReceta);
+
+        if (medicamentosRecetaDTOs != null && !medicamentosRecetaDTOs.isEmpty()) {
+
+            DefaultTableModel model = (DefaultTableModel) jTablaIndicaciones.getModel();
+            model.setRowCount(0);
+
+            for (MedicamentosRecetaDTO medicamentoReceta : medicamentosRecetaDTOs) {
+                Object[] rowData = new Object[4];
+                rowData[0] = medicamentoReceta.getNumeroSerieMedicamento();
+                rowData[1] = medicamentoReceta.getInstrucciones();
+                rowData[3] = medicamentoReceta.getNumeroReceta();
+
+                model.addRow(rowData);
+            }
+        } else {
+            
+            JOptionPane.showMessageDialog(this, "No se encontró la receta con el número proporcionado.", "No encontrado", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_BotonBuscarActionPerformed
 
     private void txfBuscarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBuscarRecetaActionPerformed
