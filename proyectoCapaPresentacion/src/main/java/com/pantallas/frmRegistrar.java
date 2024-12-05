@@ -6,6 +6,7 @@ package com.pantallas;
 import com.control.SesionControl;
 import com.dtos.EmpleadoDTO;
 import com.dtos.MedicoDTO;
+import com.dtos.SucursalDTO;
 import com.persistencias.UsuarioPersistencia;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -205,8 +206,9 @@ public class frmRegistrar extends javax.swing.JFrame {
                     empleadoDto.setCorreo(txfCorreo.getText().trim());
                     empleadoDto.setContrasena(txfContrasena.getText().trim());
                     empleadoDto.setTipoUsuario("empleado");
-            
-                    usrPersistencia.agregarEmpleado(empleadoDto);
+                    
+                    SucursalDTO sucursalDto = sesionControl.seleccionarSucursal();
+                    usrPersistencia.agregarEmpleado(empleadoDto, sucursalDto);
                     
                     if(tipoEmpleado.equals("Gerente")) {
                         JOptionPane.showMessageDialog(null, "Asigna una sucursal", "Atención", JOptionPane.INFORMATION_MESSAGE);

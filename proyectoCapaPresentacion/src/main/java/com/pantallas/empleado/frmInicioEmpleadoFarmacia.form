@@ -49,20 +49,13 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
+        <Menu class="javax.swing.JMenu" name="menLabelSucursal">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sucursal"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="miSucursales">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Consultar Sucursales"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSucursalesActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="menLabelSucursal.setEnabled(false);&#xa;menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());"/>
+          </AuxValues>
         </Menu>
       </SubComponents>
     </Menu>

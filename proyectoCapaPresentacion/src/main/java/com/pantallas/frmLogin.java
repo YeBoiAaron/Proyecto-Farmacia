@@ -128,8 +128,7 @@ public class frmLogin extends javax.swing.JFrame {
         String nombreUsuario = tfNombreUsuario.getText();
         String stringContra = new String(pfContrasena.getPassword());
         
-        sesControl.iniciarSesion(nombreUsuario, stringContra);
-        this.dispose();
+        sesControl.iniciarSesion(this, nombreUsuario, stringContra);
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void lblRegistrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarUsuarioMouseClicked

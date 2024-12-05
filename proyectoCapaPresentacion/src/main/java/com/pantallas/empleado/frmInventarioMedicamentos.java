@@ -49,8 +49,9 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         miConsultarRecetas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miConsultarInventario = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        miSucursales = new javax.swing.JMenuItem();
+        menLabelSucursal = new javax.swing.JMenu();
+        menLabelSucursal.setEnabled(false);
+        menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,17 +165,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Sucursal");
-
-        miSucursales.setText("Consultar Sucursales");
-        miSucursales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSucursalesActionPerformed(evt);
-            }
-        });
-        jMenu4.add(miSucursales);
-
-        jMenuBar1.add(jMenu4);
+        menLabelSucursal.setToolTipText("");
+        jMenuBar1.add(menLabelSucursal);
 
         setJMenuBar(jMenuBar1);
 
@@ -279,12 +271,6 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cobListaSucursalesActionPerformed
 
-    private void miSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSucursalesActionPerformed
-        frmSucursales sucursales = new frmSucursales();
-        sucursales.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_miSucursalesActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -332,15 +318,14 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenu menLabelSucursal;
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;
-    private javax.swing.JMenuItem miSucursales;
     // End of variables declaration//GEN-END:variables
     private SucursalDTO sucursal;
     

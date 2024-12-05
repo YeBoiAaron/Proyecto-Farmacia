@@ -6,6 +6,7 @@ package com.daos.interfaces;
 
 import com.daos.IDAO;
 import com.entidades.Empleado;
+import com.entidades.Sucursal;
 
 /**
  *
@@ -13,4 +14,6 @@ import com.entidades.Empleado;
  */
 public interface IEmpleadoDAO extends IDAO<Empleado> {
     public Empleado obtenerPorNombreUsuario(String nombreUsuario);
+    
+    public Sucursal obtenerSucursalPorEmpleado(String nombreUsuario);
 }

@@ -4,6 +4,7 @@
  */
 package com.pantallas.empleado;
 
+import com.control.Sesion;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.RecetaDTO;
 import com.persistencias.MedicamentosRecetaPersistencia;
@@ -39,7 +40,7 @@ public class frmVenta extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         txfBuscarReceta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        BotonBuscar = new javax.swing.JButton();
+        btnBuscarReceta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -53,24 +54,21 @@ public class frmVenta extends javax.swing.JFrame {
         miConsultarRecetas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miConsultarInventario = new javax.swing.JMenuItem();
+        menLabelSucursal = new javax.swing.JMenu();
+        menLabelSucursal.setEnabled(false);
+        menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());
 
         label1.setText("label1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txfBuscarReceta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfBuscarRecetaActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Numero de Receta:");
 
-        BotonBuscar.setText("Buscar");
-        BotonBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarReceta.setText("Buscar");
+        btnBuscarReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonBuscarActionPerformed(evt);
+                btnBuscarRecetaActionPerformed(evt);
             }
         });
 
@@ -146,6 +144,9 @@ public class frmVenta extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        menLabelSucursal.setToolTipText("");
+        jMenuBar1.add(menLabelSucursal);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,7 +170,7 @@ public class frmVenta extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txfBuscarReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(BotonBuscar))
+                            .addComponent(btnBuscarReceta))
                         .addComponent(TablaIndicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -180,7 +181,7 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txfBuscarReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonBuscar))
+                    .addComponent(btnBuscarReceta))
                 .addGap(18, 18, 18)
                 .addComponent(TablaIndicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -218,7 +219,7 @@ public class frmVenta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
+    private void btnBuscarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
 
         String numeroReceta = txfBuscarReceta.getText().trim();
 
@@ -290,8 +291,8 @@ public class frmVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonBuscar;
     private javax.swing.JScrollPane TablaIndicaciones;
+    private javax.swing.JButton btnBuscarReceta;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -303,6 +304,7 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JTable jTablaIndicaciones;
     private javax.swing.JTextField jTextField4;
     private java.awt.Label label1;
+    private javax.swing.JMenu menLabelSucursal;
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;

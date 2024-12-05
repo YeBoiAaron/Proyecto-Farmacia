@@ -8,18 +8,23 @@ import com.servicios.JPAUtil;
 import org.mindrot.jbcrypt.BCrypt;
 import com.daos.implementaciones.EmpleadoDAO;
 import com.daos.implementaciones.MedicoDAO;
+import com.daos.implementaciones.SucursalDAO;
 import com.daos.implementaciones.UsuarioDAO;
 import com.daos.interfaces.IEmpleadoDAO;
 import com.daos.interfaces.IMedicoDAO;
+import com.daos.interfaces.ISucursalDAO;
 import com.daos.interfaces.IUsuarioDAO;
 import com.dtos.EmpleadoDTO;
 import com.dtos.MedicoDTO;
+import com.dtos.SucursalDTO;
 import com.dtos.UsuarioDTO;
 import com.entidades.Empleado;
 import com.entidades.Medico;
+import com.entidades.Sucursal;
 import com.entidades.Usuario;
 import com.mappers.EmpleadoMapper;
 import com.mappers.MedicoMapper;
+import com.mappers.SucursalMapper;
 import com.mappers.UsuarioMapper;
 import javax.persistence.EntityManager;
 
@@ -32,21 +37,26 @@ public class UsuarioPersistencia {
     private IUsuarioDAO usuarioDao;
     private IMedicoDAO medicoDao;
     private IEmpleadoDAO empleadoDao;
+    private ISucursalDAO sucursalDao;
 
     public UsuarioPersistencia() {
         entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         usuarioDao = new UsuarioDAO(entityManager);
         medicoDao = new MedicoDAO(entityManager);
         empleadoDao = new EmpleadoDAO(entityManager);
+        sucursalDao = new SucursalDAO(entityManager);
     }
     
-    public void agregarEmpleado(EmpleadoDTO edto){
-        Empleado empleado = EmpleadoMapper.toEntity(edto);
-        String password = edto.getContrasena();
+    public void agregarEmpleado(EmpleadoDTO empleadoDto, SucursalDTO sucursalDto){
+        Empleado empleado = EmpleadoMapper.toEntity(empleadoDto);
+        String password = empleadoDto.getContrasena();
         String hashedPass = encriptar(password);
         empleado.setContrasena(hashedPass);
-        empleado.setNombreUsuario(edto.getNombreUsuario());
-        empleado.setCorreo(edto.getCorreo());
+        empleado.setNombreUsuario(empleadoDto.getNombreUsuario());
+        empleado.setCorreo(empleadoDto.getCorreo());
+        
+        Sucursal sucursal = sucursalDao.obtenerPorNombreSucursal(sucursalDto.getNombreSucursal());
+        empleado.setSucursal(sucursal);
         empleadoDao.agregar(empleado);
     }
     
@@ -96,6 +106,15 @@ public class UsuarioPersistencia {
         if(usuario.getTipoUsuario().equals("empleado")) {
             Empleado empleado = empleadoDao.obtenerPorNombreUsuario(usuario.getNombreUsuario());
             return EmpleadoMapper.toDTO(empleado);
+        }
+        
+        return null;
+    }
+    
+    public SucursalDTO obtenerSucursalDeEmpleado(UsuarioDTO usuario) {
+        if(usuario.getTipoUsuario().equals("empleado")) {
+            Sucursal sucursal = empleadoDao.obtenerSucursalPorEmpleado(usuario.getNombreUsuario());
+            return SucursalMapper.toDTO(sucursal);
         }
         
         return null;
