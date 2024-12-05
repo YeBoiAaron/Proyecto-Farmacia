@@ -13,14 +13,14 @@ import java.util.Objects;
 public class SucursalDTO {
     private String nombreSucursal;
     private String calle;
-    private String numero;
+    private int numero;
     private String colonia;
     private int codigoPostal;
 
     public SucursalDTO() {
     }
 
-    public SucursalDTO(String nombreSucursal, String calle, String numero, String colonia, int codigoPostal) {
+    public SucursalDTO(String nombreSucursal, String calle, int numero, String colonia, int codigoPostal) {
         this.nombreSucursal = nombreSucursal;
         this.calle = calle;
         this.numero = numero;
@@ -44,11 +44,11 @@ public class SucursalDTO {
         this.calle = calle;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 

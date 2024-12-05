@@ -4,12 +4,8 @@
  */
 package com.pantallas;
 
-import com.Sesion;
-import com.dtos.UsuarioDTO;
-import com.pantallas.medico.frmInicioMedico;
-import com.pantallas.empleado.frmInicioEmpleadoFarmacia;
+import com.control.SesionControl;
 import com.persistencias.UsuarioPersistencia;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +19,7 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
         setLocationRelativeTo(null);
+        this.sesControl = new SesionControl();
         this.usrPersistencia = new UsuarioPersistencia();
     }
 
@@ -131,25 +128,8 @@ public class frmLogin extends javax.swing.JFrame {
         String nombreUsuario = tfNombreUsuario.getText();
         String stringContra = new String(pfContrasena.getPassword());
         
-        if(nombreUsuario.isEmpty() || stringContra.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingresa usuario y contraseña", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                UsuarioDTO usuario = usrPersistencia.verificarCredenciales(nombreUsuario, stringContra);
-                Sesion.setUsuarioLogueado(usuario);
-                if(usuario.getTipoUsuario().equals("medico")) {
-                    frmInicioMedico medico = new frmInicioMedico();
-                    medico.setVisible(true);
-                    this.dispose();
-                } else if(usuario.getTipoUsuario().equals("empleado")) {
-                    frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
-                    empleado.setVisible(true);
-                    this.dispose();
-                }
-            } catch(NullPointerException e) {
-                JOptionPane.showMessageDialog(null, "Credenciales inválidas", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        sesControl.iniciarSesion(nombreUsuario, stringContra);
+        this.dispose();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void lblRegistrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarUsuarioMouseClicked
@@ -204,4 +184,5 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JTextField tfNombreUsuario;
     // End of variables declaration//GEN-END:variables
     private UsuarioPersistencia usrPersistencia;
+    private SesionControl sesControl;
 }

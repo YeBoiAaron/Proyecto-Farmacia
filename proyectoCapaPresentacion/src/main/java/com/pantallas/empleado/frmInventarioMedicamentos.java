@@ -4,6 +4,9 @@
  */
 package com.pantallas.empleado;
 
+import com.control.Sesion;
+import com.dtos.SucursalDTO;
+
 /**
  *
  * @author pausa
@@ -16,6 +19,7 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     public frmInventarioMedicamentos() {
         initComponents();
         setLocationRelativeTo(null);
+        sucursal = Sesion.getSucursalEmpleado();
     }
 
     /**
@@ -36,6 +40,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cobListaSucursales = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miRealizarVenta = new javax.swing.JMenuItem();
@@ -43,6 +49,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         miConsultarRecetas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miConsultarInventario = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        miSucursales = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,22 +66,10 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Medicamento", "Activo", "Precio", "Disponible"
+                "Activo", "Presentacion", "Precio", "Disponible"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -122,6 +118,14 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Sucursal");
+
+        cobListaSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cobListaSucursalesActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
 
         jMenu1.setText("Venta");
@@ -160,6 +164,18 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Sucursal");
+
+        miSucursales.setText("Consultar Sucursales");
+        miSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSucursalesActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miSucursales);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,9 +198,13 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1)
+                                    .addComponent(cobListaSucursales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(58, Short.MAX_VALUE))
@@ -197,15 +217,19 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cobListaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -251,6 +275,16 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private void miConsultarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultarInventarioActionPerformed
     }//GEN-LAST:event_miConsultarInventarioActionPerformed
 
+    private void cobListaSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobListaSucursalesActionPerformed
+        
+    }//GEN-LAST:event_cobListaSucursalesActionPerformed
+
+    private void miSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSucursalesActionPerformed
+        frmSucursales sucursales = new frmSucursales();
+        sucursales.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_miSucursalesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -287,15 +321,18 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cobListaSucursales;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -303,5 +340,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;
+    private javax.swing.JMenuItem miSucursales;
     // End of variables declaration//GEN-END:variables
+    private SucursalDTO sucursal;
+    
 }

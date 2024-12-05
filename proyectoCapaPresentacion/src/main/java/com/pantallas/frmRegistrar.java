@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.pantallas;
+import com.control.SesionControl;
 import com.dtos.EmpleadoDTO;
 import com.dtos.MedicoDTO;
 import com.persistencias.UsuarioPersistencia;
@@ -20,6 +21,7 @@ public class frmRegistrar extends javax.swing.JFrame {
     public frmRegistrar() {
         initComponents();
         setLocationRelativeTo(null);
+        sesionControl = new SesionControl();
     }
 
     /**
@@ -184,44 +186,56 @@ public class frmRegistrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        UsuarioPersistencia up = new UsuarioPersistencia();
-        String nombreUsuario = txfNombreUsuario.getText().trim();
-        LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();
+        try {
+            sesionControl.validarFormulario(this);
+            UsuarioPersistencia usrPersistencia = new UsuarioPersistencia();
+            String nombreUsuario = txfNombreUsuario.getText().trim();
+            LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();
         
-        if(!up.nombreUsuarioExiste(nombreUsuario)) {
-            if(chbEmpleado.isSelected()){
-                EmpleadoDTO edto = new EmpleadoDTO(
-                        txfNombreCompleto.getText().trim(),
-                        txfNumeroTelefono.getText().trim(),
-                        fechaNacimiento,
-                        cobTipoEmpleado.getItemAt(cobTipoEmpleado.getSelectedIndex())
-                );
-                edto.setNombreUsuario(nombreUsuario);
-                edto.setCorreo(txfCorreo.getText().trim());
-                edto.setContrasena(txfContrasena.getText().trim());
-                edto.setTipoUsuario("empleado");
+            if(!usrPersistencia.nombreUsuarioExiste(nombreUsuario)) {
+                if(chbEmpleado.isSelected()){
+                    String tipoEmpleado = cobTipoEmpleado.getItemAt(cobTipoEmpleado.getSelectedIndex());
+                    EmpleadoDTO empleadoDto = new EmpleadoDTO(
+                            txfNombreCompleto.getText().trim(),
+                            txfNumeroTelefono.getText().trim(),
+                            fechaNacimiento,
+                            tipoEmpleado
+                    );
+                    empleadoDto.setNombreUsuario(nombreUsuario);
+                    empleadoDto.setCorreo(txfCorreo.getText().trim());
+                    empleadoDto.setContrasena(txfContrasena.getText().trim());
+                    empleadoDto.setTipoUsuario("empleado");
             
-                up.agregarUsuarioEmpleado(edto);
-                JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            } else if(chbMedico.isSelected()) {
-                MedicoDTO mdto = new MedicoDTO(
-                        txfNombreCompleto.getText().trim(),
-                        txfNumeroTelefono.getText().trim(),
-                        txfNumeroCedula.getText().trim(),
-                        fechaNacimiento
-                );
-                mdto.setNombreUsuario(nombreUsuario);
-                mdto.setCorreo(txfCorreo.getText().trim());
-                mdto.setContrasena(txfContrasena.getText().trim());
-                mdto.setTipoUsuario("medico");
+                    usrPersistencia.agregarEmpleado(empleadoDto);
+                    
+                    if(tipoEmpleado.equals("Gerente")) {
+                        JOptionPane.showMessageDialog(null, "Asigna una sucursal", "Atención", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    }
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else if(chbMedico.isSelected()) {
+                    MedicoDTO medicoDto = new MedicoDTO(
+                            txfNombreCompleto.getText().trim(),
+                            txfNumeroTelefono.getText().trim(),
+                            txfNumeroCedula.getText().trim(),
+                            fechaNacimiento
+                    );
+                    medicoDto.setNombreUsuario(nombreUsuario);
+                    medicoDto.setCorreo(txfCorreo.getText().trim());
+                    medicoDto.setContrasena(txfContrasena.getText().trim());
+                    medicoDto.setTipoUsuario("medico");
             
-                up.agregarMedico(mdto);
-                JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
+                    usrPersistencia.agregarMedico(medicoDto);
+                    JOptionPane.showMessageDialog(null, "Usuario Registrado con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Este nombre de usuario ya existe", "Error", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Este nombre de usuario ya existe", "Error", JOptionPane.WARNING_MESSAGE);
+        } catch(IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarMouseClicked
 
@@ -302,4 +316,5 @@ public class frmRegistrar extends javax.swing.JFrame {
     private javax.swing.JTextField txfNumeroCedula;
     private javax.swing.JTextField txfNumeroTelefono;
     // End of variables declaration//GEN-END:variables
+    private SesionControl sesionControl;
 }

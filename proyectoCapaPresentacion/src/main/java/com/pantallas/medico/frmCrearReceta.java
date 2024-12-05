@@ -4,7 +4,7 @@
  */
 package com.pantallas.medico;
 
-import com.Sesion;
+import com.control.Sesion;
 import com.control.RecetaControl;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;

@@ -29,14 +29,14 @@ public class Sucursal implements Serializable {
     @Column(name = "calle")
     private String calle;
     @Column(name = "numero")
-    private String numero;
+    private int numero;
     @Column(name = "colonia")
     private String colonia;
     @Column(name = "codigo_postal")
     private int codigoPostal;
 
-    @OneToOne(mappedBy = "sucursal")
-    private Empleado gerente;
+    @OneToMany(mappedBy = "sucursal")
+    private List<Empleado> empleados;
 
     @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InventarioSucursal> inventario;
@@ -44,7 +44,7 @@ public class Sucursal implements Serializable {
     public Sucursal() {
     }
 
-    public Sucursal(String nombreSucursal, String calle, String numero, String colonia, int codigoPostal) {
+    public Sucursal(String nombreSucursal, String calle, int numero, String colonia, int codigoPostal) {
         this.nombreSucursal = nombreSucursal;
         this.calle = calle;
         this.numero = numero;
@@ -52,14 +52,14 @@ public class Sucursal implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Sucursal(Long idSucursal, String nombreSucursal, String calle, String numero, String colonia, int codigoPostal, Empleado gerente, List<InventarioSucursal> inventario) {
+    public Sucursal(Long idSucursal, String nombreSucursal, String calle, int numero, String colonia, int codigoPostal, List<Empleado> empleados, List<InventarioSucursal> inventario) {
         this.idSucursal = idSucursal;
         this.nombreSucursal = nombreSucursal;
         this.calle = calle;
         this.numero = numero;
         this.colonia = colonia;
         this.codigoPostal = codigoPostal;
-        this.gerente = gerente;
+        this.empleados = empleados;
         this.inventario = inventario;
     }
 
@@ -87,11 +87,11 @@ public class Sucursal implements Serializable {
         this.calle = calle;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -111,12 +111,12 @@ public class Sucursal implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Empleado getGerente() {
-        return gerente;
+    public List<Empleado> getEmpleados() {
+        return empleados;
     }
 
-    public void setGerente(Empleado gerente) {
-        this.gerente = gerente;
+    public void setEmpleados(List<Empleado> empleados) {
+        this.empleados = empleados;
     }
 
     public List<InventarioSucursal> getInventario() {

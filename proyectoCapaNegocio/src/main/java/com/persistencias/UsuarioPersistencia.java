@@ -28,26 +28,26 @@ import javax.persistence.EntityManager;
  * @author Aaron
  */
 public class UsuarioPersistencia {
-    private EntityManager em;
-    private IUsuarioDAO udao;
-    private IMedicoDAO mdao;
-    private IEmpleadoDAO edao;
+    private EntityManager entityManager;
+    private IUsuarioDAO usuarioDao;
+    private IMedicoDAO medicoDao;
+    private IEmpleadoDAO empleadoDao;
 
     public UsuarioPersistencia() {
-        em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        udao = new UsuarioDAO(em);
-        mdao = new MedicoDAO(em);
-        edao = new EmpleadoDAO(em);
+        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        usuarioDao = new UsuarioDAO(entityManager);
+        medicoDao = new MedicoDAO(entityManager);
+        empleadoDao = new EmpleadoDAO(entityManager);
     }
     
-    public void agregarUsuarioEmpleado(EmpleadoDTO edto){
+    public void agregarEmpleado(EmpleadoDTO edto){
         Empleado empleado = EmpleadoMapper.toEntity(edto);
         String password = edto.getContrasena();
         String hashedPass = encriptar(password);
         empleado.setContrasena(hashedPass);
         empleado.setNombreUsuario(edto.getNombreUsuario());
         empleado.setCorreo(edto.getCorreo());
-        edao.agregar(empleado);
+        empleadoDao.agregar(empleado);
     }
     
     public void agregarMedico(MedicoDTO medicoDto) {
@@ -57,14 +57,14 @@ public class UsuarioPersistencia {
         medico.setContrasena(hashedPass);
         medico.setNombreUsuario(medicoDto.getNombreUsuario());
         medico.setCorreo(medicoDto.getCorreo());
-        mdao.agregar(medico);
+        medicoDao.agregar(medico);
     }
     
     public static String encriptar(String pass){
         return BCrypt.hashpw(pass, BCrypt.gensalt());
     }
     public UsuarioDTO verificarCredenciales(String nombreUsuario, String stringContra) {
-        Usuario usuario = udao.obtenerPorNombreUsuario(nombreUsuario);
+        Usuario usuario = usuarioDao.obtenerPorNombreUsuario(nombreUsuario);
         
         if(usuario != null && BCrypt.checkpw(stringContra, usuario.getContrasena())) {
             if(usuario instanceof Medico) {
@@ -78,14 +78,14 @@ public class UsuarioPersistencia {
     }
     
     public boolean nombreUsuarioExiste(String nombreUsuario) {
-        boolean enEmpleado = (edao.obtenerPorNombreUsuario(nombreUsuario) != null);
-        boolean enMedico = (mdao.obtenerPorNombreUsuario(nombreUsuario) != null);
+        boolean enEmpleado = (empleadoDao.obtenerPorNombreUsuario(nombreUsuario) != null);
+        boolean enMedico = (medicoDao.obtenerPorNombreUsuario(nombreUsuario) != null);
         return (enEmpleado || enMedico);
     }
     
     public MedicoDTO obtenerMedico(UsuarioDTO usuario) {
         if(usuario.getTipoUsuario().equals("medico")) {
-            Medico medico = mdao.obtenerPorNombreUsuario(usuario.getNombreUsuario());
+            Medico medico = medicoDao.obtenerPorNombreUsuario(usuario.getNombreUsuario());
             return MedicoMapper.toDTO(medico);
         }
         
@@ -94,7 +94,7 @@ public class UsuarioPersistencia {
     
     public EmpleadoDTO obtenerEmpleado(UsuarioDTO usuario) {
         if(usuario.getTipoUsuario().equals("empleado")) {
-            Empleado empleado = edao.obtenerPorNombreUsuario(usuario.getNombreUsuario());
+            Empleado empleado = empleadoDao.obtenerPorNombreUsuario(usuario.getNombreUsuario());
             return EmpleadoMapper.toDTO(empleado);
         }
         

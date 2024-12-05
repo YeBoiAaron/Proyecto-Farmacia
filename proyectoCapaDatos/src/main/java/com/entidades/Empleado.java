@@ -37,7 +37,7 @@ public class Empleado extends Usuario implements Serializable {
     @OneToMany(mappedBy = "cajero", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Venta> ventas;
     
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal;
 

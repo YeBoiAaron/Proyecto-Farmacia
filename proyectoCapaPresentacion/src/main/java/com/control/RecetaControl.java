@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Aaron
  */
-public class RecetaControl {
+public class RecetaControl extends Control{
     private PacientePersistencia pctPersistencia;
     private ConversionesTablas convers;
     private RecetaPersistencia recetaPersistencia;

@@ -5,10 +5,15 @@
 package com.servicios;
 
 import com.daos.implementaciones.MedicamentoDAO;
+import com.daos.implementaciones.SucursalDAO;
+import com.dtos.EmpleadoDTO;
 import com.dtos.MedicamentoDTO;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
 import com.dtos.RecetaDTO;
+import com.dtos.SucursalDTO;
+import com.persistencias.MedicamentoPersistencia;
+import com.persistencias.SucursalPersistencia;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -23,8 +28,11 @@ public class ConversionesTablas {
     private String nombresColumnasTablaMedicamentos[] = {"Nombre", "Activo", "Presentacion", "Concentración", "Numero Serie"};
     private String nombresColumnasTablaPacientes[] = {"Nombre", "Fecha de Nacimiento", "Correo Electronico"};
     private String nombresColumnasTablaRecetas[] = {"Numero de Receta", "Instrucciones"};
+    private String nombresColumnasTablaSucursales[] = {"Sucursal", "Dirección", "Gerente"};
     
     private RecetaServicio recetaServicio = new RecetaServicio();
+    private MedicamentoPersistencia medPersistencia = new MedicamentoPersistencia();
+    private SucursalPersistencia scrslPersistencia = new SucursalPersistencia();
     
     public ArrayList<MedicamentosRecetaDTO> tablaMedicamentosRecetaToArray(TableModel tabla, String numeroReceta) {
         ArrayList<MedicamentosRecetaDTO> listaMedicamentos = new ArrayList<>();
@@ -43,11 +51,12 @@ public class ConversionesTablas {
     public DefaultTableModel listaMedicamentosRecetaToTableModel(List<MedicamentosRecetaDTO> listaMedicamentosReceta) {
         DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaMedicamentosReceta, 0);
         for (MedicamentosRecetaDTO medicamento : listaMedicamentosReceta) {
+            String numeroSerie = medicamento.getNumeroSerieMedicamento();
             Object[] datosFila = {
-                new MedicamentoDAO(JPAUtil.getEntityManagerFactory().createEntityManager()).obtenerPorNumeroSerie(medicamento.getNumeroSerieMedicamento()).getNombre(),
+                medPersistencia.buscarMedicamento(numeroSerie).getNombre(),
                 medicamento.getInstrucciones(),
                 medicamento.getCantidad(),
-                medicamento.getNumeroSerieMedicamento()
+                numeroSerie
             };
             modelo.addRow(datosFila);
         }
@@ -92,6 +101,28 @@ public class ConversionesTablas {
             List<String> recetas = recetaServicio.obtenerMedicamentosInstruccionesDeReceta(numeroReceta);
             Object[] datosFila = {
                 numeroReceta, String.join("\n", recetas)
+            };
+            modelo.addRow(datosFila);
+        }
+        
+        return modelo;
+    }
+    
+    public DefaultTableModel listaSucursalesToTableModel(List<SucursalDTO> listaSucursales) {
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaSucursales, 0);
+        for (SucursalDTO sucursal : listaSucursales) {
+            String nombreSucursal = sucursal.getNombreSucursal();
+            String direccion = String.join(
+                    ", ",
+                    sucursal.getCalle() + " #" + Integer.toString(sucursal.getNumero()),
+                    sucursal.getColonia(), "CP: " + Integer.toString(sucursal.getCodigoPostal())
+            );
+            EmpleadoDTO empleado = scrslPersistencia.obtenerGerenteSucursal(nombreSucursal);
+            String nombreGerente = (empleado == null ? "" : empleado.getNombreCompleto());
+            Object[] datosFila = {
+                nombreSucursal,
+                direccion,
+                nombreGerente
             };
             modelo.addRow(datosFila);
         }

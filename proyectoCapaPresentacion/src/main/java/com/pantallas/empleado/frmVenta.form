@@ -54,6 +54,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sucursal"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miSucursales">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar Sucursales"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSucursalesActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -99,7 +114,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="txfBuscarReceta" min="-2" pref="383" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="BotonBuscar" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBuscarReceta" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="TablaIndicaciones" min="-2" pref="608" max="-2" attributes="0"/>
                   </Group>
@@ -115,7 +130,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txfBuscarReceta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BotonBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBuscarReceta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="TablaIndicaciones" min="-2" pref="222" max="-2" attributes="0"/>
@@ -136,9 +151,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txfBuscarReceta">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfBuscarRecetaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -148,12 +160,12 @@
         <Property name="text" type="java.lang.String" value="Numero de Receta:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="BotonBuscar">
+    <Component class="javax.swing.JButton" name="btnBuscarReceta">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonBuscarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarRecetaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

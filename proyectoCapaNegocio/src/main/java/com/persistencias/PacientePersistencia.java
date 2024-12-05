@@ -19,21 +19,21 @@ import javax.persistence.EntityManager;
  * @author Aaron
  */
 public class PacientePersistencia {
-    EntityManager em;
-    IPacienteDAO pdao;
+    EntityManager entityManager;
+    IPacienteDAO pacienteDao;
 
     public PacientePersistencia() {
-        em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        pdao = new PacienteDAO(em);
+        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        pacienteDao = new PacienteDAO(entityManager);
     }
     
     public void crearPaciente(PacienteDTO pacientedto) {
         Paciente paciente = PacienteMapper.toEntity(pacientedto);
-        pdao.agregar(paciente);
+        pacienteDao.agregar(paciente);
     }
     
     public List<PacienteDTO> buscarPaciente(String nombreCompleto) {
-        List<Paciente> pacientes = pdao.obtenerPorNombre(nombreCompleto);
+        List<Paciente> pacientes = pacienteDao.obtenerPorNombre(nombreCompleto);
         if(pacientes != null) {
             List<PacienteDTO> pacientesDto = new ArrayList<>();
             for (Paciente paciente : pacientes) {
@@ -46,6 +46,6 @@ public class PacientePersistencia {
     }
     
     public PacienteDTO buscarPorCorreo(String correo) {
-        return PacienteMapper.toDTO(pdao.obtenerPorCorreo(correo));
+        return PacienteMapper.toDTO(pacienteDao.obtenerPorCorreo(correo));
     }
 }

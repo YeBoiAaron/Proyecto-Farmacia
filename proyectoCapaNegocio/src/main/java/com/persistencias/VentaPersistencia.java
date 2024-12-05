@@ -9,7 +9,7 @@ import com.daos.implementaciones.RecetaDAO;
 import com.dtos.RecetaDTO;
 import com.entidades.Receta;
 import com.mappers.RecetaMapper;
-
+import com.servicios.JPAUtil;
 import javax.persistence.EntityManager;
 
 /**
@@ -22,10 +22,9 @@ public class VentaPersistencia {
 
     /**
      * Constructor que inicializa recetaDao utilizando un EntityManager.
-     *
-     * @param entityManager el EntityManager a utilizar.
      */
-    public VentaPersistencia(EntityManager entityManager) {
+    public VentaPersistencia() {
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         this.recetaDao = new RecetaDAO(entityManager);
     }
 

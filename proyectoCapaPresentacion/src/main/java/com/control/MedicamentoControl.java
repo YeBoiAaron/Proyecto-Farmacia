@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Aaron
  */
-public class MedicamentoControl {
+public class MedicamentoControl extends Control{
     
     public MedicamentosRecetaDTO seleccionarMedicamentoReceta(JDialog parent, JTable tblMedicamentos) {
         int filaSeleccionada = tblMedicamentos.getSelectedRow();

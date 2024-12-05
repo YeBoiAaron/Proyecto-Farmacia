@@ -8,14 +8,13 @@ package com.pantallas.empleado;
  *
  * @author Aaron
  */
-public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
+public class frmSucursales extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmInicioEmpleadoFarmacia
+     * Creates new form frmSucursales
      */
-    public frmInicioEmpleadoFarmacia() {
+    public frmSucursales() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,7 +37,6 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
         miSucursales = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(getPreferredSize());
 
         jMenu1.setText("Venta");
 
@@ -123,9 +121,6 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
     }//GEN-LAST:event_miConsultarInventarioActionPerformed
 
     private void miSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSucursalesActionPerformed
-        frmSucursales sucursales = new frmSucursales();
-        sucursales.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_miSucursalesActionPerformed
 
     /**
@@ -145,25 +140,23 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmInicioEmpleadoFarmacia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSucursales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmInicioEmpleadoFarmacia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSucursales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmInicioEmpleadoFarmacia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSucursales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmInicioEmpleadoFarmacia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSucursales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmInicioEmpleadoFarmacia().setVisible(true);
+                new frmSucursales().setVisible(true);
             }
         });
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

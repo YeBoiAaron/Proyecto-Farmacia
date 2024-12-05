@@ -4,15 +4,10 @@
  */
 package com.pantallas.empleado;
 
-import com.control.VentaControl;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.RecetaDTO;
 import com.persistencias.MedicamentosRecetaPersistencia;
-import com.persistencias.VentaPersistencia;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

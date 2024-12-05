@@ -19,21 +19,21 @@ import javax.persistence.EntityManager;
  * @author martinez
  */
 public class MedicamentoPersistencia {
-    private EntityManager em;
-    private IMedicamentoDAO mdao;
+    private EntityManager entityManager;
+    private IMedicamentoDAO medicamentoDao;
     
     public MedicamentoPersistencia(){
-        em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        mdao = new MedicamentoDAO(em);
+        entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        medicamentoDao = new MedicamentoDAO(entityManager);
     }
     
     public void agregarMedicamento(MedicamentoDTO medicamentoDTO){
         Medicamento medicamento = MedicamentoMapper.toEntity(medicamentoDTO);
-        mdao.agregar(medicamento);
+        medicamentoDao.agregar(medicamento);
     }
     
     public MedicamentoDTO buscarMedicamento(String numeroSerie) {
-        Medicamento medicamento = mdao.obtenerPorNumeroSerie(numeroSerie);
+        Medicamento medicamento = medicamentoDao.obtenerPorNumeroSerie(numeroSerie);
         if(medicamento != null) {
             return MedicamentoMapper.toDTO(medicamento);
         }
@@ -43,7 +43,7 @@ public class MedicamentoPersistencia {
     
     public List<MedicamentoDTO> listaMedicamentos() {
         List<MedicamentoDTO> medicamentosDto = new ArrayList<>();
-        List<Medicamento> medicamentos = mdao.lista();
+        List<Medicamento> medicamentos = medicamentoDao.lista();
         if(!medicamentos.isEmpty()) {
             for (Medicamento medicamento : medicamentos) {
                 medicamentosDto.add(MedicamentoMapper.toDTO(medicamento));
@@ -56,7 +56,7 @@ public class MedicamentoPersistencia {
     
     public List<MedicamentoDTO> obtenerMedicamentosPorNombre(String nombreMedicamento) {
         List<MedicamentoDTO> medicamentosDto = new ArrayList<>();
-        List<Medicamento> medicamentos = mdao.obtenerPorNombre(nombreMedicamento);
+        List<Medicamento> medicamentos = medicamentoDao.obtenerPorNombre(nombreMedicamento);
         if(!medicamentos.isEmpty()) {
             for (Medicamento medicamento : medicamentos) {
                 medicamentosDto.add(MedicamentoMapper.toDTO(medicamento));
