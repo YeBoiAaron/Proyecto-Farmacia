@@ -236,7 +236,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblMedicamentosMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tblMedicamentos.setRowSelectionAllowed(true);&#xd;&#xa;tblMedicamentos.setColumnSelectionAllowed(false);&#xd;&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tblMedicamentos.setRowSelectionAllowed(true);&#xd;&#xa;tblMedicamentos.setColumnSelectionAllowed(false);&#xd;&#xa;tblMedicamentos.setDefaultEditor(Object.class, null);"/>
           </AuxValues>
         </Component>
       </SubComponents>

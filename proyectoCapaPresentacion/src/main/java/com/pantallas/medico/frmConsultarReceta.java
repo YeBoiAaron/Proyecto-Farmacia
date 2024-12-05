@@ -8,7 +8,6 @@ import com.control.RecetaControl;
 import com.servicios.ConversionesTablas;
 import com.servicios.MultiLineCellRenderer;
 import java.time.LocalDate;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,7 +26,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         tblBusqueda.getColumnModel().getColumn(1).setCellRenderer(new MultiLineCellRenderer());
     }
     
-    public void actualizarTablaMedicamentos(DefaultTableModel modelo) {
+    public void actualizarTablaRecetas(DefaultTableModel modelo) {
         tblBusqueda.setModel(modelo);
         tblBusqueda.getColumnModel().getColumn(1).setCellRenderer(new MultiLineCellRenderer());
     }
@@ -214,7 +213,7 @@ public class frmConsultarReceta extends javax.swing.JFrame {
         LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();
         String nombrePaciente = txfNombrePaciente.getText().trim();
         DefaultTableModel modelo = control.consultarRecetas(nombrePaciente, fechaNacimiento);
-        actualizarTablaMedicamentos(modelo);
+        actualizarTablaRecetas(modelo);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void miCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCrearRecetaActionPerformed

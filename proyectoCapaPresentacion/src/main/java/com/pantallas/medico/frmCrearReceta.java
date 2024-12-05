@@ -81,6 +81,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
         tblMedicamentos = new javax.swing.JTable();
         tblMedicamentos.setRowSelectionAllowed(true);
         tblMedicamentos.setColumnSelectionAllowed(false);
+        tblMedicamentos.setDefaultEditor(Object.class, null);
         btnAgregarMedicamentos = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txfAltura = new javax.swing.JTextField();
@@ -371,6 +372,12 @@ public class frmCrearReceta extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();
             listaMedicamentos.remove(tblMedicamentos.getSelectedRow());
             modelo.removeRow(tblMedicamentos.getSelectedRow());
+            if(listaMedicamentos.isEmpty()) {
+                btnActualizar.setVisible(false);
+                btnActualizar.setEnabled(false);
+                btnEliminar.setVisible(false);
+                btnEliminar.setEnabled(false);
+            }
         } catch(IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Por favor selecciona un medicamento para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
