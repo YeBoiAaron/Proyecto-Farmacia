@@ -4,8 +4,11 @@
  */
 package com.pantallas.empleado;
 
+import com.control.InventarioControl;
 import com.control.Sesion;
 import com.dtos.SucursalDTO;
+import com.persistencias.SucursalPersistencia;
+import java.util.List;
 import javax.swing.Box;
 
 /**
@@ -20,9 +23,12 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     public frmInventarioMedicamentos() {
         initComponents();
         setLocationRelativeTo(null);
+        invControl = new InventarioControl();
         sucursal = Sesion.getSucursalEmpleado();
+        scrslPersistencia = new SucursalPersistencia();
+        listaSucursales = scrslPersistencia.listaSucursales();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +49,7 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cobListaSucursales = new javax.swing.JComboBox<>();
+        cobListaSucursales.setModel(invControl.listaSucursalesToComboBoxModel(listaSucursales));
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miRealizarVenta = new javax.swing.JMenuItem();
@@ -197,8 +204,10 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
-                                    .addComponent(cobListaSucursales, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cobListaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextField1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(58, Short.MAX_VALUE))
@@ -330,5 +339,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private javax.swing.JMenuItem miRealizarVenta;
     // End of variables declaration//GEN-END:variables
     private SucursalDTO sucursal;
+    private List<SucursalDTO> listaSucursales;
+    private SucursalPersistencia scrslPersistencia;
+    private InventarioControl invControl;
     
 }

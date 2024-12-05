@@ -4,7 +4,6 @@
  */
 package com.control;
 
-import com.dtos.EmpleadoDTO;
 import com.dtos.SucursalDTO;
 import com.dtos.UsuarioDTO;
 import com.pantallas.empleado.frmInicioEmpleadoFarmacia;
@@ -41,17 +40,19 @@ public class SesionControl extends Control{
         } else {
             try {
                 UsuarioDTO usuario = usrPersistencia.verificarCredenciales(nombreUsuario, contrasena);
+                usuario.setContrasena("");
                 Sesion.setUsuarioLogueado(usuario);
                 if(usuario.getTipoUsuario().equals("medico")) {
                     frmInicioMedico medico = new frmInicioMedico();
                     medico.setVisible(true);
-                } else if(usuario.getTipoUsuario().equals("empleado")) {
+                } else if(usuario.getTipoUsuario().equalsIgnoreCase("Gerente") || usuario.getTipoUsuario().equalsIgnoreCase("Cajero")) {
                     Sesion.setSucursalEmpleado(usrPersistencia.obtenerSucursalDeEmpleado(usuario));
                     frmInicioEmpleadoFarmacia empleado = new frmInicioEmpleadoFarmacia();
                     empleado.setVisible(true);
                 }
                 parent.dispose();
             } catch(NullPointerException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Credenciales inválidas", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }

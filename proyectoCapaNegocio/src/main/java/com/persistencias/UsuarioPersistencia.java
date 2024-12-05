@@ -80,7 +80,11 @@ public class UsuarioPersistencia {
             if(usuario instanceof Medico) {
                 return UsuarioMapper.toDto(usuario, "medico");
             } else if(usuario instanceof Empleado) {
-                return UsuarioMapper.toDto(usuario, "empleado");
+                if(((Empleado) usuario).getTipoEmpleado().equals("Gerente")) {
+                    return UsuarioMapper.toDto(usuario, "Gerente");
+                } else if(((Empleado) usuario).getTipoEmpleado().equals("Cajero")) {
+                    return UsuarioMapper.toDto(usuario, "Cajero");
+                }
             }
         }
         
@@ -112,7 +116,7 @@ public class UsuarioPersistencia {
     }
     
     public SucursalDTO obtenerSucursalDeEmpleado(UsuarioDTO usuario) {
-        if(usuario.getTipoUsuario().equals("empleado")) {
+        if(usuario.getTipoUsuario().equals("Gerente") || usuario.getTipoUsuario().equals("Cajero")) {
             Sucursal sucursal = empleadoDao.obtenerSucursalPorEmpleado(usuario.getNombreUsuario());
             return SucursalMapper.toDTO(sucursal);
         }
