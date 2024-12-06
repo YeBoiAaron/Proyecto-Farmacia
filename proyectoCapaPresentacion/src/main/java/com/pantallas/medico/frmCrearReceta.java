@@ -101,8 +101,8 @@ public class frmCrearReceta extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        moCrearReceta = new javax.swing.JMenuItem();
-        moConsultarReceta = new javax.swing.JMenuItem();
+        miCrearReceta = new javax.swing.JMenuItem();
+        miConsultarReceta = new javax.swing.JMenuItem();
 
         jButton2.setText("jButton2");
 
@@ -195,21 +195,21 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
         jMenu1.setText("Recetas");
 
-        moCrearReceta.setText("Crear Receta");
-        moCrearReceta.addActionListener(new java.awt.event.ActionListener() {
+        miCrearReceta.setText("Crear Receta");
+        miCrearReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moCrearRecetaActionPerformed(evt);
+                miCrearRecetaActionPerformed(evt);
             }
         });
-        jMenu1.add(moCrearReceta);
+        jMenu1.add(miCrearReceta);
 
-        moConsultarReceta.setText("Consultar Receta");
-        moConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
+        miConsultarReceta.setText("Consultar Receta");
+        miConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moConsultarRecetaActionPerformed(evt);
+                miConsultarRecetaActionPerformed(evt);
             }
         });
-        jMenu1.add(moConsultarReceta);
+        jMenu1.add(miConsultarReceta);
 
         jMenuBar1.add(jMenu1);
 
@@ -335,17 +335,17 @@ public class frmCrearReceta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
+    private void miCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCrearRecetaActionPerformed
         frmConsultarReceta consultar_receta = new frmConsultarReceta();
         consultar_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_moCrearRecetaActionPerformed
+    }//GEN-LAST:event_miCrearRecetaActionPerformed
 
-    private void moConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moConsultarRecetaActionPerformed
+    private void miConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultarRecetaActionPerformed
         frmCrearReceta crear_receta = new frmCrearReceta();
         crear_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_moConsultarRecetaActionPerformed
+    }//GEN-LAST:event_miConsultarRecetaActionPerformed
 
     private void btnAgregarMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicamentosActionPerformed
         dlgSeleccionarMedicamento seleccionarMed = new dlgSeleccionarMedicamento(this);
@@ -443,8 +443,8 @@ public class frmCrearReceta extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem moConsultarReceta;
-    private javax.swing.JMenuItem moCrearReceta;
+    private javax.swing.JMenuItem miConsultarReceta;
+    private javax.swing.JMenuItem miCrearReceta;
     private javax.swing.JTable tblMedicamentos;
     private javax.swing.JTextField txfAltura;
     private javax.swing.JTextField txfDiagnostico;

@@ -9,20 +9,20 @@
             <Property name="text" type="java.lang.String" value="Recetas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="moCrearReceta">
+            <MenuItem class="javax.swing.JMenuItem" name="miCrearReceta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear Receta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moCrearRecetaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miCrearRecetaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="moConsultarReceta">
+            <MenuItem class="javax.swing.JMenuItem" name="miConsultarReceta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consultar Receta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moConsultarRecetaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miConsultarRecetaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

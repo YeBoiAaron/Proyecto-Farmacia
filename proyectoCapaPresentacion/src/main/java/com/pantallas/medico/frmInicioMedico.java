@@ -29,29 +29,29 @@ public class frmInicioMedico extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        moCrearReceta = new javax.swing.JMenuItem();
-        moConsultarReceta = new javax.swing.JMenuItem();
+        miCrearReceta = new javax.swing.JMenuItem();
+        miConsultarReceta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(getPreferredSize());
 
         jMenu1.setText("Recetas");
 
-        moCrearReceta.setText("Crear Receta");
-        moCrearReceta.addActionListener(new java.awt.event.ActionListener() {
+        miCrearReceta.setText("Crear Receta");
+        miCrearReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moCrearRecetaActionPerformed(evt);
+                miCrearRecetaActionPerformed(evt);
             }
         });
-        jMenu1.add(moCrearReceta);
+        jMenu1.add(miCrearReceta);
 
-        moConsultarReceta.setText("Consultar Receta");
-        moConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
+        miConsultarReceta.setText("Consultar Receta");
+        miConsultarReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moConsultarRecetaActionPerformed(evt);
+                miConsultarRecetaActionPerformed(evt);
             }
         });
-        jMenu1.add(moConsultarReceta);
+        jMenu1.add(miConsultarReceta);
 
         jMenuBar1.add(jMenu1);
 
@@ -71,18 +71,18 @@ public class frmInicioMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void moCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moCrearRecetaActionPerformed
+    private void miCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCrearRecetaActionPerformed
         frmCrearReceta crear_receta = new frmCrearReceta();
         crear_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_moCrearRecetaActionPerformed
+    }//GEN-LAST:event_miCrearRecetaActionPerformed
 
-    private void moConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moConsultarRecetaActionPerformed
+    private void miConsultarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultarRecetaActionPerformed
         
         frmConsultarReceta consultar_receta = new frmConsultarReceta();
         consultar_receta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_moConsultarRecetaActionPerformed
+    }//GEN-LAST:event_miConsultarRecetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,7 +122,7 @@ public class frmInicioMedico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem moConsultarReceta;
-    private javax.swing.JMenuItem moCrearReceta;
+    private javax.swing.JMenuItem miConsultarReceta;
+    private javax.swing.JMenuItem miCrearReceta;
     // End of variables declaration//GEN-END:variables
 }
