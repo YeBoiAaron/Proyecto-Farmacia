@@ -187,6 +187,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txfTotal">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DecimalFormat df = new DecimalFormat(&quot;#.00&quot;);&#xd;&#xa;txfTotal.setText(df.format(0.00));&#xd;&#xa;"/>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="txfTotal.setEditable(false);"/>
       </AuxValues>
     </Component>
@@ -249,7 +250,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();&#xd;&#xa;modelo.addTableModelListener(e -&gt; {&#xd;&#xa;    int column = e.getColumn();&#xd;&#xa;    int row = e.getFirstRow();&#xd;&#xa;&#xd;&#xa;    if (column == 2) {&#xd;&#xa;        boolean isSelected = (boolean) modelo.getValueAt(row, column);&#xd;&#xa;        float value = (float) modelo.getValueAt(row, 2) * (float) modelo.getValueAt(row, 1);&#xd;&#xa;&#xd;&#xa;        float currentTotal = Float.parseFloat(txfTotal.getText());&#xd;&#xa;        if (isSelected) {&#xd;&#xa;            currentTotal += value;&#xd;&#xa;        } else {&#xd;&#xa;            currentTotal -= value;&#xd;&#xa;        }&#xd;&#xa;        txfTotal.setText(String.valueOf(currentTotal));&#xd;&#xa;    }&#xd;&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();&#xd;&#xa;modelo.addTableModelListener(e -&gt; {&#xd;&#xa;    int column = e.getColumn();&#xd;&#xa;    int row = e.getFirstRow();&#xd;&#xa;&#xd;&#xa;    if (column == 3) {&#xd;&#xa;        boolean isSelected = (boolean) modelo.getValueAt(row, column);&#xd;&#xa;        Object cantidadObj = modelo.getValueAt(row, 1);&#xd;&#xa;        Object precioObj = modelo.getValueAt(row, 2);&#xd;&#xa;&#xd;&#xa;        if (cantidadObj != null &amp;&amp; precioObj != null) {&#xd;&#xa;            try {&#xd;&#xa;                float cantidad = (float) cantidadObj;&#xd;&#xa;                float precioUnitario = (float) precioObj;&#xd;&#xa;                float value = cantidad * precioUnitario;&#xd;&#xa;&#xd;&#xa;                float currentTotal = Float.parseFloat(txfTotal.getText());&#xd;&#xa;                if (isSelected) {&#xd;&#xa;                    currentTotal += value;&#xd;&#xa;                } else {&#xd;&#xa;                    currentTotal -= value;&#xd;&#xa;                }&#xd;&#xa;                txfTotal.setText(df.format(currentTotal));&#xd;&#xa;            } catch (NumberFormatException ex) {&#xd;&#xa;                JOptionPane.showMessageDialog(null, &quot;Error en el c&#xe1;lculo del total.&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);&#xd;&#xa;            }&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;});"/>
           </AuxValues>
         </Component>
       </SubComponents>

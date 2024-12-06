@@ -9,6 +9,7 @@ import com.control.VentaControl;
 import com.dtos.VentaDTO;
 import com.persistencias.VentaPersistencia;
 import com.servicios.VentaServicio;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
@@ -46,6 +47,8 @@ public class frmVenta extends javax.swing.JFrame {
         btnBuscarReceta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txfTotal = new javax.swing.JTextField();
+        DecimalFormat df = new DecimalFormat("#.00");
+        txfTotal.setText(df.format(0.00));
         btnCrearVenta = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         TablaIndicaciones = new javax.swing.JScrollPane();
@@ -121,17 +124,28 @@ public class frmVenta extends javax.swing.JFrame {
             int column = e.getColumn();
             int row = e.getFirstRow();
 
-            if (column == 2) {
+            if (column == 3) {
                 boolean isSelected = (boolean) modelo.getValueAt(row, column);
-                float value = (float) modelo.getValueAt(row, 2) * (float) modelo.getValueAt(row, 1);
+                Object cantidadObj = modelo.getValueAt(row, 1);
+                Object precioObj = modelo.getValueAt(row, 2);
 
-                float currentTotal = Float.parseFloat(txfTotal.getText());
-                if (isSelected) {
-                    currentTotal += value;
-                } else {
-                    currentTotal -= value;
+                if (cantidadObj != null && precioObj != null) {
+                    try {
+                        float cantidad = (float) cantidadObj;
+                        float precioUnitario = (float) precioObj;
+                        float value = cantidad * precioUnitario;
+
+                        float currentTotal = Float.parseFloat(txfTotal.getText());
+                        if (isSelected) {
+                            currentTotal += value;
+                        } else {
+                            currentTotal -= value;
+                        }
+                        txfTotal.setText(df.format(currentTotal));
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Error en el cálculo del total.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-                txfTotal.setText(String.valueOf(currentTotal));
             }
         });
         TablaIndicaciones.setViewportView(tblMedicamentos);
