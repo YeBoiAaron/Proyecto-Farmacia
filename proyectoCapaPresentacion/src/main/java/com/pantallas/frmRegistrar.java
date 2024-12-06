@@ -4,6 +4,7 @@
  */
 package com.pantallas;
 import com.control.SesionControl;
+import com.control.SucursalControl;
 import com.dtos.EmpleadoDTO;
 import com.dtos.MedicoDTO;
 import com.dtos.SucursalDTO;
@@ -23,6 +24,7 @@ public class frmRegistrar extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         sesionControl = new SesionControl();
+        scrslControl = new SucursalControl();
     }
 
     /**
@@ -103,7 +105,7 @@ public class frmRegistrar extends javax.swing.JFrame {
         jPanel1.add(txfNumeroCedula);
         txfNumeroCedula.setBounds(6, 0, 280, 22);
 
-        cobTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Empleado" }));
+        cobTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Cajero" }));
         cobTipoEmpleado.setMinimumSize(new java.awt.Dimension(64, 22));
         cobTipoEmpleado.setPreferredSize(new java.awt.Dimension(64, 22));
         jPanel1.add(cobTipoEmpleado);
@@ -207,7 +209,7 @@ public class frmRegistrar extends javax.swing.JFrame {
                     empleadoDto.setContrasena(txfContrasena.getText().trim());
                     empleadoDto.setTipoUsuario("empleado");
                     
-                    SucursalDTO sucursalDto = sesionControl.seleccionarSucursal(empleadoDto);
+                    SucursalDTO sucursalDto = scrslControl.seleccionarSucursal(empleadoDto);
                     
                     if(tipoEmpleado.equals("Cajero") && sucursalDto == null) {
                         JOptionPane.showMessageDialog(null, "No hay sucursales disponibles", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -325,4 +327,5 @@ public class frmRegistrar extends javax.swing.JFrame {
     private javax.swing.JTextField txfNumeroTelefono;
     // End of variables declaration//GEN-END:variables
     private SesionControl sesionControl;
+    private SucursalControl scrslControl;
 }

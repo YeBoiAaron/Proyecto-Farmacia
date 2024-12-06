@@ -37,6 +37,12 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
         miConsultarRecetas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miConsultarInventario = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        if(!Sesion.getUsuarioLogueado().getTipoUsuario().equals("Gerente")){
+            jMenu4.setVisible(false);
+            jMenu4.setEnabled(false);
+        }
+        miAgregarSucursal = new javax.swing.JMenuItem();
         menLabelSucursal = new javax.swing.JMenu();
         menLabelSucursal.setEnabled(false);
         menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());
@@ -80,6 +86,13 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Sucursal");
+
+        miAgregarSucursal.setText("Crear Sucursal");
+        jMenu4.add(miAgregarSucursal);
+
+        jMenuBar1.add(jMenu4);
+
         menLabelSucursal.setToolTipText("");
         jMenuBar1.add(Box.createHorizontalGlue());
         jMenuBar1.add(menLabelSucursal);
@@ -94,7 +107,7 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addGap(0, 378, Short.MAX_VALUE)
         );
 
         pack();
@@ -159,8 +172,10 @@ public class frmInicioEmpleadoFarmacia extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menLabelSucursal;
+    private javax.swing.JMenuItem miAgregarSucursal;
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;

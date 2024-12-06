@@ -6,11 +6,14 @@ package com.daos.interfaces;
 
 import com.daos.IDAO;
 import com.entidades.InventarioSucursal;
+import java.util.List;
 
 /**
  *
  * @author Aaron
  */
 public interface IInventarioSucursalDAO extends IDAO<InventarioSucursal> {
+    public InventarioSucursal obtenerPorMedicamentoYSucursal(String numeroSerie, String nombreSucursal);
     
+    public List<InventarioSucursal> obtenerInventarioPorSucursal(String nombreSucursal);
 }

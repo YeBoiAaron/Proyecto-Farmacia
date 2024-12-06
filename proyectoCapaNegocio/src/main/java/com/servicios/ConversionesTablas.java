@@ -4,9 +4,8 @@
  */
 package com.servicios;
 
-import com.daos.implementaciones.MedicamentoDAO;
-import com.daos.implementaciones.SucursalDAO;
 import com.dtos.EmpleadoDTO;
+import com.dtos.InventarioSucursalDTO;
 import com.dtos.MedicamentoDTO;
 import com.dtos.MedicamentosRecetaDTO;
 import com.dtos.PacienteDTO;
@@ -29,6 +28,8 @@ public class ConversionesTablas {
     private String nombresColumnasTablaPacientes[] = {"Nombre", "Fecha de Nacimiento", "Correo Electronico"};
     private String nombresColumnasTablaRecetas[] = {"Numero de Receta", "Instrucciones"};
     private String nombresColumnasTablaSucursales[] = {"Sucursal", "Dirección", "Gerente"};
+    private String nombresColumnasTablaInventario[] = {"Medicamento", "Activo", "Presentacion", "Precio", "Disponible"};
+    private String nombresColumnasTablaRecetasVenta[] = {"Medicamento", "Cantidad", "Surtir"};
     
     private RecetaServicio recetaServicio = new RecetaServicio();
     private MedicamentoPersistencia medPersistencia = new MedicamentoPersistencia();
@@ -108,6 +109,37 @@ public class ConversionesTablas {
         return modelo;
     }
     
+    public DefaultTableModel listaMedicamentosVentaToTableModel(List<MedicamentosRecetaDTO> medicamentosReceta, String numeroReceta) {
+        List<String> recetas = recetaServicio.obtenerMedicamentosInstruccionesDeReceta(numeroReceta);
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaRecetasVenta, 0) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if(columnIndex == 2) {
+                    return Boolean.class;
+                }
+                return super.getColumnClass(columnIndex);
+            }
+            
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 2;
+            }
+        };
+        
+        for (int i = 0; i < medicamentosReceta.size(); i++) {
+            String medicamento = recetas.get(i);
+            int cantidad = medicamentosReceta.get(i).getCantidad();
+            Object[] datosFila = {
+                medicamento,
+                cantidad,
+                false
+            };
+            modelo.addRow(datosFila);
+        }
+        
+        return modelo;
+    }
+    
     public DefaultTableModel listaSucursalesToTableModel(List<SucursalDTO> listaSucursales) {
         DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaSucursales, 0);
         for (SucursalDTO sucursal : listaSucursales) {
@@ -123,6 +155,25 @@ public class ConversionesTablas {
                 nombreSucursal,
                 direccion,
                 nombreGerente
+            };
+            modelo.addRow(datosFila);
+        }
+        
+        return modelo;
+    }
+    
+    public DefaultTableModel listaMedicamentosInventarioToTableModel(List<InventarioSucursalDTO> listaInventarios) {
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaInventario, 0);
+        for (InventarioSucursalDTO inventario : listaInventarios) {
+            String numeroSerie = inventario.getNumeroSerieMedicamento();
+            int cantidadDisponible = inventario.getCantidad();
+            MedicamentoDTO medicamento = medPersistencia.buscarMedicamento(numeroSerie);
+            Object[] datosFila = {
+                medicamento.getNombre(),
+                medicamento.getActivo(),
+                medicamento.getPresentacion(),
+                medicamento.getPresentacion(),
+                cantidadDisponible
             };
             modelo.addRow(datosFila);
         }

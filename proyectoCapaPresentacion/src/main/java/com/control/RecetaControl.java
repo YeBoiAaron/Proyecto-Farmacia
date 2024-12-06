@@ -101,6 +101,7 @@ public class RecetaControl extends Control{
 
         if(respuesta == JOptionPane.OK_OPTION) {
             try {
+                validarComponentes(mensaje);
                 float altura = Float.parseFloat(txfAltura.getText().trim());
                 float peso = Float.parseFloat(txfPeso.getText().trim());
                 LocalDate fechaNacimiento = dtpFechaNacimiento.getDate();

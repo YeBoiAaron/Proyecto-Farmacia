@@ -6,10 +6,19 @@ package com.pantallas.empleado;
 
 import com.control.InventarioControl;
 import com.control.Sesion;
+import com.control.SucursalControl;
+import com.dtos.InventarioSucursalDTO;
 import com.dtos.SucursalDTO;
 import com.persistencias.SucursalPersistencia;
+import com.servicios.ConversionesTablas;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Box;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -21,12 +30,24 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
      * Creates new form frmInventarioMedicamentos
      */
     public frmInventarioMedicamentos() {
-        initComponents();
-        setLocationRelativeTo(null);
+        convers = new ConversionesTablas();
         invControl = new InventarioControl();
-        sucursal = Sesion.getSucursalEmpleado();
+        sucursalSeleccionada = Sesion.getSucursalEmpleado();
+        scrslControl = new SucursalControl();
         scrslPersistencia = new SucursalPersistencia();
         listaSucursales = scrslPersistencia.listaSucursales();
+        listaInventario = new ArrayList<>();
+        initComponents();
+        setLocationRelativeTo(null);
+        DefaultTableModel modelo = (DefaultTableModel) tblInventario.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(modelo);
+        tblInventario.setRowSorter(sorter);
+        actualizarTablaMedicamentos(listaInventario);
+    }
+    
+    private void actualizarTablaMedicamentos(List<InventarioSucursalDTO> listaMedicamentos) {
+        this.tblInventario.setModel(convers.listaMedicamentosInventarioToTableModel(listaMedicamentos));
+        this.tblInventario.getColumnModel().removeColumn(tblInventario.getColumnModel().getColumn(3));
     }
     
     /**
@@ -39,13 +60,12 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txfNombreMedicamento = new javax.swing.JTextField();
+        btnBuscarMedicamento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        tblInventario = new javax.swing.JTable();
+        btnAgregarMedicamento = new javax.swing.JButton();
+        btnActualizarMedicamento = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cobListaSucursales = new javax.swing.JComboBox<>();
@@ -57,6 +77,12 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         miConsultarRecetas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miConsultarInventario = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        if(!Sesion.getUsuarioLogueado().getTipoUsuario().equals("Gerente")){
+            jMenu4.setVisible(false);
+            jMenu4.setEnabled(false);
+        }
+        miAgregarSucursal = new javax.swing.JMenuItem();
         menLabelSucursal = new javax.swing.JMenu();
         menLabelSucursal.setEnabled(false);
         menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());
@@ -65,58 +91,49 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jLabel1.setText("Medicamento");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarMedicamento.setText("Buscar");
+        btnBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                btnBuscarMedicamentoActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Buscar");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Activo", "Presentacion", "Precio", "Disponible"
+                "Medicamento", "Activo", "Presentacion", "Precio", "Disponible"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(tblInventario);
+        if (tblInventario.getColumnModel().getColumnCount() > 0) {
+            tblInventario.getColumnModel().getColumn(0).setResizable(false);
+            tblInventario.getColumnModel().getColumn(1).setResizable(false);
+            tblInventario.getColumnModel().getColumn(2).setResizable(false);
+            tblInventario.getColumnModel().getColumn(3).setResizable(false);
+            tblInventario.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton2.setText("Nuevo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarMedicamento.setText("Nuevo");
+        btnAgregarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAgregar(evt);
             }
         });
 
-        jButton3.setText("Actualizar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarMedicamento.setText("Actualizar");
+        btnActualizarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonActualizar(evt);
-            }
-        });
-
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonEliminar(evt);
             }
         });
 
@@ -129,6 +146,7 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jLabel2.setText("Sucursal");
 
+        cobListaSucursales.setSelectedItem(sucursalSeleccionada);
         cobListaSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cobListaSucursalesActionPerformed(evt);
@@ -173,6 +191,18 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Sucursal");
+
+        miAgregarSucursal.setText("Crear Sucursal");
+        miAgregarSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAgregarSucursalActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miAgregarSucursal);
+
+        jMenuBar1.add(jMenu4);
+
         menLabelSucursal.setToolTipText("");
         jMenuBar1.add(Box.createHorizontalGlue());
         jMenuBar1.add(menLabelSucursal);
@@ -186,12 +216,10 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(251, 251, 251)
+                        .addComponent(btnAgregarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnActualizarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -207,9 +235,9 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(cobListaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTextField1))
+                                    .addComponent(txfNombreMedicamento))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnBuscarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,8 +246,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txfNombreMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarMedicamento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -228,9 +256,8 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(btnAgregarMedicamento)
+                    .addComponent(btnActualizarMedicamento)
                     .addComponent(jButton5))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -238,23 +265,17 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void BotonEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminar
-        frmEliminarMedicamento EM = new frmEliminarMedicamento();
-        EM.setVisible(true);
-    }//GEN-LAST:event_BotonEliminar
-
     private void BotonActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActualizar
-        frmActualizarInventario frmAI = new frmActualizarInventario();
-        frmAI.setVisible(true);
+        int seleccion = tblInventario.getSelectedRow();
+        InventarioSucursalDTO invActualizar = listaInventario.get(seleccion);
+        InventarioSucursalDTO invActualizado = invControl.actualizarInventario(invActualizar);
+        listaInventario.set(seleccion, invActualizado);
     }//GEN-LAST:event_BotonActualizar
 
     private void BotonAgregar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregar
-       frmAgregarMedicamento frmAM= new frmAgregarMedicamento();
-       frmAM.setVisible(true);
+        InventarioSucursalDTO inventario = invControl.agregarMedicamento();
+        listaInventario.add(inventario);
+        actualizarTablaMedicamentos(listaInventario);
     }//GEN-LAST:event_BotonAgregar
 
     private void BotonCancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelar
@@ -279,8 +300,44 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_miConsultarInventarioActionPerformed
 
     private void cobListaSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobListaSucursalesActionPerformed
-        
+        int seleccion = cobListaSucursales.getSelectedIndex();
+        String nombreSucursalSeleccionada = cobListaSucursales.getItemAt(seleccion);
+        if(!nombreSucursalSeleccionada.equalsIgnoreCase(Sesion.getSucursalEmpleado().getNombreSucursal())) {
+            btnAgregarMedicamento.setVisible(false);
+            btnAgregarMedicamento.setEnabled(false);
+            btnActualizarMedicamento.setVisible(false);
+            btnActualizarMedicamento.setEnabled(false);
+            sucursalSeleccionada = scrslPersistencia.obtenerSucursalPorNombre(nombreSucursalSeleccionada);
+            listaInventario = invControl.listaInventarioSucursal(sucursalSeleccionada);
+            actualizarTablaMedicamentos(listaInventario);
+        } else {
+            btnAgregarMedicamento.setVisible(true);
+            btnAgregarMedicamento.setEnabled(true);
+            btnActualizarMedicamento.setVisible(true);
+            btnActualizarMedicamento.setEnabled(true);
+            sucursalSeleccionada = Sesion.getSucursalEmpleado();
+            listaInventario = invControl.listaInventarioSucursal(sucursalSeleccionada);
+            actualizarTablaMedicamentos(listaInventario);
+        }
     }//GEN-LAST:event_cobListaSucursalesActionPerformed
+
+    private void btnBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicamentoActionPerformed
+        String nombreMedicamento = txfNombreMedicamento.getText().trim();
+        if(nombreMedicamento.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingresa el nombre de un medicamento para poder buscarlo", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            sorter.setRowFilter(null);
+        } else {
+            try {
+                sorter.setRowFilter(RowFilter.regexFilter("^" + nombreMedicamento, 0));
+            } catch(NullPointerException e) {
+                JOptionPane.showMessageDialog(this, "No existe un medicamento bajo ese nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarMedicamentoActionPerformed
+
+    private void miAgregarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgregarSucursalActionPerformed
+        scrslControl.crearSucursal();
+    }//GEN-LAST:event_miAgregarSucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,29 +375,34 @@ public class frmInventarioMedicamentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarMedicamento;
+    private javax.swing.JButton btnAgregarMedicamento;
+    private javax.swing.JButton btnBuscarMedicamento;
     private javax.swing.JComboBox<String> cobListaSucursales;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu menLabelSucursal;
+    private javax.swing.JMenuItem miAgregarSucursal;
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;
+    private javax.swing.JTable tblInventario;
+    private javax.swing.JTextField txfNombreMedicamento;
     // End of variables declaration//GEN-END:variables
-    private SucursalDTO sucursal;
+    private SucursalDTO sucursalSeleccionada;
+    private ConversionesTablas convers;
     private List<SucursalDTO> listaSucursales;
+    private List<InventarioSucursalDTO> listaInventario;
     private SucursalPersistencia scrslPersistencia;
     private InventarioControl invControl;
+    private SucursalControl scrslControl;
+    TableRowSorter<TableModel> sorter;
     
 }

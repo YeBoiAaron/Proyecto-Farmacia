@@ -7,7 +7,9 @@ package com.daos.implementaciones;
 import com.daos.DAOBase;
 import com.daos.interfaces.IInventarioSucursalDAO;
 import com.entidades.InventarioSucursal;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -17,6 +19,36 @@ public class InventarioSucursalDAO extends DAOBase<InventarioSucursal> implement
     
     public InventarioSucursalDAO(EntityManager entityManager) {
         super(entityManager);
+    }
+
+    @Override
+    public InventarioSucursal obtenerPorMedicamentoYSucursal(String numeroSerie, String nombreSucursal) {
+        try {
+            String jpql = "SELECT inventario " + 
+                    "FROM InventarioSucursal inventario " +
+                    "WHERE inventario.medicamento.numeroSerie = :numeroSerie " + 
+                    "AND inventario.sucursal.nombreSucursal = :nombreSucursal";
+            return entityManager.createQuery(jpql, InventarioSucursal.class).
+                    setParameter("numeroSerie", numeroSerie).
+                    setParameter("nombreSucursal", nombreSucursal).
+                    getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<InventarioSucursal> obtenerInventarioPorSucursal(String nombreSucursal) {
+        try {
+            String jpql = "SELECT inventario "+
+                    "FROM InventarioSucursal inventario " +
+                    "WHERE inventario.sucursal.nombreSucursal = :nombreSucursal";
+            return entityManager.createQuery(jpql, InventarioSucursal.class).
+                    setParameter("nombreSucursal", nombreSucursal).
+                    getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
     
 }

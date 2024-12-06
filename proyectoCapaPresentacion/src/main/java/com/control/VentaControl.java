@@ -4,44 +4,35 @@
  */
 package com.control;
 
-import com.dtos.RecetaDTO;
+import com.dtos.MedicamentosRecetaDTO;
+import com.persistencias.MedicamentosRecetaPersistencia;
 import com.persistencias.RecetaPersistencia;
-import javax.swing.JFrame;
+import com.servicios.ConversionesTablas;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class VentaControl {
     private RecetaPersistencia recetaPersistencia;
+    private ConversionesTablas convers;
 
     public VentaControl() {
         recetaPersistencia = new RecetaPersistencia();
+        convers = new ConversionesTablas();
     }
 
-  /* 
-    public RecetaDTO buscarRecetaPorNumero(JFrame parent, String numeroReceta) {
-    if (numeroReceta.isEmpty()) {
-        JOptionPane.showMessageDialog(parent, "Ingresa el número de receta a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-    } else {
-        try {
-           
-            RecetaPersistencia recetaPersistencia = new RecetaPersistencia();
-          
-            RecetaDTO receta = recetaPersistencia.buscarReceta(numeroReceta);
-            
-            if (receta != null) {
-               
-                return receta;
-            } else {
-                
-                JOptionPane.showMessageDialog(parent, "No se encontró una receta con ese número.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (Exception e) {
-          
-            JOptionPane.showMessageDialog(parent, "Error al buscar la receta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    public DefaultTableModel buscarReceta(String numeroReceta) {
+        MedicamentosRecetaPersistencia persistencia = new MedicamentosRecetaPersistencia();
+        List<MedicamentosRecetaDTO> medicamentosRecetaDTOs = persistencia.buscarPorNumeroReceta(numeroReceta);
+
+        if (medicamentosRecetaDTOs != null && !medicamentosRecetaDTOs.isEmpty()) {
+            DefaultTableModel modelo = convers.listaMedicamentosVentaToTableModel(medicamentosRecetaDTOs, numeroReceta);
+            return modelo;
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la receta con el número proporcionado.", "No encontrado", JOptionPane.INFORMATION_MESSAGE);
+            return null;
         }
     }
-    return null;
-}
-*/
 }
 
 

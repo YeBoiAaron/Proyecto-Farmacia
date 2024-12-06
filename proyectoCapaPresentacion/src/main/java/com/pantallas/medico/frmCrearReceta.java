@@ -33,7 +33,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
         recetaPersistencia = new RecetaPersistencia();
         usrPersistencia = new UsuarioPersistencia();
         recetaServicio = new RecetaServicio();
-        control = new RecetaControl();
+        recetaControl = new RecetaControl();
         convers = new ConversionesTablas();
         listaMedicamentos = new ArrayList<>();
         paciente = new PacienteDTO();
@@ -317,7 +317,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
                     usrPersistencia.obtenerMedico(Sesion.getUsuarioLogueado()),
                     paciente
             );
-            JOptionPane.showMessageDialog(null, "Operación realizada con éxito", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Su número de receta es: " + numeroReceta, "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);
             frmInicioMedico inicio = new frmInicioMedico();
             inicio.setVisible(true);
             this.dispose();
@@ -354,7 +354,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
         String nombrePaciente = txfNombrePaciente.getText().trim();
-        paciente = control.buscarPaciente(this, nombrePaciente);
+        paciente = recetaControl.buscarPaciente(this, nombrePaciente);
         actualizarPaciente();
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
@@ -367,7 +367,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         MedicamentosRecetaDTO medicamento = listaMedicamentos.get(tblMedicamentos.getSelectedRow());
-        MedicamentosRecetaDTO medicamentoActualizado = control.actualizarMedicamentoReceta(this, medicamento);
+        MedicamentosRecetaDTO medicamentoActualizado = recetaControl.actualizarMedicamentoReceta(this, medicamento);
         listaMedicamentos.set(tblMedicamentos.getSelectedRow(), medicamentoActualizado);
         actualizarTablaMedicamentos(listaMedicamentos);
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -455,7 +455,7 @@ public class frmCrearReceta extends javax.swing.JFrame {
     private RecetaPersistencia recetaPersistencia;
     private UsuarioPersistencia usrPersistencia;
     private RecetaServicio recetaServicio;
-    private RecetaControl control;
+    private RecetaControl recetaControl;
     private ConversionesTablas convers;
     private List<MedicamentosRecetaDTO> listaMedicamentos;
     private PacienteDTO paciente;

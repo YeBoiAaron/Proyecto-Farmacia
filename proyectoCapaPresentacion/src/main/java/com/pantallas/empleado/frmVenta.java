@@ -5,10 +5,8 @@
 package com.pantallas.empleado;
 
 import com.control.Sesion;
-import com.dtos.MedicamentosRecetaDTO;
+import com.control.VentaControl;
 import com.dtos.RecetaDTO;
-import com.persistencias.MedicamentosRecetaPersistencia;
-import java.util.List;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +24,7 @@ public class frmVenta extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         receta = new RecetaDTO();
+        ventaControl = new VentaControl();
 
     }
 
@@ -47,7 +46,7 @@ public class frmVenta extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         TablaIndicaciones = new javax.swing.JScrollPane();
-        jTablaIndicaciones = new javax.swing.JTable();
+        tblMedicamentos = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miRealizarVenta = new javax.swing.JMenuItem();
@@ -55,6 +54,12 @@ public class frmVenta extends javax.swing.JFrame {
         miConsultarRecetas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         miConsultarInventario = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        if(!Sesion.getUsuarioLogueado().getTipoUsuario().equals("Gerente")){
+            jMenu4.setVisible(false);
+            jMenu4.setEnabled(false);
+        }
+        miAgregarSucursal = new javax.swing.JMenuItem();
         menLabelSucursal = new javax.swing.JMenu();
         menLabelSucursal.setEnabled(false);
         menLabelSucursal.setText(Sesion.getSucursalEmpleado().getNombreSucursal());
@@ -63,8 +68,8 @@ public class frmVenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Numero de Receta:");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Numero de Receta:");
 
         btnBuscarReceta.setText("Buscar");
         btnBuscarReceta.addActionListener(new java.awt.event.ActionListener() {
@@ -73,8 +78,8 @@ public class frmVenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Subtotal:");
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Subtotal:");
 
         jButton5.setText("Confirmar");
 
@@ -85,28 +90,27 @@ public class frmVenta extends javax.swing.JFrame {
             }
         });
 
-        jTablaIndicaciones.setModel(new javax.swing.table.DefaultTableModel(
+        tblMedicamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Medicamento", "Indicaciones", "Cantidad", "Surtir"
+                "Medicamento", "Cantidad", "Surtir"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        TablaIndicaciones.setViewportView(jTablaIndicaciones);
-        if (jTablaIndicaciones.getColumnModel().getColumnCount() > 0) {
-            jTablaIndicaciones.getColumnModel().getColumn(0).setResizable(false);
-            jTablaIndicaciones.getColumnModel().getColumn(1).setResizable(false);
-            jTablaIndicaciones.getColumnModel().getColumn(2).setResizable(false);
-            jTablaIndicaciones.getColumnModel().getColumn(3).setResizable(false);
+        TablaIndicaciones.setViewportView(tblMedicamentos);
+        if (tblMedicamentos.getColumnModel().getColumnCount() > 0) {
+            tblMedicamentos.getColumnModel().getColumn(0).setResizable(false);
+            tblMedicamentos.getColumnModel().getColumn(1).setResizable(false);
+            tblMedicamentos.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jMenu1.setText("Venta");
@@ -144,6 +148,13 @@ public class frmVenta extends javax.swing.JFrame {
         jMenu3.add(miConsultarInventario);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Sucursal");
+
+        miAgregarSucursal.setText("Crear Sucursal");
+        jMenu4.add(miAgregarSucursal);
+
+        jMenuBar1.add(jMenu4);
 
         menLabelSucursal.setToolTipText("");
         jMenuBar1.add(Box.createHorizontalGlue());
@@ -194,7 +205,7 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(btnCancelar))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,35 +233,13 @@ public class frmVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
-
         String numeroReceta = txfBuscarReceta.getText().trim();
-
         if (numeroReceta.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor ingrese un número de receta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        MedicamentosRecetaPersistencia persistencia = new MedicamentosRecetaPersistencia();
-        List<MedicamentosRecetaDTO> medicamentosRecetaDTOs = persistencia.buscarPorNumeroReceta(numeroReceta);
-
-        if (medicamentosRecetaDTOs != null && !medicamentosRecetaDTOs.isEmpty()) {
-
-            DefaultTableModel model = (DefaultTableModel) jTablaIndicaciones.getModel();
-            model.setRowCount(0);
-
-            for (MedicamentosRecetaDTO medicamentoReceta : medicamentosRecetaDTOs) {
-                Object[] rowData = new Object[4];
-                rowData[0] = medicamentoReceta.getNumeroSerieMedicamento();
-                rowData[1] = medicamentoReceta.getInstrucciones();
-                rowData[3] = medicamentoReceta.getNumeroReceta();
-
-                model.addRow(rowData);
-            }
-        } else {
-            
-            JOptionPane.showMessageDialog(this, "No se encontró la receta con el número proporcionado.", "No encontrado", JOptionPane.INFORMATION_MESSAGE);
-        }
-
+        DefaultTableModel modelo = ventaControl.buscarReceta(numeroReceta);
+        tblMedicamentos.setModel(modelo);
     }//GEN-LAST:event_BotonBuscarActionPerformed
 
     private void txfBuscarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBuscarRecetaActionPerformed
@@ -302,15 +291,18 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTable jTablaIndicaciones;
     private javax.swing.JTextField jTextField4;
     private java.awt.Label label1;
     private javax.swing.JMenu menLabelSucursal;
+    private javax.swing.JMenuItem miAgregarSucursal;
     private javax.swing.JMenuItem miConsultarInventario;
     private javax.swing.JMenuItem miConsultarRecetas;
     private javax.swing.JMenuItem miRealizarVenta;
+    private javax.swing.JTable tblMedicamentos;
     private javax.swing.JTextField txfBuscarReceta;
     // End of variables declaration//GEN-END:variables
   private RecetaDTO receta;
+  private VentaControl ventaControl;
 }
