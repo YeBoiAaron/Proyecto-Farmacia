@@ -29,7 +29,7 @@ public class ConversionesTablas {
     private String nombresColumnasTablaRecetas[] = {"Numero de Receta", "Instrucciones"};
     private String nombresColumnasTablaSucursales[] = {"Sucursal", "Dirección", "Gerente"};
     private String nombresColumnasTablaInventario[] = {"Medicamento", "Activo", "Presentacion", "Precio", "Disponible"};
-    private String nombresColumnasTablaRecetasVenta[] = {"Medicamento", "Cantidad", "Surtir"};
+    private String nombresColumnasTablaRecetasVenta[] = {"Medicamento", "Cantidad", "Precio", "Surtir"};
     
     private RecetaServicio recetaServicio = new RecetaServicio();
     private MedicamentoPersistencia medPersistencia = new MedicamentoPersistencia();
@@ -129,9 +129,11 @@ public class ConversionesTablas {
         for (int i = 0; i < medicamentosReceta.size(); i++) {
             String medicamento = recetas.get(i);
             int cantidad = medicamentosReceta.get(i).getCantidad();
+            float precio = medPersistencia.buscarMedicamento(medicamentosReceta.get(i).getNumeroSerieMedicamento()).getPrecio();
             Object[] datosFila = {
                 medicamento,
                 cantidad,
+                precio,
                 false
             };
             modelo.addRow(datosFila);

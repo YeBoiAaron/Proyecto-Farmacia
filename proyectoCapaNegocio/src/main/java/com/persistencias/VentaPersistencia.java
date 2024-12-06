@@ -6,9 +6,15 @@ package com.persistencias;
 
 import com.daos.interfaces.IRecetaDAO;
 import com.daos.implementaciones.RecetaDAO;
+import com.daos.implementaciones.VentaDAO;
+import com.daos.interfaces.IVentaDAO;
+import com.dtos.EmpleadoDTO;
 import com.dtos.RecetaDTO;
+import com.dtos.VentaDTO;
 import com.entidades.Receta;
+import com.entidades.Venta;
 import com.mappers.RecetaMapper;
+import com.mappers.VentaMapper;
 import com.servicios.JPAUtil;
 import javax.persistence.EntityManager;
 
@@ -19,13 +25,28 @@ import javax.persistence.EntityManager;
  */
 public class VentaPersistencia {
     private IRecetaDAO recetaDao;
+    private IVentaDAO ventaDao;
 
     /**
      * Constructor que inicializa recetaDao utilizando un EntityManager.
      */
     public VentaPersistencia() {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        this.recetaDao = new RecetaDAO(entityManager);
+        recetaDao = new RecetaDAO(entityManager);
+        ventaDao = new VentaDAO(entityManager);
+    }
+    
+    public void agregarVenta(VentaDTO venta, String nombreUsuario, String numeroReceta) {
+        
+    }
+    
+    public VentaDTO buscarVenta(String folio) {
+        Venta venta = ventaDao.obtenerPorFolio(folio);
+        if(venta != null) {
+            return VentaMapper.toDTO(venta);
+        } 
+        
+        return null;
     }
 
     /**

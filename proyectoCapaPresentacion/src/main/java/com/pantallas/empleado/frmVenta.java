@@ -6,7 +6,10 @@ package com.pantallas.empleado;
 
 import com.control.Sesion;
 import com.control.VentaControl;
-import com.dtos.RecetaDTO;
+import com.dtos.VentaDTO;
+import com.persistencias.VentaPersistencia;
+import com.servicios.VentaServicio;
+import java.time.LocalDate;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +26,9 @@ public class frmVenta extends javax.swing.JFrame {
     public frmVenta() {
         initComponents();
         setLocationRelativeTo(null);
-        receta = new RecetaDTO();
         ventaControl = new VentaControl();
-
+        ventaServicio = new VentaServicio();
+        ventaPersistencia = new VentaPersistencia();
     }
 
     /**
@@ -42,8 +45,8 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnBuscarReceta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        txfTotal = new javax.swing.JTextField();
+        btnCrearVenta = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         TablaIndicaciones = new javax.swing.JScrollPane();
         tblMedicamentos = new javax.swing.JTable();
@@ -81,7 +84,14 @@ public class frmVenta extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Subtotal:");
 
-        jButton5.setText("Confirmar");
+        txfTotal.setEditable(false);
+
+        btnCrearVenta.setText("Confirmar");
+        btnCrearVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearVentaActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,22 +105,42 @@ public class frmVenta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Medicamento", "Cantidad", "Surtir"
+                "Medicamento", "Cantidad", "Precio", "Surtir"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        DefaultTableModel modelo = (DefaultTableModel) tblMedicamentos.getModel();
+        modelo.addTableModelListener(e -> {
+            int column = e.getColumn();
+            int row = e.getFirstRow();
+
+            if (column == 2) {
+                boolean isSelected = (boolean) modelo.getValueAt(row, column);
+                float value = (float) modelo.getValueAt(row, 2) * (float) modelo.getValueAt(row, 1);
+
+                float currentTotal = Float.parseFloat(txfTotal.getText());
+                if (isSelected) {
+                    currentTotal += value;
+                } else {
+                    currentTotal -= value;
+                }
+                txfTotal.setText(String.valueOf(currentTotal));
+            }
+        });
         TablaIndicaciones.setViewportView(tblMedicamentos);
         if (tblMedicamentos.getColumnModel().getColumnCount() > 0) {
             tblMedicamentos.getColumnModel().getColumn(0).setResizable(false);
+            tblMedicamentos.getColumnModel().getColumn(0).setPreferredWidth(300);
             tblMedicamentos.getColumnModel().getColumn(1).setResizable(false);
             tblMedicamentos.getColumnModel().getColumn(2).setResizable(false);
+            tblMedicamentos.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jMenu1.setText("Venta");
@@ -170,13 +200,13 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(btnCrearVenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
@@ -200,10 +230,10 @@ public class frmVenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(btnCrearVenta)
                     .addComponent(btnCancelar))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -238,6 +268,7 @@ public class frmVenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor ingrese un número de receta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        receta = numeroReceta;
         DefaultTableModel modelo = ventaControl.buscarReceta(numeroReceta);
         tblMedicamentos.setModel(modelo);
     }//GEN-LAST:event_BotonBuscarActionPerformed
@@ -245,6 +276,22 @@ public class frmVenta extends javax.swing.JFrame {
     private void txfBuscarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBuscarRecetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfBuscarRecetaActionPerformed
+
+    private void btnCrearVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearVentaActionPerformed
+        Float subtotal = Float.valueOf(txfTotal.getText().trim());
+        if(subtotal <= 0){
+            JOptionPane.showMessageDialog(this, "Por favor selecciona medicamentos para surtir", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else {
+            VentaDTO ventaDto = new VentaDTO();
+            ventaDto.setFolio(ventaServicio.generarFolio());
+            ventaDto.setSubtotal(subtotal);
+            Float total = subtotal + (subtotal * 0.16f);
+            ventaDto.setTotal(total);
+            ventaDto.setFecha(LocalDate.now());
+            
+            ventaPersistencia.agregarVenta(ventaDto, Sesion.getUsuarioLogueado().getNombreUsuario(), receta);
+        }
+    }//GEN-LAST:event_btnCrearVentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,7 +332,7 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JScrollPane TablaIndicaciones;
     private javax.swing.JButton btnBuscarReceta;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnCrearVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
@@ -293,7 +340,6 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTextField4;
     private java.awt.Label label1;
     private javax.swing.JMenu menLabelSucursal;
     private javax.swing.JMenuItem miAgregarSucursal;
@@ -302,7 +348,10 @@ public class frmVenta extends javax.swing.JFrame {
     private javax.swing.JMenuItem miRealizarVenta;
     private javax.swing.JTable tblMedicamentos;
     private javax.swing.JTextField txfBuscarReceta;
+    private javax.swing.JTextField txfTotal;
     // End of variables declaration//GEN-END:variables
-  private RecetaDTO receta;
+  private String receta;
   private VentaControl ventaControl;
+  private VentaPersistencia ventaPersistencia;
+  private VentaServicio ventaServicio;
 }

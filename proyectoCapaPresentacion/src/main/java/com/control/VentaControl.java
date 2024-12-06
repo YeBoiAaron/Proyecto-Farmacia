@@ -4,20 +4,23 @@
  */
 package com.control;
 
+import com.dtos.EmpleadoDTO;
 import com.dtos.MedicamentosRecetaDTO;
+import com.dtos.VentaDTO;
 import com.persistencias.MedicamentosRecetaPersistencia;
 import com.persistencias.RecetaPersistencia;
+import com.persistencias.VentaPersistencia;
 import com.servicios.ConversionesTablas;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentaControl {
-    private RecetaPersistencia recetaPersistencia;
+    private VentaPersistencia ventaPersistencia;
     private ConversionesTablas convers;
 
     public VentaControl() {
-        recetaPersistencia = new RecetaPersistencia();
+        ventaPersistencia = new VentaPersistencia();
         convers = new ConversionesTablas();
     }
 
