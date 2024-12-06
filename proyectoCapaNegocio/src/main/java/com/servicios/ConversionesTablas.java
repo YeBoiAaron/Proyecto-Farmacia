@@ -114,7 +114,7 @@ public class ConversionesTablas {
         DefaultTableModel modelo = new DefaultTableModel(nombresColumnasTablaRecetasVenta, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if(columnIndex == 2) {
+                if(columnIndex == 3) {
                     return Boolean.class;
                 }
                 return super.getColumnClass(columnIndex);
@@ -122,7 +122,7 @@ public class ConversionesTablas {
             
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 2;
+                return column == 3;
             }
         };
         

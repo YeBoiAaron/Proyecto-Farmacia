@@ -4,13 +4,16 @@
  */
 package com.persistencias;
 
+import com.daos.implementaciones.EmpleadoDAO;
 import com.daos.interfaces.IRecetaDAO;
 import com.daos.implementaciones.RecetaDAO;
 import com.daos.implementaciones.VentaDAO;
+import com.daos.interfaces.IEmpleadoDAO;
 import com.daos.interfaces.IVentaDAO;
 import com.dtos.EmpleadoDTO;
 import com.dtos.RecetaDTO;
 import com.dtos.VentaDTO;
+import com.entidades.Empleado;
 import com.entidades.Receta;
 import com.entidades.Venta;
 import com.mappers.RecetaMapper;
@@ -26,6 +29,7 @@ import javax.persistence.EntityManager;
 public class VentaPersistencia {
     private IRecetaDAO recetaDao;
     private IVentaDAO ventaDao;
+    private IEmpleadoDAO empleadoDao;
 
     /**
      * Constructor que inicializa recetaDao utilizando un EntityManager.
@@ -34,10 +38,18 @@ public class VentaPersistencia {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         recetaDao = new RecetaDAO(entityManager);
         ventaDao = new VentaDAO(entityManager);
+        empleadoDao = new EmpleadoDAO(entityManager);
     }
     
-    public void agregarVenta(VentaDTO venta, String nombreUsuario, String numeroReceta) {
+    public void agregarVenta(VentaDTO ventaDto, String nombreUsuario, String numeroReceta) {
+        Venta venta = VentaMapper.toEntity(ventaDto);
+        Empleado empleado = empleadoDao.obtenerPorNombreUsuario(nombreUsuario);
+        Receta receta = recetaDao.obtenerPorNumeroReceta(numeroReceta);
         
+        venta.setCajero(empleado);
+        venta.setReceta(receta);
+        
+        ventaDao.agregar(venta);
     }
     
     public VentaDTO buscarVenta(String folio) {
