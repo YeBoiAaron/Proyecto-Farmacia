@@ -15,6 +15,7 @@ import javax.swing.table.TableCellRenderer;
  * @author Aaron
  */
 public class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
+    
     public MultiLineCellRenderer() {
         setLineWrap(true);
         setWrapStyleWord(true);
